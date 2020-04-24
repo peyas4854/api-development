@@ -20,9 +20,14 @@ Route::post('register', 'API\RegisterController@register');
 
 Route::post('login', 'API\RegisterController@login');
 
-//Route::resource('product', 'API\ProductController');
 
-Route::middleware('auth:api')->group( function () {
-    Route::resource('product', 'API\ProductController');
+//Route::middleware('auth:api')->group( function () {
+//    Route::resource('product', 'API\ProductController');
+//});
+
+Route::apiresource('products', 'ProductController');
+
+Route::group(['prefix'=>'products'],function(){
+    Route::apiresource('/{product}/reviews', 'ProductController');
+
 });
-
