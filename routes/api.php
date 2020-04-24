@@ -20,7 +20,9 @@ Route::post('register', 'API\RegisterController@register');
 
 Route::post('login', 'API\RegisterController@login');
 
-Route::resource('product', 'API\ProductController');
+//Route::resource('product', 'API\ProductController');
 
-
+Route::middleware('auth:api')->group( function () {
+    Route::resource('product', 'API\ProductController');
+});
 
