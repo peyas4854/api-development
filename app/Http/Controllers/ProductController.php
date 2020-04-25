@@ -1,12 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Resources\ProductResource;
 use App\Model\Product;
 use Illuminate\Http\Request;
+use App\Http\Controllers\API\BaseController as BaseController;
+use Symfony\Component\HttpFoundation\Response;
 
-class ProductController extends Controller
+class ProductController extends BaseController
 {
+    public function __construct()
+    {
+        //$this->middleware('auth:api');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $product = product::all();
+        return ProductResource::collection($product);
     }
 
     /**
@@ -35,7 +42,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        echo "store";
     }
 
     /**
@@ -46,7 +53,8 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+
+        return new ProductResource($product);
     }
 
     /**
@@ -80,6 +88,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return $this->sendResponse([],'Product Deleted Successfully');
+
     }
 }

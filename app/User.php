@@ -2,10 +2,11 @@
 
 namespace App;
 
+use App\Model\Product;
+use Laravel\Passport\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Passport\HasApiTokens;
 
 
 class User extends Authenticatable
@@ -42,5 +43,9 @@ class User extends Authenticatable
 //    public static function Create(array $input)
 //    {
 //    }
+
+    public function products(){
+        return $this->hasMany(Product::class);
+    }
 
 }
