@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Http\Resources\ProductResource;
 use App\Model\Product;
+use App\Model\BaseModel;
 use Illuminate\Http\Request;
-use App\Http\Controllers\API\BaseController as BaseController;
+use App\Http\Requests\ProductRequest;
+use App\Http\Resources\ProductResource;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Controllers\API\BaseController as BaseController;
 
 class ProductController extends BaseController
 {
@@ -40,9 +42,26 @@ class ProductController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        echo "store";
+   
+       $product=[
+        'user_id'=>$request->user_id,
+        'name'=>$request->name,
+        'detail'=>$request->detail,
+        'price'=>$request->price,
+        'stock'=>$request->stock,
+        'discount'=>$request->discount,
+         ];
+
+        $data =Product::store($product);
+
+        if($data){
+            return $this->sendResponse(new ProductResource($data),'Product Store Successfully.');
+        }else{
+            return $this->sendError([],'Something Went Wrong!.');
+        }
+
     }
 
     /**

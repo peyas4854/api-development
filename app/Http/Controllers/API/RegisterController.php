@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\API\BaseController as BaseController;
 use App\User;
+use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
+use Laravel\Passport\Passport;
+use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use Laravel\Passport\Passport;
+use App\Http\Controllers\API\BaseController as BaseController;
 
 class RegisterController extends BaseController
 {
@@ -24,8 +26,8 @@ class RegisterController extends BaseController
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
-        $success['token'] =  $user->createToken('MyApp')->accessToken;
         $success['name'] =  $user->name;
+        $success['token'] =  $user->createToken('MyApp')->accessToken;
         return $this->sendResponse($success, 'User register successfully.');
     }
 
@@ -36,12 +38,17 @@ class RegisterController extends BaseController
         ];
       if( Auth::attempt($credentials)){
         $user = auth::user();
-          $success['token'] =  $user->createToken('MyApp')->accessToken;
-          $success['name'] =  $user->name;
-          return $this->sendResponse($success, 'User Login successfully.');
+          $token =  $user->createToken('MyApp')->accessToken;
+          return $this->returnWithToken($token,'User Login successfully.');
       }else{
           return $this->sendError('Unauthorised',['error'=>'Unauthorised']);
       }
-
+    }
+    public function returnWithToken($token,$msg){
+         $data=array(
+            'user'=>auth()->user()->name,
+            'token'=>$token
+        );
+        return  $this->sendResponse($data, $msg);
     }
 }

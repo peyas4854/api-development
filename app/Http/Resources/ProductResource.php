@@ -23,7 +23,7 @@ class ProductResource extends JsonResource
             'price' => $this->price,
             'stock' => $this->stock,
             'discount' => $this->discount,
-            'created_by'=>$this->user_id,
+            'created_by'=>$this->user->name,
             'reviews'=>ReviewResource::collection($this->reviews),
             //'created_at' => $this->created_at->format('d/m/Y'),
             //'updated_at' => $this->updated_at->diffForHumans(),
