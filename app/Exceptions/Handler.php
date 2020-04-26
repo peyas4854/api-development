@@ -3,7 +3,13 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpFoundation\Response;
+use App\Http\Controllers\API\BaseController;
+
+
 
 class Handler extends ExceptionHandler
 {
@@ -50,6 +56,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if($exception instanceof ModelNotFoundException){
+         return response(['error'=>'Requested data not found.'],Response::HTTP_BAD_REQUEST);
+        // return $this->sendResponse([],'Data not found');
+        }
         return parent::render($request, $exception);
+
     }
 }

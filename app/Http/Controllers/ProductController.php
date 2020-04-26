@@ -6,8 +6,9 @@ use App\Model\BaseModel;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
 use App\Http\Resources\ProductResource;
-use Symfony\Component\HttpFoundation\Response;
 use App\Http\Controllers\API\BaseController as BaseController;
+
+use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends BaseController
 {
@@ -23,7 +24,8 @@ class ProductController extends BaseController
     public function index()
     {
         $product = product::all();
-        return ProductResource::collection($product);
+        return $this->sendResponse(ProductResource::collection($product),'Product retrived successfully');
+
     }
 
     /**
@@ -44,14 +46,14 @@ class ProductController extends BaseController
      */
     public function store(ProductRequest $request)
     {
-   
-       $product=[
-        'user_id'=>$request->user_id,
-        'name'=>$request->name,
-        'detail'=>$request->detail,
-        'price'=>$request->price,
-        'stock'=>$request->stock,
-        'discount'=>$request->discount,
+        /* validation make by custom request class*/
+         $product=[
+            'user_id'=>$request->user_id,
+            'name'=>$request->name,
+            'detail'=>$request->detail,
+            'price'=>$request->price,
+            'stock'=>$request->stock,
+            'discount'=>$request->discount,
          ];
 
         $data =Product::store($product);
@@ -72,8 +74,7 @@ class ProductController extends BaseController
      */
     public function show(Product $product)
     {
-
-        return new ProductResource($product);
+        return $this->sendResponse(new ProductResource($product),'Product retrived successfully');
     }
 
     /**
@@ -94,9 +95,25 @@ class ProductController extends BaseController
      * @param  \App\Model\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
-        //
+
+        /* validation use ProductRequest */
+        $product->update([
+            'user_id'=>$request->user_id,
+            'name'=>$request->name,
+            'detail'=>$request->detail,
+            'price'=>$request->price,
+            'stock'=>$request->stock,
+            'discount'=>$request->discount,
+        ]);
+
+        if($product){
+        return $this->sendResponse(new ProductResource($product),'Product Updated Successfully');
+        }else{
+        return $this->sendError([],'Something Went Wrong!');
+        }
+
     }
 
     /**
