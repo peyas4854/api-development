@@ -1,0 +1,9 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap');
+body{
+background-color: #ebeaf1;
+}
+
+p{
+font-family: Montserrat;
+}

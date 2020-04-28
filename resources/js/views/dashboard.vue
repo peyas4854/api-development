@@ -1,15 +1,16 @@
 <template>
   <div>
-    <h1>home 1</h1>
+<h1>Dashboard page</h1>
 
-  </div>
+</div>
 </template>
 
 <script>
 export default {
 
-};
+}
 </script>
 
 <style>
+
 </style>

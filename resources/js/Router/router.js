@@ -3,20 +3,28 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter);
 
-import home1 from '../components/ExampleComponent';
-import home2 from '../components/home2';
-import home3 from '../page/home1';
+const loadLayout = layout => () => import(`../components/layouts/${layout}.vue`)
+const loadView = view => () => import(`../views/${view}.vue`)
+const routes = [{
+        path: '/',
+        component: loadLayout("BackendLayout"),
+        children: [
+        {path: '',component: loadView("dashboard")},
+        {path: '/product',component: loadView("product")},
+        { path: '/review',component: loadView("review")},
+        ]
+    },
+    {
+        path: '/frontend',
+        component: loadLayout("DefaultLayout"),
 
+    },
 
-const routes = [
-  { path: '/home1', component: home1 },
-  { path: '/home2', component: home2 },
-  { path: '/home3', component: home3 },
 ]
 
 const router = new VueRouter({
     routes,
-    hasbang:false,
-    mode:'history',
+    hasbang: false,
+    mode: 'history',
 });
 export default router

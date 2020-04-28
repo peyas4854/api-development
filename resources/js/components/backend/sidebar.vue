@@ -1,15 +1,46 @@
 <template>
-  <div >
-    <h1>side backend </h1>
-</div>
+  <div class="sidebar_app">
+    <ul class="nav flex-column">
+
+      <li class="nav-item">
+        <router-link class="nav-link" to="/">Dashboard</router-link>
+      </li>
+      <li class="nav-item">
+        <router-link class="nav-link" to="/product">Product</router-link>
+      </li>
+      <li class="nav-item">
+        <router-link class="nav-link" to="/review">Review</router-link>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Settings</a>
+      </li>
+
+    </ul>
+  </div>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
-<style>
+<style scoped>
+.sidebar_app {
+    background-color: #02071ba3;
+    position: fixed;
+    width: 16.7%!important;
+    height: 100vh!important;
+}
+.nav-link {
+    display: block;
+    padding: 15px 0px;
+text-align: center;
+}
+a {
+    color: #ffffff;
+    text-decoration: none;
+    background-color: transparent;
+
+    font-size: 20px;
+}
 
 </style>
