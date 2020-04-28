@@ -8,6 +8,9 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+//import commonMethod from '../js/helper/commonMethods';
+//Vue.use(commonMethod);
+
 
 
 /**
@@ -23,6 +26,7 @@ window.Vue = require('vue');
 
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('app', require('../js/App.vue').default);
+Vue.component('preloader', require('./components/base/preloader.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -32,6 +36,8 @@ Vue.component('app', require('../js/App.vue').default);
 //import router from './Router/router.js';
 
 import router from './Router/router.js';
+
+
 const app = new Vue({
     el: '#app',
     router,
