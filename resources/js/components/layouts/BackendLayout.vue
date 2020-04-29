@@ -30,13 +30,19 @@ export default {
 
 <style scoped>
 .bg-light {
-  background-color: #06b4f1d1!important;
+  background-color:#06d0f1f2!important;
   position: fixed;
   width: 100%;
   border: 0px !important;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+}
+.bg-light:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 .main-content {
   margin-top: 80px;
+padding:0px 15px;
 }
 .card-body {
   border-bottom: 1px solid #d3d3daf3 !important;

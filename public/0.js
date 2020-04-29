@@ -9,6 +9,9 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _helper_commonMethods__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../helper/commonMethods */ "./resources/js/helper/commonMethods.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 //
 //
 //
@@ -37,7 +40,72 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  "extends": _helper_commonMethods__WEBPACK_IMPORTED_MODULE_0__["default"],
+  data: function data() {
+    return {
+      product: {
+        user_id: 1
+      },
+      errors: [],
+      modalID: '#productModal'
+    };
+  },
+  created: function created() {// console.log('modal active',this.isActive);
+  },
+  methods: {
+    save: function save() {
+      var _this = this;
+
+      this.preLoader = false;
+      this.inputField = this.product;
+      console.log(this.inputField);
+      axios.post("http://127.0.0.1:8000/api/products", this.inputField).then(function (response) {
+        console.log(response.data);
+      })["catch"](function (error) {
+        console.log(error.response.data.errors);
+        _this.errors = error.response.data.errors;
+        console.log(_typeof(_this.errors));
+      });
+    }
+  }
+});
 
 /***/ }),
 
@@ -133,19 +201,18 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     addModal: function addModal() {
-      console.log("open modal");
       $("#productModal").modal("toggle");
     },
     getProduct: function getProduct(route) {
       //console.log("df");
       var instance = this;
       instance.axiosGet(route, function (response) {
-        console.log("paici response ", response);
+        //console.log("paici response ", response);
         instance.product = response.data.data;
         instance.message = response.data.message;
         instance.preLoader = false;
       }, function (response) {
-        console.log("paici 2", response);
+        // console.log("paici 2", response);
         instance.preLoader = true;
       });
     }
@@ -166,7 +233,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.modal-header[data-v-09603204] {\n    background-color: #4f96e6;\n    color: #ffffff!important;\n}\n\n", ""]);
+exports.push([module.i, "\n.modal-header[data-v-09603204] {\n  background-color: #4f96e6;\n  color: #ffffff !important;\n}\n.from_group[data-v-09603204] {\n  margin-bottom: 10px;\n}\n.errors[data-v-09603204] {\n    color: red;\n    font-family: Roboto;\n    font-size: 14px;\n    font-weight: 400;\n}\n", ""]);
 
 // exports
 
@@ -185,7 +252,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.main_wrapper[data-v-5ecfa9c0] {\n  background-color: #ffffff;\n}\n.top_wrapper[data-v-5ecfa9c0] {\n  padding: 10px 22px;\n  height: 60px;\n  background-color: #0e77e0a1 !important;\n}\n.top_wrapper_header[data-v-5ecfa9c0] {\n  float: left;\n}\n.top_wrapper_button[data-v-5ecfa9c0] {\n  float: right;\n}\n.top_wrapper_header_content[data-v-5ecfa9c0] {\n  color: #ffffff;\n}\n", ""]);
+exports.push([module.i, "\n.main_wrapper[data-v-5ecfa9c0] {\n    background-color: #ffffff;\n    box-shadow: 0 2px 10px 0 rgba(0,0,0,0.2);\n}\n.top_wrapper[data-v-5ecfa9c0] {\n  padding: 10px 22px;\n  height: 60px;\n  background-color: #0e77e0a1 !important;\n}\n.top_wrapper_header[data-v-5ecfa9c0] {\n  float: left;\n}\n.top_wrapper_button[data-v-5ecfa9c0] {\n  float: right;\n}\n.top_wrapper_header_content[data-v-5ecfa9c0] {\n  color: #ffffff;\n}\n", ""]);
 
 // exports
 
@@ -267,38 +334,217 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", {}, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "modal-body" }, [
+      _vm.preLoader == true
+        ? _c("div", [_c("preloader")], 1)
+        : _c("form", [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-6 from_group col-sm-12" }, [
+                _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.product.name,
+                      expression: "product.name"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", placeholder: "Name" },
+                  domProps: { value: _vm.product.name },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.product, "name", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.errors.name
+                  ? _c("p", { staticClass: "errors" }, [
+                      _vm._v(" " + _vm._s(_vm.errors.name[0]))
+                    ])
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6 from_group col-sm-12" }, [
+                _c("label", { attrs: { for: "price" } }, [_vm._v("Price")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.product.price,
+                      expression: "product.price"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "number", placeholder: "Price" },
+                  domProps: { value: _vm.product.price },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.product, "price", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.errors.price
+                  ? _c("p", { staticClass: "errors" }, [
+                      _vm._v(_vm._s(_vm.errors.price[0]))
+                    ])
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-12 from_group col-sm-12" }, [
+                _c("label", { attrs: { for: "description" } }, [
+                  _vm._v("Description")
+                ]),
+                _vm._v(" "),
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.product.detail,
+                      expression: "product.detail"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "text",
+                    placeholder: "Description",
+                    rows: "3"
+                  },
+                  domProps: { value: _vm.product.detail },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.product, "detail", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.errors.detail
+                  ? _c("p", { staticClass: "errors" }, [
+                      _vm._v(_vm._s(_vm.errors.detail[0]))
+                    ])
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6 from_group col-sm-12" }, [
+                _c("label", { attrs: { for: "discount" } }, [
+                  _vm._v("Discount")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.product.discount,
+                      expression: "product.discount"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "number", placeholder: "Discount" },
+                  domProps: { value: _vm.product.discount },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.product, "discount", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.errors.discount
+                  ? _c("p", { staticClass: "errors" }, [
+                      _vm._v(_vm._s(_vm.errors.discount[0]))
+                    ])
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-6 from_group col-sm-12" }, [
+                _c("label", { attrs: { for: "stock" } }, [_vm._v("Stock")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.product.stock,
+                      expression: "product.stock"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "number", placeholder: "Price" },
+                  domProps: { value: _vm.product.stock },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.product, "stock", $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.errors.stock
+                  ? _c("p", { staticClass: "errors" }, [
+                      _vm._v(_vm._s(_vm.errors.stock[0]))
+                    ])
+                  : _vm._e()
+              ])
+            ])
+          ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary app_primary_btn",
+          on: {
+            click: function($event) {
+              return _vm.save()
+            }
+          }
+        },
+        [_vm._v("Save")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-danger",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", [
-        _c("div", {}, [
-          _c("div", { staticClass: "modal-content" }, [
-            _c("div", { staticClass: "modal-header" }, [
-              _c("h4", { staticClass: "modal-title" }, [_vm._v("Add Product")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "modal-body" }, [
-              _vm._v("\n        Modal body..\n      ")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "modal-footer" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-danger",
-                  attrs: { type: "button", "data-dismiss": "modal" }
-                },
-                [_vm._v("Close")]
-              )
-            ])
-          ])
-        ])
-      ])
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h4", { staticClass: "modal-title" }, [_vm._v("Add Product")])
     ])
   }
 ]
@@ -367,14 +613,18 @@ var render = function() {
                 attrs: {
                   id: "productModal",
                   role: "dialog",
+                  tabindex: "-1",
                   "aria-hidden": "true"
                 }
               },
               [
                 _c(
                   "div",
-                  { staticClass: "modal-dialog" },
-                  [_c("productmodal")],
+                  {
+                    staticClass: "modal-dialog modal-lg",
+                    attrs: { role: "document" }
+                  },
+                  [_c("productmodal", { staticClass: "modal-content" })],
                   1
                 )
               ]
@@ -570,13 +820,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      isActive: 'hello people',
-      inputField: '',
-      user: ''
+      isActive: false,
+      inputField: 'input',
+      preLoader: false
     };
   },
   mounted: function mounted() {
-    //console.log('mounted form common')
+    //console.log('mounted', this.isActive);
     window.setTimeout(function () {
       $(".alert").fadeTo(500, 0).slideUp(500, function () {
         $(this).remove();

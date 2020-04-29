@@ -7,6 +7,9 @@
 
 <script>
 export default {
+created(){
+console.log('review');
+}
 
 }
 </script>

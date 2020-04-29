@@ -1,6 +1,6 @@
 <template>
   <div class="main_wrapper">
-    <!-- <div class="spinner-border"></div> -->
+
     <div v-if="preLoader == true">
       <preloader />
     </div>
@@ -19,9 +19,9 @@
       </div>
       <div class="modal_wrapper">
         <!-- <productmodal/> -->
-        <div class="modal fade" id="productModal" role="dialog" aria-hidden="true">
-          <div class="modal-dialog">
-            <productmodal />
+        <div class="modal fade" id="productModal" role="dialog" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog modal-lg" role="document">
+            <productmodal class="modal-content"  />
           </div>
         </div>
       </div>
@@ -80,7 +80,6 @@ export default {
   },
   methods: {
     addModal() {
-      console.log("open modal");
       $("#productModal").modal("toggle");
     },
     getProduct(route) {
@@ -89,13 +88,13 @@ export default {
       instance.axiosGet(
         route,
         function(response) {
-          console.log("paici response ", response);
+          //console.log("paici response ", response);
           instance.product = response.data.data;
           instance.message = response.data.message;
           instance.preLoader = false;
         },
         function(response) {
-          console.log("paici 2", response);
+         // console.log("paici 2", response);
             instance.preLoader = true;
         }
       );
@@ -106,7 +105,8 @@ export default {
 
 <style scoped>
 .main_wrapper {
-  background-color: #ffffff;
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px 0 rgba(0,0,0,0.2);
 }
 .top_wrapper {
   padding: 10px 22px;
