@@ -1,6 +1,5 @@
 <template>
   <div class="main_wrapper">
-
     <div v-if="preLoader == true">
       <preloader />
     </div>
@@ -14,18 +13,44 @@
           <h3 class="p-0 top_wrapper_header_content">Product</h3>
         </div>
         <div class="top_wrapper_button">
-          <button class="btn btn-primary app_primary_btn" @click="addModal()">Add</button>
+          <button
+            class="btn btn-primary app_primary_btn"
+            data-toggle="modal"
+            data-target="#add-edit-modal"
+            @click="addEdit('')"
+          >Add</button>
+          <!-- <button
+            class="btn btn-primary"
+            data-toggle="modal"
+            data-target="#add-edit-modal"
+            @click="addEdit('')"
+          >cvghvghgh</button> -->
         </div>
       </div>
-      <div class="modal_wrapper">
-        <!-- <productmodal/> -->
-        <div class="modal fade" id="productModal" role="dialog" tabindex="-1" aria-hidden="true">
+      <!-- <div class="modal_wrapper">
+       
+        <div class="modal fade" id="add-edit-modal" role="dialog" tabindex="-1" aria-hidden="true">
           <div class="modal-dialog modal-lg" role="document">
-            <productmodal class="modal-content"  />
+            <productmodal
+              class="modal-content"
+              v-if="isActive"
+              :id="selecteditemid"
+              :modalID="modalID"
+            />
           </div>
         </div>
+      </div>-->
+      <div class="modal fade" id="add-edit-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered " role="document">
+          <productmodal
+            class="modal-content"
+            v-if="isActive"
+            :id="selectedItemId"
+            :modalID="modalID"
+            ref="vuemodal"
+          ></productmodal>
+        </div>
       </div>
-
       <div class="table_wrapper">
         <table class="table">
           <thead>
@@ -48,7 +73,13 @@
               <td>{{ products.stock }}</td>
               <td>{{ products.created_by }}</td>
               <td>
-                <button type="button" class="btn btn-primary btn-sm">Edit</button>
+                <button
+                  type="button"
+                  class="btn btn-primary btn-sm"
+                  data-toggle="modal"
+                  data-target="#add-edit-modal"
+                  @click="addEdit(products.id)"
+                >Edit</button>
                 <button type="button" class="btn btn-danger btn-sm">Delete</button>
               </td>
             </tr>
@@ -58,7 +89,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import productmodal from "../components/backend/product/productModal";
 import commonMethod from "../helper/commonMethods";
@@ -72,18 +102,25 @@ export default {
     return {
       product: "",
       message: "",
-      preLoader: true
+      preLoader: true,
+      modalID: "#add-edit-modal",
+      //selectedItemId: "",
+      //isActive: false
     };
+  },
+   mounted() {
+    // this.modalCloseAction(this.modalID)
+    // let instance = this;
+    // $(instance.modalID).on("hide.bs.modal", function(e) {
+    //   instance.isActice = false;
+    //   console.log("modal close");
+    // });
   },
   created() {
     this.getProduct("http://127.0.0.1:8000/api/products");
   },
   methods: {
-    addModal() {
-      $("#productModal").modal("toggle");
-    },
     getProduct(route) {
-      //console.log("df");
       let instance = this;
       instance.axiosGet(
         route,
@@ -94,8 +131,8 @@ export default {
           instance.preLoader = false;
         },
         function(response) {
-         // console.log("paici 2", response);
-            instance.preLoader = true;
+          // console.log("paici 2", response);
+          instance.preLoader = true;
         }
       );
     }
@@ -105,8 +142,8 @@ export default {
 
 <style scoped>
 .main_wrapper {
-    background-color: #ffffff;
-    box-shadow: 0 2px 10px 0 rgba(0,0,0,0.2);
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
 }
 .top_wrapper {
   padding: 10px 22px;
