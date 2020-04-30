@@ -1,13 +1,6 @@
 <template>
   <div class="main_wrapper">
-    <div v-if="preLoader == true">
-      <preloader />
-    </div>
-    <div v-else>
-      <div class="alert alert-success">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>{{ message }}!</strong>
-      </div>
+    <div>
       <div class="top_wrapper">
         <div class="top_wrapper_header">
           <h3 class="p-0 top_wrapper_header_content">Product</h3>
@@ -19,27 +12,10 @@
             data-target="#add-edit-modal"
             @click="addEdit('')"
           >Add</button>
-          <!-- <button
-            class="btn btn-primary"
-            data-toggle="modal"
-            data-target="#add-edit-modal"
-            @click="addEdit('')"
-          >cvghvghgh</button> -->
+         
         </div>
       </div>
-      <!-- <div class="modal_wrapper">
-       
-        <div class="modal fade" id="add-edit-modal" role="dialog" tabindex="-1" aria-hidden="true">
-          <div class="modal-dialog modal-lg" role="document">
-            <productmodal
-              class="modal-content"
-              v-if="isActive"
-              :id="selecteditemid"
-              :modalID="modalID"
-            />
-          </div>
-        </div>
-      </div>-->
+     
       <div class="modal fade" id="add-edit-modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered " role="document">
           <productmodal
@@ -51,7 +27,10 @@
           ></productmodal>
         </div>
       </div>
-      <div class="table_wrapper">
+    <div v-if="preLoader == true">
+      <preloader />
+    </div>
+      <div class="table_wrapper" v-else>
         <table class="table">
           <thead>
             <tr>
@@ -102,22 +81,17 @@ export default {
     return {
       product: "",
       message: "",
-      preLoader: true,
       modalID: "#add-edit-modal",
       //selectedItemId: "",
       //isActive: false
     };
   },
    mounted() {
-    // this.modalCloseAction(this.modalID)
-    // let instance = this;
-    // $(instance.modalID).on("hide.bs.modal", function(e) {
-    //   instance.isActice = false;
-    //   console.log("modal close");
-    // });
+     this.modalCloseAction(this.modalID)
   },
   created() {
     this.getProduct("http://127.0.0.1:8000/api/products");
+ this.setPreloader(true);
   },
   methods: {
     getProduct(route) {
@@ -128,11 +102,11 @@ export default {
           //console.log("paici response ", response);
           instance.product = response.data.data;
           instance.message = response.data.message;
-          instance.preLoader = false;
+          instance.setPreloader(false);
         },
         function(response) {
           // console.log("paici 2", response);
-          instance.preLoader = true;
+          instance.setPreloader(true);
         }
       );
     }

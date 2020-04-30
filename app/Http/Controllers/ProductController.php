@@ -59,7 +59,7 @@ class ProductController extends BaseController
         $data =Product::store($product);
 
         if($data){
-            return $this->sendResponse(new ProductResource($data),'Product Store Successfully.');
+            return $this->sendResponse([],'Product Store Successfully.');
         }else{
             return $this->sendError([],'Something Went Wrong!.');
         }

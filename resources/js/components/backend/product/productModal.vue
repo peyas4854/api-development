@@ -6,10 +6,6 @@
       <button type="button" class="close" data-dismiss="modal" @click.prevent>&times;</button>
     </div>
     <div class="modal-body">
-      <div class="alert alert-success">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>{{ setMessage }}!</strong>
-      </div>
       <div v-if="preLoader == true">
         <preloader />
       </div>
@@ -65,16 +61,16 @@
 import commonMethods from "../../../helper/commonMethods";
 export default {
   extends: commonMethods,
-  //   props: {
-  //     id: {
-  //       type: Number,
-  //       required: false
-  //     },
-  //     modalID: {
-  //       type: String,
-  //       required: false
-  //     }
+  // props: {
+  //   id: {
+  //     type: Number,
+  //     required: false
   //   },
+  //   modalID: {
+  //     type: String,
+  //     required: false
+  //   }
+  // },
   props: ["id", "modalID"],
   data() {
     return {
@@ -84,16 +80,7 @@ export default {
       errors: []
     };
   },
-  mounted() {
-
-    let instance = this;
-    $("#add-edit-modal").on("hidden.bs.modal", function() {
-      instance.isActice = false;
-      console.log("modal close");
-    });
-  },
   created() {
-    console.log("modal active", this.modalID);
     console.log("modal created");
     if (this.id) {
       this.getProduct("http://127.0.0.1:8000/api/products/" + this.id);
@@ -103,21 +90,24 @@ export default {
     save() {
       let instance = this;
       instance.inputField = instance.product;
-      instance.postDataMethod(
-        "http://127.0.0.1:8000/api/products",
-        this.inputField
-      );
+      if (this.id) {
+        instance.axoisUpdate(
+          "http://127.0.0.1:8000/api/products/" + this.id,
+          this.inputField
+        );
+      } else {
+        instance.postDataMethod(
+          "http://127.0.0.1:8000/api/products",
+          this.inputField
+        );
+      }
     },
     postDataSuccess(response) {
-      this.product = {};
-      console.log("postDataSuccess", response);
       this.message = response.data.message;
       $(this.modalID).modal("hide");
-      this.modalCloseAction(this.modalID);
-      (this.errors = []), console.log("message", this.message);
+      console.log("message", this.message);
     },
     postDataError(error) {
-      console.log("postDataError", error);
       this.errors = error.errors;
     },
     getProduct(route) {

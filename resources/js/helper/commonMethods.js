@@ -56,32 +56,50 @@ export default {
             instance.axiosPost(route, fields,
                 function (response) {
                     instance.preLoader = false;
-                    console.log("paici response ", response.data);
+                    console.log("paici success ", response.data);
                     instance.postDataSuccess(response);
 
                 },
                 function (error) {
                     instance.preLoader = false;
 
-                    console.log("paici 2", error.response.data);
+                    console.log("post error", error.response.data);
                     instance.postDataError(error.response.data)
 
                 }
             )
         },
-        modalCloseAction(modalID) {
-            console.log('modalCloseAction', modalID)
+        axoisUpdate(url, id, fields, onSuccess, onError) {
             let instance = this;
-           // instance.isActive = false;
+            axios.patch(url, id, fields)
+                .then(function (response) {
+                    if (onSuccess) onSuccess(response);
+                    //console.log('update response', response)
+                    instance.postDataSuccess(response);
+
+                }.bind(this))
+                .catch(function (error) {
+                    if (onError) onError(error);
+                    // console.log('update error', response)
+                    instance.postDataError(error.response.data)
+                })
+
+        },
+        modalCloseAction(modalID) {
+            let instance = this;
             $(modalID).on("hidden.bs.modal", function () {
                 instance.isActive = false;
                 console.log("modal  close");
             });
         },
         addEdit(id) {
-           
+
             this.selectedItemId = id;
             this.isActive = true;
+        },
+        setPreloader(val) {
+            let instance = this;
+            instance.preLoader = val;
         }
 
 

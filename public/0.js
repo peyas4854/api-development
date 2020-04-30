@@ -69,23 +69,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   "extends": _helper_commonMethods__WEBPACK_IMPORTED_MODULE_0__["default"],
-  //   props: {
-  //     id: {
-  //       type: Number,
-  //       required: false
-  //     },
-  //     modalID: {
-  //       type: String,
-  //       required: false
-  //     }
+  // props: {
+  //   id: {
+  //     type: Number,
+  //     required: false
   //   },
+  //   modalID: {
+  //     type: String,
+  //     required: false
+  //   }
+  // },
   props: ["id", "modalID"],
   data: function data() {
     return {
@@ -95,15 +91,7 @@ __webpack_require__.r(__webpack_exports__);
       errors: []
     };
   },
-  mounted: function mounted() {
-    var instance = this;
-    $("#add-edit-modal").on("hidden.bs.modal", function () {
-      instance.isActice = false;
-      console.log("modal close");
-    });
-  },
   created: function created() {
-    console.log("modal active", this.modalID);
     console.log("modal created");
 
     if (this.id) {
@@ -114,18 +102,19 @@ __webpack_require__.r(__webpack_exports__);
     save: function save() {
       var instance = this;
       instance.inputField = instance.product;
-      instance.postDataMethod("http://127.0.0.1:8000/api/products", this.inputField);
+
+      if (this.id) {
+        instance.axoisUpdate("http://127.0.0.1:8000/api/products/" + this.id, this.inputField);
+      } else {
+        instance.postDataMethod("http://127.0.0.1:8000/api/products", this.inputField);
+      }
     },
     postDataSuccess: function postDataSuccess(response) {
-      this.product = {};
-      console.log("postDataSuccess", response);
       this.message = response.data.message;
       $(this.modalID).modal("hide");
-      this.modalCloseAction(this.modalID);
-      this.errors = [], console.log("message", this.message);
+      console.log("message", this.message);
     },
     postDataError: function postDataError(error) {
-      console.log("postDataError", error);
       this.errors = error.errors;
     },
     getProduct: function getProduct(route) {
@@ -228,27 +217,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -261,21 +229,17 @@ __webpack_require__.r(__webpack_exports__);
     return {
       product: "",
       message: "",
-      preLoader: true,
       modalID: "#add-edit-modal" //selectedItemId: "",
       //isActive: false
 
     };
   },
-  mounted: function mounted() {// this.modalCloseAction(this.modalID)
-    // let instance = this;
-    // $(instance.modalID).on("hide.bs.modal", function(e) {
-    //   instance.isActice = false;
-    //   console.log("modal close");
-    // });
+  mounted: function mounted() {
+    this.modalCloseAction(this.modalID);
   },
   created: function created() {
     this.getProduct("http://127.0.0.1:8000/api/products");
+    this.setPreloader(true);
   },
   methods: {
     getProduct: function getProduct(route) {
@@ -284,10 +248,10 @@ __webpack_require__.r(__webpack_exports__);
         //console.log("paici response ", response);
         instance.product = response.data.data;
         instance.message = response.data.message;
-        instance.preLoader = false;
+        instance.setPreloader(false);
       }, function (response) {
         // console.log("paici 2", response);
-        instance.preLoader = true;
+        instance.setPreloader(true);
       });
     }
   }
@@ -432,19 +396,6 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "modal-body" }, [
-      _c("div", { staticClass: "alert alert-success" }, [
-        _c(
-          "button",
-          {
-            staticClass: "close",
-            attrs: { type: "button", "data-dismiss": "alert" }
-          },
-          [_vm._v("×")]
-        ),
-        _vm._v(" "),
-        _c("strong", [_vm._v(_vm._s(_vm.setMessage) + "!")])
-      ]),
-      _vm._v(" "),
       _vm.preLoader == true
         ? _c("div", [_c("preloader")], 1)
         : _c("form", [
@@ -673,78 +624,65 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "main_wrapper" }, [
-    _vm.preLoader == true
-      ? _c("div", [_c("preloader")], 1)
-      : _c("div", [
-          _c("div", { staticClass: "alert alert-success" }, [
-            _c(
-              "button",
-              {
-                staticClass: "close",
-                attrs: { type: "button", "data-dismiss": "alert" }
+    _c("div", [
+      _c("div", { staticClass: "top_wrapper" }, [
+        _vm._m(0),
+        _vm._v(" "),
+        _c("div", { staticClass: "top_wrapper_button" }, [
+          _c(
+            "button",
+            {
+              staticClass: "btn btn-primary app_primary_btn",
+              attrs: {
+                "data-toggle": "modal",
+                "data-target": "#add-edit-modal"
               },
-              [_vm._v("×")]
-            ),
-            _vm._v(" "),
-            _c("strong", [_vm._v(_vm._s(_vm.message) + "!")])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "top_wrapper" }, [
-            _vm._m(0),
-            _vm._v(" "),
-            _c("div", { staticClass: "top_wrapper_button" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-primary app_primary_btn",
-                  attrs: {
-                    "data-toggle": "modal",
-                    "data-target": "#add-edit-modal"
-                  },
-                  on: {
-                    click: function($event) {
-                      return _vm.addEdit("")
-                    }
-                  }
-                },
-                [_vm._v("Add")]
-              )
-            ])
-          ]),
-          _vm._v(" "),
+              on: {
+                click: function($event) {
+                  return _vm.addEdit("")
+                }
+              }
+            },
+            [_vm._v("Add")]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: {
+            id: "add-edit-modal",
+            tabindex: "-1",
+            role: "dialog",
+            "aria-hidden": "true"
+          }
+        },
+        [
           _c(
             "div",
             {
-              staticClass: "modal fade",
-              attrs: {
-                id: "add-edit-modal",
-                tabindex: "-1",
-                role: "dialog",
-                "aria-hidden": "true"
-              }
+              staticClass: "modal-dialog modal-dialog-centered ",
+              attrs: { role: "document" }
             },
             [
-              _c(
-                "div",
-                {
-                  staticClass: "modal-dialog modal-dialog-centered ",
-                  attrs: { role: "document" }
-                },
-                [
-                  _vm.isActive
-                    ? _c("productmodal", {
-                        ref: "vuemodal",
-                        staticClass: "modal-content",
-                        attrs: { id: _vm.selectedItemId, modalID: _vm.modalID }
-                      })
-                    : _vm._e()
-                ],
-                1
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "table_wrapper" }, [
+              _vm.isActive
+                ? _c("productmodal", {
+                    ref: "vuemodal",
+                    staticClass: "modal-content",
+                    attrs: { id: _vm.selectedItemId, modalID: _vm.modalID }
+                  })
+                : _vm._e()
+            ],
+            1
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _vm.preLoader == true
+        ? _c("div", [_c("preloader")], 1)
+        : _c("div", { staticClass: "table_wrapper" }, [
             _c(
               "table",
               { staticClass: "table" },
@@ -799,7 +737,7 @@ var render = function() {
               2
             )
           ])
-        ])
+    ])
   ])
 }
 var staticRenderFns = [
@@ -986,18 +924,28 @@ __webpack_require__.r(__webpack_exports__);
       var instance = this;
       instance.axiosPost(route, fields, function (response) {
         instance.preLoader = false;
-        console.log("paici response ", response.data);
+        console.log("paici success ", response.data);
         instance.postDataSuccess(response);
       }, function (error) {
         instance.preLoader = false;
-        console.log("paici 2", error.response.data);
+        console.log("post error", error.response.data);
+        instance.postDataError(error.response.data);
+      });
+    },
+    axoisUpdate: function axoisUpdate(url, id, fields, onSuccess, onError) {
+      var instance = this;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.patch(url, id, fields).then(function (response) {
+        if (onSuccess) onSuccess(response); //console.log('update response', response)
+
+        instance.postDataSuccess(response);
+      }.bind(this))["catch"](function (error) {
+        if (onError) onError(error); // console.log('update error', response)
+
         instance.postDataError(error.response.data);
       });
     },
     modalCloseAction: function modalCloseAction(modalID) {
-      console.log('modalCloseAction', modalID);
-      var instance = this; // instance.isActive = false;
-
+      var instance = this;
       $(modalID).on("hidden.bs.modal", function () {
         instance.isActive = false;
         console.log("modal  close");
@@ -1006,6 +954,10 @@ __webpack_require__.r(__webpack_exports__);
     addEdit: function addEdit(id) {
       this.selectedItemId = id;
       this.isActive = true;
+    },
+    setPreloader: function setPreloader(val) {
+      var instance = this;
+      instance.preLoader = val;
     }
   }
 });
