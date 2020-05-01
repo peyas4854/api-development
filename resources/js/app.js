@@ -8,11 +8,52 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-//import commonMethod from '../js/helper/commonMethods';
-//Vue.use(commonMethod);
+// an EventHub to share events between components
+Vue.prototype.$hub = new Vue();
 
+// register the plugin on vue
+import Toasted from 'vue-toasted';
 
+Vue.use(Toasted)
 
+let success = {
+    theme: "toasted-primary",
+    type: success,
+    position: "top-right",
+    duration: 5000,
+    className: ['bg-success', 'text-white']
+}
+// register the toast with the custom message
+Vue.toasted.register('Success',
+    (payload) => {
+        // if there is no message passed show default message
+        if (!payload.message) {
+            return "Oops! Something Went Wrong.."
+        }
+        // if there is a message show it with the message
+        return payload.message;
+    },
+    success
+)
+
+let error = {
+    theme: "toasted-primary",
+    type: 'error',
+    position: "top-right",
+    duration: 5000,
+
+}
+Vue.toasted.register('errors',
+    (payload) => {
+        // if there is no message passed show default message
+        if (!payload.message) {
+            return "Oops! Something Went Wrong.."
+        }
+        // if there is a message show it with the message
+        return payload.message;
+    },
+    error
+)
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -27,6 +68,7 @@ window.Vue = require('vue');
 //Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('app', require('../js/App.vue').default);
 Vue.component('preloader', require('./components/base/preloader.vue').default);
+Vue.component('datatable', require('./components/base/datatable.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

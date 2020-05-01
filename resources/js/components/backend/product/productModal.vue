@@ -103,9 +103,8 @@ export default {
       }
     },
     postDataSuccess(response) {
-      this.message = response.data.message;
       $(this.modalID).modal("hide");
-      console.log("message", this.message);
+      this.$hub.$emit("reloadDataTable");
     },
     postDataError(error) {
       this.errors = error.errors;

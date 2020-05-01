@@ -12,6 +12,7 @@ const routes = [{
         {path: '',component: loadView("dashboard")},
         {path: '/product',component: loadView("product")},
         { path: '/review',component: loadView("review")},
+        { path: '*',component: loadView("error")},
         ]
     },
     {

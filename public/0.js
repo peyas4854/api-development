@@ -110,9 +110,8 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     postDataSuccess: function postDataSuccess(response) {
-      this.message = response.data.message;
       $(this.modalID).modal("hide");
-      console.log("message", this.message);
+      this.$hub.$emit("reloadDataTable");
     },
     postDataError: function postDataError(error) {
       this.errors = error.errors;
@@ -229,17 +228,51 @@ __webpack_require__.r(__webpack_exports__);
     return {
       product: "",
       message: "",
-      modalID: "#add-edit-modal" //selectedItemId: "",
-      //isActive: false
-
+      modalID: "#add-edit-modal",
+      dataset: {
+        source: "http://127.0.0.1:8000/api/products",
+        headers: ["Product name", "Price", "Discount", "Stock", "Created By", "Action"],
+        colums: [{
+          title: " Product name",
+          key: "name",
+          type: "text"
+        }, {
+          title: " Price",
+          key: "price",
+          type: "text"
+        }, {
+          title: " Discount",
+          key: "discount",
+          type: "text"
+        }, {
+          title: " Stock",
+          key: "stock",
+          type: "text"
+        }, {
+          title: " Created By",
+          key: "created_by",
+          type: "text"
+        }, {
+          title: " Action",
+          key: "action",
+          type: "component"
+        }]
+      }
     };
   },
   mounted: function mounted() {
+    var instance = this;
+    this.$hub.$on("addEdit", function (id) {
+      instance.addEdit(id);
+    });
     this.modalCloseAction(this.modalID);
+    this.$hub.$on("deleteMethod", function (id) {
+      console.log("delete route", id);
+      instance.axiosDelete("http://127.0.0.1:8000/api/products/" + id);
+    });
   },
-  created: function created() {
-    this.getProduct("http://127.0.0.1:8000/api/products");
-    this.setPreloader(true);
+  created: function created() {//this.getProduct("http://127.0.0.1:8000/api/products");
+    //this.setPreloader(true);
   },
   methods: {
     getProduct: function getProduct(route) {
@@ -271,7 +304,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.modal-header[data-v-09603204] {\r\n  background-color: #4f96e6;\r\n  color: #ffffff !important;\n}\n.from_group[data-v-09603204] {\r\n  margin-bottom: 10px;\n}\n.errors[data-v-09603204] {\r\n  color: red;\r\n  font-family: Roboto;\r\n  font-size: 14px;\r\n  font-weight: 400;\n}\r\n", ""]);
+exports.push([module.i, "\n.modal-header[data-v-09603204] {\n  background-color: #4f96e6;\n  color: #ffffff !important;\n}\n.from_group[data-v-09603204] {\n  margin-bottom: 10px;\n}\n.errors[data-v-09603204] {\n  color: red;\n  font-family: Roboto;\n  font-size: 14px;\n  font-weight: 400;\n}\n", ""]);
 
 // exports
 
@@ -290,7 +323,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.main_wrapper[data-v-5ecfa9c0] {\r\n  background-color: #ffffff;\r\n  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);\n}\n.top_wrapper[data-v-5ecfa9c0] {\r\n  padding: 10px 22px;\r\n  height: 60px;\r\n  background-color: #0e77e0a1 !important;\n}\n.top_wrapper_header[data-v-5ecfa9c0] {\r\n  float: left;\n}\n.top_wrapper_button[data-v-5ecfa9c0] {\r\n  float: right;\n}\n.top_wrapper_header_content[data-v-5ecfa9c0] {\r\n  color: #ffffff;\n}\r\n", ""]);
+exports.push([module.i, "\n.main_wrapper[data-v-5ecfa9c0] {\n  background-color: #ffffff;\n  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);\n}\n.top_wrapper[data-v-5ecfa9c0] {\n  padding: 10px 22px;\n  height: 60px;\n  background-color: #0e77e0a1 !important;\n}\n.top_wrapper_header[data-v-5ecfa9c0] {\n  float: left;\n}\n.top_wrapper_button[data-v-5ecfa9c0] {\n  float: right;\n}\n.top_wrapper_header_content[data-v-5ecfa9c0] {\n  color: #ffffff;\n}\n", ""]);
 
 // exports
 
@@ -663,7 +696,7 @@ var render = function() {
           _c(
             "div",
             {
-              staticClass: "modal-dialog modal-dialog-centered ",
+              staticClass: "modal-dialog modal-dialog-centered",
               attrs: { role: "document" }
             },
             [
@@ -680,63 +713,12 @@ var render = function() {
         ]
       ),
       _vm._v(" "),
-      _vm.preLoader == true
-        ? _c("div", [_c("preloader")], 1)
-        : _c("div", { staticClass: "table_wrapper" }, [
-            _c(
-              "table",
-              { staticClass: "table" },
-              [
-                _vm._m(1),
-                _vm._v(" "),
-                _vm._l(_vm.product, function(products) {
-                  return _c("tbody", { key: products.id }, [
-                    _c("tr", [
-                      _c("td", [_vm._v(_vm._s(products.name))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(products.price))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(products.discount))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(products.stock))]),
-                      _vm._v(" "),
-                      _c("td", [_vm._v(_vm._s(products.created_by))]),
-                      _vm._v(" "),
-                      _c("td", [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-primary btn-sm",
-                            attrs: {
-                              type: "button",
-                              "data-toggle": "modal",
-                              "data-target": "#add-edit-modal"
-                            },
-                            on: {
-                              click: function($event) {
-                                return _vm.addEdit(products.id)
-                              }
-                            }
-                          },
-                          [_vm._v("Edit")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-danger btn-sm",
-                            attrs: { type: "button" }
-                          },
-                          [_vm._v("Delete")]
-                        )
-                      ])
-                    ])
-                  ])
-                })
-              ],
-              2
-            )
-          ])
+      _c(
+        "div",
+        { staticClass: "table_wrapper" },
+        [_c("datatable", { attrs: { dataset: _vm.dataset } })],
+        1
+      )
     ])
   ])
 }
@@ -748,26 +730,6 @@ var staticRenderFns = [
     return _c("div", { staticClass: "top_wrapper_header" }, [
       _c("h3", { staticClass: "p-0 top_wrapper_header_content" }, [
         _vm._v("Product")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("Product name")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Price")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Discount")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Stock")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Created user")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Action")])
       ])
     ])
   }
@@ -862,105 +824,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_productModal_vue_vue_type_template_id_09603204_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
-
-/***/ }),
-
-/***/ "./resources/js/helper/commonMethods.js":
-/*!**********************************************!*\
-  !*** ./resources/js/helper/commonMethods.js ***!
-  \**********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      isActive: false,
-      inputField: 'input',
-      preLoader: false,
-      message: '',
-      selectedItemId: ''
-    };
-  },
-  computed: {
-    setMessage: function setMessage() {
-      return this.message;
-    }
-  },
-  mounted: function mounted() {
-    //console.log('mounted', this.isActive);
-    window.setTimeout(function () {
-      $(".alert").fadeTo(500, 0).slideUp(500, function () {
-        $(this).remove();
-      });
-    }, 5000);
-  },
-  created: function created() {//console.log('mounted form created')
-  },
-  methods: {
-    axiosGet: function axiosGet(url, onSuccess, onError) {
-      //let instance = this;
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url).then(function (response) {
-        if (onSuccess) onSuccess(response);
-      }.bind(this))["catch"](function (error) {
-        if (onError) onError(error);
-      });
-    },
-    axiosPost: function axiosPost(url, postData, onSuccess, onError) {
-      this.preLoader = true;
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(url, postData).then(function (response) {
-        if (onSuccess) onSuccess(response);
-      }.bind(this))["catch"](function (error) {
-        if (onError) onError(error);
-      });
-    },
-    postDataMethod: function postDataMethod(route, fields) {
-      //console.log("df");
-      var instance = this;
-      instance.axiosPost(route, fields, function (response) {
-        instance.preLoader = false;
-        console.log("paici success ", response.data);
-        instance.postDataSuccess(response);
-      }, function (error) {
-        instance.preLoader = false;
-        console.log("post error", error.response.data);
-        instance.postDataError(error.response.data);
-      });
-    },
-    axoisUpdate: function axoisUpdate(url, id, fields, onSuccess, onError) {
-      var instance = this;
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.patch(url, id, fields).then(function (response) {
-        if (onSuccess) onSuccess(response); //console.log('update response', response)
-
-        instance.postDataSuccess(response);
-      }.bind(this))["catch"](function (error) {
-        if (onError) onError(error); // console.log('update error', response)
-
-        instance.postDataError(error.response.data);
-      });
-    },
-    modalCloseAction: function modalCloseAction(modalID) {
-      var instance = this;
-      $(modalID).on("hidden.bs.modal", function () {
-        instance.isActive = false;
-        console.log("modal  close");
-      });
-    },
-    addEdit: function addEdit(id) {
-      this.selectedItemId = id;
-      this.isActive = true;
-    },
-    setPreloader: function setPreloader(val) {
-      var instance = this;
-      instance.preLoader = val;
-    }
-  }
-});
 
 /***/ }),
 

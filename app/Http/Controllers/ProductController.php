@@ -24,7 +24,7 @@ class ProductController extends BaseController
     public function index()
     {
         $product = product::all();
-        return $this->sendResponse(ProductResource::collection($product),'Product retrived successfully');
+        return $this->sendResponse(ProductResource::collection($product),'Product Retrived Successfully');
 
     }
 
@@ -74,7 +74,7 @@ class ProductController extends BaseController
      */
     public function show(Product $product)
     {
-        return $this->sendResponse(new ProductResource($product),'Product retrived successfully');
+        return $this->sendResponse(new ProductResource($product),'Product Show successfully');
     }
 
     /**

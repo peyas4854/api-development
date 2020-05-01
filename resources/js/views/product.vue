@@ -12,12 +12,11 @@
             data-target="#add-edit-modal"
             @click="addEdit('')"
           >Add</button>
-         
         </div>
       </div>
-     
+
       <div class="modal fade" id="add-edit-modal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered " role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
           <productmodal
             class="modal-content"
             v-if="isActive"
@@ -27,11 +26,11 @@
           ></productmodal>
         </div>
       </div>
-    <div v-if="preLoader == true">
-      <preloader />
-    </div>
-      <div class="table_wrapper" v-else>
-        <table class="table">
+      <!-- <div v-if="preLoader == true">
+        <preloader />
+      </div>-->
+      <div class="table_wrapper">
+        <!-- <table class="table">
           <thead>
             <tr>
               <th>Product name</th>
@@ -63,7 +62,8 @@
               </td>
             </tr>
           </tbody>
-        </table>
+        </table>-->
+        <datatable :dataset="dataset" />
       </div>
     </div>
   </div>
@@ -82,16 +82,41 @@ export default {
       product: "",
       message: "",
       modalID: "#add-edit-modal",
-      //selectedItemId: "",
-      //isActive: false
+      dataset: {
+        source: "http://127.0.0.1:8000/api/products",
+        headers: [
+          "Product name",
+          "Price",
+          "Discount",
+          "Stock",
+          "Created By",
+          "Action"
+        ],
+        colums: [
+          { title: " Product name", key: "name", type: "text" },
+          { title: " Price", key: "price", type: "text" },
+          { title: " Discount", key: "discount", type: "text" },
+          { title: " Stock", key: "stock", type: "text" },
+          { title: " Created By", key: "created_by", type: "text" },
+          { title: " Action", key: "action", type: "component" }
+        ]
+      }
     };
   },
-   mounted() {
-     this.modalCloseAction(this.modalID)
+  mounted() {
+    let instance = this;
+    this.$hub.$on("addEdit", function(id) {
+      instance.addEdit(id);
+    });
+    this.modalCloseAction(this.modalID);
+    this.$hub.$on("deleteMethod", function(id) {
+      console.log("delete route", id);
+      instance.axiosDelete("http://127.0.0.1:8000/api/products/" + id);
+    });
   },
   created() {
-    this.getProduct("http://127.0.0.1:8000/api/products");
- this.setPreloader(true);
+    //this.getProduct("http://127.0.0.1:8000/api/products");
+    //this.setPreloader(true);
   },
   methods: {
     getProduct(route) {
