@@ -2090,6 +2090,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   "extends": _helper_commonMethods__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -2101,8 +2108,15 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      tableData: {}
+      tableData: {},
+      searchtable: ""
     };
+  },
+  watch: {
+    searchtable: function searchtable(newval, oldval) {
+      // console.log("new", newval);
+      this.searchMethod(newval);
+    }
   },
   mounted: function mounted() {
     var instance = this;
@@ -2122,17 +2136,28 @@ __webpack_require__.r(__webpack_exports__);
     getData: function getData(route) {
       var instance = this;
       instance.axiosGet(route, function (response) {
-        console.log("datatable response ", response.data.data);
+        //console.log("datatable response ", response.data.data);
         instance.tableData = response.data.data;
-      }, function (response) {
-        console.log("datatable 2", response);
+      }, function (response) {//console.log("datatable 2", response);
       });
     },
     addEdit: function addEdit(id) {
       console.log("emit,id");
+      this.$hub.$emit("addEdit", id);
     },
     reload: function reload() {
       this.getData(this.dataset.source);
+    },
+    searchMethod: function searchMethod(val) {
+      console.log("paici", val); //console.log("paici", this.tableData);
+
+      var key = JSON.parse(JSON.stringify(this.dataset.colums));
+      console.log("key", key);
+      var data = JSON.parse(JSON.stringify(this.tableData));
+      var result = data.filter(function (e) {
+        return e.name === val;
+      });
+      console.log("result", result);
     }
   }
 });
@@ -38428,25 +38453,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container-fluid" },
-    [
-      _c(
-        "h1",
-        { staticClass: "text-center" },
-        [_c("router-link", { attrs: { to: "/" } }, [_vm._v("App home")])],
-        1
-      ),
-      _vm._v(" "),
-      _c("router-link", { attrs: { to: "/home2" } }, [_vm._v("home 2")]),
-      _vm._v(" "),
-      _c("router-link", { attrs: { to: "/home3" } }, [_vm._v("home 3")]),
-      _vm._v(" "),
-      _c("router-view")
-    ],
-    1
-  )
+  return _c("div", { staticClass: "container-fluid" })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -38470,80 +38477,114 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm.preLoader == true
-      ? _c("div", [_c("preloader")], 1)
-      : _c("table", { staticClass: "table" }, [
-          _c("thead", [
-            _c(
-              "tr",
-              _vm._l(_vm.dataset.colums, function(header, i) {
-                return _c("th", { key: i }, [_vm._v(_vm._s(header.title))])
-              }),
-              0
-            )
-          ]),
-          _vm._v(" "),
-          _vm.tableData.length > 0
-            ? _c(
-                "tbody",
-                _vm._l(_vm.tableData, function(data, i) {
-                  return _c(
-                    "tr",
-                    { key: i },
-                    _vm._l(_vm.dataset.colums, function(column, i) {
-                      return _c("td", { key: i }, [
-                        column.type === "text"
-                          ? _c("span", [_vm._v(_vm._s(data[column.key]))])
-                          : _vm._e(),
-                        _vm._v(" "),
-                        column.type === "component"
-                          ? _c("span", [
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-primary btn-sm",
-                                  attrs: {
-                                    type: "button",
-                                    "data-toggle": "modal",
-                                    "data-target": "#add-edit-modal"
-                                  },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.addEdit(data.id)
-                                    }
-                                  }
-                                },
-                                [_vm._v("Edit")]
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-danger btn-sm",
-                                  attrs: { type: "button" },
-                                  on: {
-                                    click: function($event) {
-                                      return _vm.dataDelete(data.id)
-                                    }
-                                  }
-                                },
-                                [_vm._v("Delete")]
-                              )
-                            ])
-                          : _vm._e()
-                      ])
+  return _c(
+    "div",
+    [
+      _vm.preLoader == true
+        ? _c("preloader")
+        : _c("div", [
+            _c("div", { staticClass: "form-row p-3" }, [
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("label", { attrs: { for: "search" } }, [_vm._v("Search")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.searchtable,
+                      expression: "searchtable"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { type: "text", placeholder: "Search" },
+                  domProps: { value: _vm.searchtable },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.searchtable = $event.target.value
+                    }
+                  }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("table", { staticClass: "table" }, [
+              _c("thead", [
+                _c(
+                  "tr",
+                  _vm._l(_vm.dataset.colums, function(header, i) {
+                    return _c("th", { key: i }, [_vm._v(_vm._s(header.title))])
+                  }),
+                  0
+                )
+              ]),
+              _vm._v(" "),
+              _vm.tableData.length > 0
+                ? _c(
+                    "tbody",
+                    _vm._l(_vm.tableData, function(data, i) {
+                      return _c(
+                        "tr",
+                        { key: i },
+                        _vm._l(_vm.dataset.colums, function(column, i) {
+                          return _c("td", { key: i }, [
+                            column.type === "text"
+                              ? _c("span", [_vm._v(_vm._s(data[column.key]))])
+                              : _vm._e(),
+                            _vm._v(" "),
+                            column.type === "component"
+                              ? _c("span", [
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-primary btn-sm",
+                                      attrs: {
+                                        type: "button",
+                                        "data-toggle": "modal",
+                                        "data-target": "#add-edit-modal"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.addEdit(data.id)
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Edit")]
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "button",
+                                    {
+                                      staticClass: "btn btn-danger btn-sm",
+                                      attrs: { type: "button" },
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.dataDelete(data.id)
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Delete")]
+                                  )
+                                ])
+                              : _vm._e()
+                          ])
+                        }),
+                        0
+                      )
                     }),
                     0
                   )
-                }),
-                0
-              )
-            : _c("tbody", { staticClass: "text-center" }, [
-                _c("h1", [_vm._v(" No data Found! ")])
-              ])
-        ])
-  ])
+                : _c("tbody", { staticClass: "text-center" }, [
+                    _c("h1", [_vm._v("No data Found!")])
+                  ])
+            ])
+          ])
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -53783,6 +53824,12 @@ var loadView = function loadView(view) {
   };
 };
 
+var loadFront = function loadFront(view) {
+  return function () {
+    return __webpack_require__("./resources/js/views/front lazy recursive ^\\.\\/.*\\.vue$")("./".concat(view, ".vue"));
+  };
+};
+
 var routes = [{
   path: '/',
   component: loadLayout("BackendLayout"),
@@ -53795,13 +53842,22 @@ var routes = [{
   }, {
     path: '/review',
     component: loadView("review")
-  }, {
-    path: '*',
-    component: loadView("error")
-  }]
+  } // {
+  //     path: '/*',
+  //     component: loadView("error")
+  // },
+  ]
 }, {
-  path: '/frontend',
-  component: loadLayout("DefaultLayout")
+  path: '/index',
+  component: loadLayout("FrontLayout"),
+  children: [{
+    path: '',
+    component: loadFront("index")
+  }, {
+    path: '/singleproduct/:id',
+    component: loadView("singleproduct"),
+    name: 'singleproduct'
+  }]
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   routes: routes,
@@ -54108,9 +54164,9 @@ var map = {
 		"./resources/js/components/layouts/BackendLayout.vue",
 		1
 	],
-	"./DefaultLayout.vue": [
-		"./resources/js/components/layouts/DefaultLayout.vue",
-		2
+	"./FrontLayout.vue": [
+		"./resources/js/components/layouts/FrontLayout.vue",
+		7
 	]
 };
 function webpackAsyncContext(req) {
@@ -54156,11 +54212,6 @@ __webpack_require__.r(__webpack_exports__);
       message: '',
       selectedItemId: ''
     };
-  },
-  computed: {
-    setMessage: function setMessage() {
-      return this.message;
-    }
   },
   mounted: function mounted() {
     //console.log('mounted', this.isActive);
@@ -54289,6 +54340,10 @@ var map = {
 		"./resources/js/views/error.vue",
 		4
 	],
+	"./front/index.vue": [
+		"./resources/js/views/front/index.vue",
+		2
+	],
 	"./product.vue": [
 		"./resources/js/views/product.vue",
 		0
@@ -54296,6 +54351,10 @@ var map = {
 	"./review.vue": [
 		"./resources/js/views/review.vue",
 		5
+	],
+	"./singleproduct.vue": [
+		"./resources/js/views/singleproduct.vue",
+		6
 	]
 };
 function webpackAsyncContext(req) {
@@ -54316,6 +54375,41 @@ webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 	return Object.keys(map);
 };
 webpackAsyncContext.id = "./resources/js/views lazy recursive ^\\.\\/.*\\.vue$";
+module.exports = webpackAsyncContext;
+
+/***/ }),
+
+/***/ "./resources/js/views/front lazy recursive ^\\.\\/.*\\.vue$":
+/*!**********************************************************************!*\
+  !*** ./resources/js/views/front lazy ^\.\/.*\.vue$ namespace object ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"./index.vue": [
+		"./resources/js/views/front/index.vue",
+		2
+	]
+};
+function webpackAsyncContext(req) {
+	if(!__webpack_require__.o(map, req)) {
+		return Promise.resolve().then(function() {
+			var e = new Error("Cannot find module '" + req + "'");
+			e.code = 'MODULE_NOT_FOUND';
+			throw e;
+		});
+	}
+
+	var ids = map[req], id = ids[0];
+	return __webpack_require__.e(ids[1]).then(function() {
+		return __webpack_require__(id);
+	});
+}
+webpackAsyncContext.keys = function webpackAsyncContextKeys() {
+	return Object.keys(map);
+};
+webpackAsyncContext.id = "./resources/js/views/front lazy recursive ^\\.\\/.*\\.vue$";
 module.exports = webpackAsyncContext;
 
 /***/ }),

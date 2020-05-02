@@ -7,14 +7,10 @@ export default {
             preLoader: false,
             message: '',
             selectedItemId: '',
-        }
-    },
-    computed: {
-        setMessage() {
-            return this.message;
-        }
 
+        }
     },
+
     mounted() {
         //console.log('mounted', this.isActive);
         window.setTimeout(function () {

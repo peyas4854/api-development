@@ -105,7 +105,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.bg-light[data-v-f65b2706] {\n  background-color:#06d0f1f2!important;\n  position: fixed;\n  width: 100%;\n  border: 0px !important;\n    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);\n  transition: 0.3s;\n}\n.bg-light[data-v-f65b2706]:hover {\n  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);\n}\n.main-content[data-v-f65b2706] {\n  margin-top: 80px;\npadding:0px 15px;\n}\n.card-body[data-v-f65b2706] {\n  border-bottom: 1px solid #d3d3daf3 !important;\n}\n.fade-enter-active[data-v-f65b2706],\n.fade-leave-active[data-v-f65b2706] {\n  transition: opacity 0.4s;\n}\n.fade-enter[data-v-f65b2706], .fade-leave-to[data-v-f65b2706] /* .fade-leave-active below version 2.1.8 */ {\n  opacity: 0;\n}\n", ""]);
+exports.push([module.i, "\n.bg-light[data-v-f65b2706] {\n  background-color:#06d0f1f2!important;\n  position: fixed;\n  width: 100%;\n  border: 0px !important;\n    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);\n  transition: 0.3s;\n    z-index: 999;\n}\n.bg-light[data-v-f65b2706]:hover {\n  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);\n}\n.main-content[data-v-f65b2706] {\n  margin-top: 80px;\n padding:0px 15px;\n}\n.card-body[data-v-f65b2706] {\n  border-bottom: 1px solid #d3d3daf3 !important;\n}\n.fade-enter-active[data-v-f65b2706],\n.fade-leave-active[data-v-f65b2706] {\n  transition: opacity 0.4s;\n}\n.fade-enter[data-v-f65b2706], .fade-leave-to[data-v-f65b2706] /* .fade-leave-active below version 2.1.8 */ {\n  opacity: 0;\n}\n", ""]);
 
 // exports
 
