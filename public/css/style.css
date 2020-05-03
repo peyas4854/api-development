@@ -4,10 +4,18 @@ body{
 background-color: #ebeaf1;
 }
 
-p{
-font-family: Montserrat;
+p {
+    font-family: Montserrat;
+    color: #212529;
+    font-weight: 500;
+font-size:14px;
 }
+h1,h2,h3,h4,h5,h6{
+font-family: roboto;
+text-transform: capitalize;
+ color: #212529;
 
+}
 .app_primary_btn {
     background-color: #3e4840d9;
     color: #ffffff;

@@ -7,6 +7,7 @@ export default {
             preLoader: false,
             message: '',
             selectedItemId: '',
+            isLoggedIn:false,
 
         }
     },
@@ -31,7 +32,7 @@ export default {
                 .then(function (response) {
                     if (onSuccess) onSuccess(response);
                     this.setPreloader(false);
-                    this.toastonSuccess(response.data.message)
+                    //this.toastonSuccess(response.data.message)
                 }.bind(this))
                 .catch(function (error) {
                     if (onError) onError(error);

@@ -53858,6 +53858,9 @@ var routes = [{
     component: loadView("singleproduct"),
     name: 'singleproduct'
   }]
+}, {
+  path: '/login',
+  component: loadFront("login")
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   routes: routes,
@@ -54162,11 +54165,11 @@ __webpack_require__.r(__webpack_exports__);
 var map = {
 	"./BackendLayout.vue": [
 		"./resources/js/components/layouts/BackendLayout.vue",
-		1
+		3
 	],
 	"./FrontLayout.vue": [
 		"./resources/js/components/layouts/FrontLayout.vue",
-		7
+		1
 	]
 };
 function webpackAsyncContext(req) {
@@ -54210,7 +54213,8 @@ __webpack_require__.r(__webpack_exports__);
       inputField: 'input',
       preLoader: false,
       message: '',
-      selectedItemId: ''
+      selectedItemId: '',
+      isLoggedIn: false
     };
   },
   mounted: function mounted() {
@@ -54229,8 +54233,7 @@ __webpack_require__.r(__webpack_exports__);
       this.setPreloader(true);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url).then(function (response) {
         if (onSuccess) onSuccess(response);
-        this.setPreloader(false);
-        this.toastonSuccess(response.data.message);
+        this.setPreloader(false); //this.toastonSuccess(response.data.message)
       }.bind(this))["catch"](function (error) {
         if (onError) onError(error);
         this.setPreloader(false);
@@ -54334,27 +54337,31 @@ __webpack_require__.r(__webpack_exports__);
 var map = {
 	"./dashboard.vue": [
 		"./resources/js/views/dashboard.vue",
-		3
+		4
 	],
 	"./error.vue": [
 		"./resources/js/views/error.vue",
-		4
+		5
 	],
 	"./front/index.vue": [
 		"./resources/js/views/front/index.vue",
-		2
+		0
+	],
+	"./front/login.vue": [
+		"./resources/js/views/front/login.vue",
+		8
 	],
 	"./product.vue": [
 		"./resources/js/views/product.vue",
-		0
+		2
 	],
 	"./review.vue": [
 		"./resources/js/views/review.vue",
-		5
+		6
 	],
 	"./singleproduct.vue": [
 		"./resources/js/views/singleproduct.vue",
-		6
+		7
 	]
 };
 function webpackAsyncContext(req) {
@@ -54389,7 +54396,11 @@ module.exports = webpackAsyncContext;
 var map = {
 	"./index.vue": [
 		"./resources/js/views/front/index.vue",
-		2
+		0
+	],
+	"./login.vue": [
+		"./resources/js/views/front/login.vue",
+		8
 	]
 };
 function webpackAsyncContext(req) {

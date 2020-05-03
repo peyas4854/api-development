@@ -21,7 +21,9 @@
 
 <script>
 import sidebar from "../backend/sidebar";
+import commonMethod from '../../helper/commonMethods';
 export default {
+extends:commonMethod,
   components: {
     sidebar
   }

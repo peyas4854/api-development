@@ -25,6 +25,7 @@ const routes = [
                 path: '/review',
                 component: loadView("review")
             },
+
             // {
             //     path: '/*',
             //     component: loadView("error")
@@ -35,22 +36,28 @@ const routes = [
         path: '/index',
         component: loadLayout("FrontLayout"),
         children: [
-       
+
         {
             path: '',
             component: loadFront("index")
-        }, 
+        },
         {
             path: '/singleproduct/:id',
             component: loadView("singleproduct"),
             name:'singleproduct'
 
-        }, 
+        },
 
-
-]
+        ]
 
     },
+        {
+                path: '/login',
+                component: loadFront("login")
+        },
+
+
+
 
 
 ]
