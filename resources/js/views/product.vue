@@ -83,7 +83,7 @@ export default {
       message: "",
       modalID: "#add-edit-modal",
       dataset: {
-        source: "http://127.0.0.1:8000/api/products",
+        source: "http://127.0.0.1:8000/products",
         headers: [
           "Product name",
           "Price",

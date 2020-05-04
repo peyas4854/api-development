@@ -32,6 +32,13 @@ class RegisterController extends BaseController
     }
 
     public function login(Request $request){
+
+
+ $this->validate($request,[
+            'email'=>'required|Email',
+            'password'=>'required',
+
+        ]);
         $credentials = [
             'email' => $request['email'],
             'password' => $request['password'],
@@ -46,7 +53,7 @@ class RegisterController extends BaseController
     }
     public function returnWithToken($token,$msg){
          $data=array(
-            'user'=>auth()->user()->name,
+            'user'=>auth()->user(),
             'token'=>$token
         );
         return  $this->sendResponse($data, $msg);

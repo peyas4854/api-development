@@ -15,8 +15,13 @@
     return view('welcome');
 }); */
 
-//Auth::routes();
+Auth::routes();
+Route::resource('products', 'ProductController');
+Route::group(['prefix'=>'products'],function(){
+    Route::apiresource('/{product}/reviews', 'ReviewController');
 
+});
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/{any}', 'HomeController@index')->where('any','.*');
 //Route::get('/{any}/{any}', 'HomeController@index')->name('home');
+

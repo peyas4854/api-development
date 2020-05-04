@@ -54165,11 +54165,11 @@ __webpack_require__.r(__webpack_exports__);
 var map = {
 	"./BackendLayout.vue": [
 		"./resources/js/components/layouts/BackendLayout.vue",
-		3
+		4
 	],
 	"./FrontLayout.vue": [
 		"./resources/js/components/layouts/FrontLayout.vue",
-		1
+		2
 	]
 };
 function webpackAsyncContext(req) {
@@ -54214,11 +54214,18 @@ __webpack_require__.r(__webpack_exports__);
       preLoader: false,
       message: '',
       selectedItemId: '',
-      isLoggedIn: false
+      isLoggedIn: '',
+      user: {}
     };
   },
+  watch: {
+    isLoggedIn: function isLoggedIn(newval) {
+      this.isLoggedIn = newval;
+      console.log('isLoggedIn', this.isLoggedIn);
+    }
+  },
   mounted: function mounted() {
-    //console.log('mounted', this.isActive);
+    console.log('isLoggedIn', this.isLoggedIn);
     window.setTimeout(function () {
       $(".alert").fadeTo(500, 0).slideUp(500, function () {
         $(this).remove();
@@ -54252,12 +54259,12 @@ __webpack_require__.r(__webpack_exports__);
       var instance = this;
       instance.axiosPost(route, fields, function (response) {
         instance.setPreloader(false);
-        console.log("paici success ", response.data);
+        console.log(" success ", response.data);
         instance.postDataSuccess(response);
         instance.toastonSuccess(response.data.message);
       }, function (error) {
         instance.setPreloader(false);
-        console.log("post error", error.response.data);
+        console.log(" error", error.response.data);
         instance.postDataError(error.response.data);
         instance.toastonErrors(error.response.data.message);
       });
@@ -54321,6 +54328,12 @@ __webpack_require__.r(__webpack_exports__);
       this.$toasted.global.errors({
         message: message
       });
+    },
+    authenticate: function authenticate($user) {
+      console.log('user', $user);
+      this.user = $user; // this.isLoggedIn = true;
+
+      this.isLoggedIn = true;
     }
   }
 });
@@ -54337,11 +54350,11 @@ __webpack_require__.r(__webpack_exports__);
 var map = {
 	"./dashboard.vue": [
 		"./resources/js/views/dashboard.vue",
-		4
+		6
 	],
 	"./error.vue": [
 		"./resources/js/views/error.vue",
-		5
+		7
 	],
 	"./front/index.vue": [
 		"./resources/js/views/front/index.vue",
@@ -54349,19 +54362,19 @@ var map = {
 	],
 	"./front/login.vue": [
 		"./resources/js/views/front/login.vue",
-		8
+		1
 	],
 	"./product.vue": [
 		"./resources/js/views/product.vue",
-		2
+		3
 	],
 	"./review.vue": [
 		"./resources/js/views/review.vue",
-		6
+		8
 	],
 	"./singleproduct.vue": [
 		"./resources/js/views/singleproduct.vue",
-		7
+		5
 	]
 };
 function webpackAsyncContext(req) {
@@ -54400,7 +54413,7 @@ var map = {
 	],
 	"./login.vue": [
 		"./resources/js/views/front/login.vue",
-		8
+		1
 	]
 };
 function webpackAsyncContext(req) {

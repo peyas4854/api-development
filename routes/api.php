@@ -16,19 +16,19 @@
     return $request->user();
 }); */
 
-Route::post('register', 'API\RegisterController@register');
+// Route::post('register', 'API\RegisterController@register');
 
-Route::post('login', 'API\RegisterController@login');
+// Route::post('login', 'API\RegisterController@login');
 
 
 
-// Route::middleware('auth:api')->group( function () {
-//    Route::apiresource('products', 'ProductController');
+// // Route::middleware('auth:api')->group( function () {
+// //    Route::apiresource('products', 'ProductController');
+// // });
+
+// Route::apiresource('products', 'ProductController');
+
+// Route::group(['prefix'=>'products'],function(){
+//     Route::apiresource('/{product}/reviews', 'ReviewController');
+
 // });
-
-Route::apiresource('products', 'ProductController');
-
-Route::group(['prefix'=>'products'],function(){
-    Route::apiresource('/{product}/reviews', 'ReviewController');
-
-});

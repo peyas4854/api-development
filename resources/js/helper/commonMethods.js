@@ -7,13 +7,19 @@ export default {
             preLoader: false,
             message: '',
             selectedItemId: '',
-            isLoggedIn:false,
-
+            isLoggedIn: '',
+            user: {},
+        }
+    },
+    watch: {
+        isLoggedIn(newval) {
+             this.isLoggedIn = newval;
+            console.log('isLoggedIn', this.isLoggedIn)
         }
     },
 
     mounted() {
-        //console.log('mounted', this.isActive);
+console.log('isLoggedIn',this.isLoggedIn);
         window.setTimeout(function () {
             $(".alert").fadeTo(500, 0).slideUp(500, function () {
                 $(this).remove();
@@ -56,13 +62,13 @@ export default {
             instance.axiosPost(route, fields,
                 function (response) {
                     instance.setPreloader(false);
-                    console.log("paici success ", response.data);
+                    console.log(" success ", response.data);
                     instance.postDataSuccess(response);
                     instance.toastonSuccess(response.data.message)
                 },
                 function (error) {
                     instance.setPreloader(false);
-                    console.log("post error", error.response.data);
+                    console.log(" error", error.response.data);
                     instance.postDataError(error.response.data)
                     instance.toastonErrors(error.response.data.message)
                 }
@@ -134,6 +140,13 @@ export default {
             this.$toasted.global.errors({
                 message: message
             });
+        },
+        authenticate($user) {
+            console.log('user', $user);
+            this.user = $user;
+            // this.isLoggedIn = true;
+            this.isLoggedIn = true;
+
         }
 
 

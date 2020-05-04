@@ -139,10 +139,5 @@ export default {
 .from_group {
   margin-bottom: 10px;
 }
-.errors {
-  color: red;
-  font-family: Roboto;
-  font-size: 14px;
-  font-weight: 400;
-}
+
 </style>
