@@ -6707,7 +6707,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.large-loader-container[data-v-5f3be9c3] {\n    display: flex;\n    justify-content: center;\n    height: 100vh;\n    align-items: center;\n}\n", ""]);
+exports.push([module.i, "\n.large-loader-container[data-v-5f3be9c3] {\r\n    display: flex;\r\n    justify-content: center;\r\n    height: 100vh;\r\n    align-items: center;\n}\r\n", ""]);
 
 // exports
 
@@ -54165,11 +54165,11 @@ __webpack_require__.r(__webpack_exports__);
 var map = {
 	"./BackendLayout.vue": [
 		"./resources/js/components/layouts/BackendLayout.vue",
-		3
+		4
 	],
 	"./FrontLayout.vue": [
 		"./resources/js/components/layouts/FrontLayout.vue",
-		1
+		2
 	]
 };
 function webpackAsyncContext(req) {
@@ -54337,11 +54337,11 @@ __webpack_require__.r(__webpack_exports__);
 var map = {
 	"./dashboard.vue": [
 		"./resources/js/views/dashboard.vue",
-		4
+		6
 	],
 	"./error.vue": [
 		"./resources/js/views/error.vue",
-		5
+		7
 	],
 	"./front/index.vue": [
 		"./resources/js/views/front/index.vue",
@@ -54349,19 +54349,19 @@ var map = {
 	],
 	"./front/login.vue": [
 		"./resources/js/views/front/login.vue",
-		8
+		1
 	],
 	"./product.vue": [
 		"./resources/js/views/product.vue",
-		2
+		3
 	],
 	"./review.vue": [
 		"./resources/js/views/review.vue",
-		6
+		8
 	],
 	"./singleproduct.vue": [
 		"./resources/js/views/singleproduct.vue",
-		7
+		5
 	]
 };
 function webpackAsyncContext(req) {
@@ -54400,7 +54400,7 @@ var map = {
 	],
 	"./login.vue": [
 		"./resources/js/views/front/login.vue",
-		8
+		1
 	]
 };
 function webpackAsyncContext(req) {

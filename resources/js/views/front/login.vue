@@ -7,7 +7,7 @@
           <div class="card-text">
             <!--
             <div class="alert alert-danger alert-dismissible fade show" role="alert">Incorrect username or password.</div>-->
-            <form>
+
               <!-- to error: add class "has-danger" -->
               <div class="form-group">
                 <label for="email">Email address</label>
@@ -24,7 +24,7 @@
                 Don't have an account?
                 <a href="">Create One</a>
               </div>
-            </form>
+          
           </div>
         </div>
       </div>
