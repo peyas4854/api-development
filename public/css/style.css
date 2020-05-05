@@ -23,3 +23,9 @@ text-transform: capitalize;
     font-family: Roboto;
     font-weight: 400;
 }
+.errors {
+  color: red;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 400;
+}

@@ -8,23 +8,29 @@
             <!--
             <div class="alert alert-danger alert-dismissible fade show" role="alert">Incorrect username or password.</div>-->
 
-              <!-- to error: add class "has-danger" -->
-              <div class="form-group">
-                <label for="email">Email address</label>
-                <input type="email" class="form-control form-control-sm" id="email" v-model="user.name"/>
-              </div>
-              <div class="form-group">
-                <label for="password">Password</label>
-                <a href="#">Forgot password?</a>
-                <input type="password" class="form-control form-control-sm" v-model="user.password"/>
-              </div>
-              <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+            <!-- to error: add class "has-danger" -->
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input
+                type="email"
+                class="form-control form-control-sm"
+                id="email"
+                v-model="user.email"
+              />
+              <p class="errors" v-if="errors.email">{{ errors.email[0] }}</p>
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <a href="#">Forgot password?</a>
+              <input type="password" class="form-control form-control-sm" v-model="user.password" />
+              <p class="errors" v-if="errors.password">{{ errors.password[0] }}</p>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block" @click="login()">Sign in</button>
 
-              <div class="sign-up">
-                Don't have an account?
-                <a href="">Create One</a>
-              </div>
-          
+            <div class="sign-up">
+              Don't have an account?
+              <a href>Create One</a>
+            </div>
           </div>
         </div>
       </div>
@@ -33,11 +39,32 @@
 </template>
 
 <script>
+import commonMethods from "../../helper/commonMethods";
 export default {
+  extends: commonMethods,
   data() {
     return {
-      user: {}
+      user: {},
+      errors: []
     };
+  },
+  methods: {
+    login() {
+      let instance = this;
+
+      instance.inputField = this.user;
+      instance.postDataMethod(
+        "http://127.0.0.1:8000/login",
+        this.inputField
+      );
+    },
+    postDataSuccess(response) {
+      console.log("response", response);
+    },
+    postDataError(error) {
+      this.errors = error.errors;
+      console.log("error", this.errors);
+    }
   }
 };
 </script>

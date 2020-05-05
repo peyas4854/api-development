@@ -304,7 +304,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.modal-header[data-v-09603204] {\r\n  background-color: #4f96e6;\r\n  color: #ffffff !important;\n}\n.from_group[data-v-09603204] {\r\n  margin-bottom: 10px;\n}\n.errors[data-v-09603204] {\r\n  color: red;\r\n  font-family: Roboto;\r\n  font-size: 14px;\r\n  font-weight: 400;\n}\r\n", ""]);
+exports.push([module.i, "\n.modal-header[data-v-09603204] {\n  background-color: #4f96e6;\n  color: #ffffff !important;\n}\n.from_group[data-v-09603204] {\n  margin-bottom: 10px;\n}\n\n", ""]);
 
 // exports
 

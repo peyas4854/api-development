@@ -16,7 +16,7 @@
 }); */
 
 //Auth::routes();
-
+Route::post('login', 'API\RegisterController@login');
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/{any}', 'HomeController@index')->where('any','.*');
 //Route::get('/{any}/{any}', 'HomeController@index')->name('home');

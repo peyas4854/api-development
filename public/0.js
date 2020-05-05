@@ -105,7 +105,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.single-poduct[data-v-14f29b3d] {\n  margin-bottom: 20px;\n}\n.single-poduct[data-v-14f29b3d]:hover {\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n}\n.card[data-v-14f29b3d] {\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n  max-width: 300px;\n  margin: auto;\n  text-align: center;\n  font-family: arial;\n}\n.price[data-v-14f29b3d] {\n  color: grey;\n  font-size: 22px;\n}\n.card button[data-v-14f29b3d] {\n  border: none;\n  outline: 0;\n  padding: 12px;\n  color: white;\n  background-color: #000;\n  text-align: center;\n  cursor: pointer;\n  width: 100%;\n  font-size: 18px;\n}\n.card button[data-v-14f29b3d]:hover {\n  opacity: 0.7;\n}\n.checked[data-v-14f29b3d] {\n  color: orange;\n}\na[data-v-14f29b3d]:hover {\n  text-decoration: none;\n}\n", ""]);
+exports.push([module.i, "\n.single-poduct[data-v-14f29b3d] {\r\n  margin-bottom: 20px;\n}\n.single-poduct[data-v-14f29b3d]:hover {\r\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n}\n.card[data-v-14f29b3d] {\r\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\r\n  max-width: 300px;\r\n  margin: auto;\r\n  text-align: center;\r\n  font-family: arial;\n}\n.price[data-v-14f29b3d] {\r\n  color: grey;\r\n  font-size: 22px;\n}\n.card button[data-v-14f29b3d] {\r\n  border: none;\r\n  outline: 0;\r\n  padding: 12px;\r\n  color: white;\r\n  background-color: #000;\r\n  text-align: center;\r\n  cursor: pointer;\r\n  width: 100%;\r\n  font-size: 18px;\n}\n.card button[data-v-14f29b3d]:hover {\r\n  opacity: 0.7;\n}\n.checked[data-v-14f29b3d] {\r\n  color: orange;\n}\na[data-v-14f29b3d]:hover {\r\n  text-decoration: none;\n}\r\n", ""]);
 
 // exports
 

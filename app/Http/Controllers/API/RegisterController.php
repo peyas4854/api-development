@@ -9,6 +9,7 @@ use Laravel\Passport\Passport;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+
 use App\Http\Controllers\API\BaseController as BaseController;
 
 class RegisterController extends BaseController
@@ -32,6 +33,12 @@ class RegisterController extends BaseController
     }
 
     public function login(Request $request){
+ $this->validate($request,[
+            'email'=>'required|Email',
+            'password'=>'required',
+
+        ]);
+
         $credentials = [
             'email' => $request['email'],
             'password' => $request['password'],
