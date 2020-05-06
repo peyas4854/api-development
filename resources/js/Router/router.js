@@ -12,7 +12,7 @@ const routes = [
 
     {
         path: '/',
-        component: loadLayout("BackendLayout"),
+        component: loadLayout("AdminLayout"),
         children: [{
                 path: '',
                 component: loadView("dashboard")
@@ -55,10 +55,6 @@ const routes = [
                 path: '/login',
                 component: loadFront("login")
         },
-
-
-
-
 
 ]
 

@@ -6,6 +6,8 @@ use App\Model\BaseModel;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
 use App\Http\Resources\ProductResource;
+use Illuminate\Support\Facades\Auth;
+
 use App\Http\Controllers\API\BaseController as BaseController;
 
 use Symfony\Component\HttpFoundation\Response;
@@ -14,7 +16,7 @@ class ProductController extends BaseController
 {
     public function __construct()
     {
-        //$this->middleware('auth:api');
+        //$this->middleware('auth');
     }
     /**
      * Display a listing of the resource.
@@ -23,6 +25,8 @@ class ProductController extends BaseController
      */
     public function index()
     {
+        //for access use route in web.php
+        //dd(auth::user()->name);
         $product = product::all();
         return $this->sendResponse(ProductResource::collection($product),'Product Retrived Successfully');
 

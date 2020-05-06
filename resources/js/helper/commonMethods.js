@@ -56,15 +56,22 @@ export default {
             instance.axiosPost(route, fields,
                 function (response) {
                     instance.setPreloader(false);
-                    console.log("paici success ", response.data);
+                    console.log("post success ", response.data);
                     instance.postDataSuccess(response);
                     instance.toastonSuccess(response.data.message)
                 },
                 function (error) {
                     instance.setPreloader(false);
-                    console.log("post error", error.response.data);
-                    instance.postDataError(error.response.data)
+                    console.log("post error", error.response.status);
+                    if(error.response.status ===404){
                     instance.toastonErrors(error.response.data.message)
+                    }
+                    if(error.response.status ===422){
+                    instance.toastonErrors(error.response.data.message)
+                    instance.postDataError(error.response.data)
+                    }
+
+                    //instance.toastonErrors(error.response.data.message)
                 }
             )
         },

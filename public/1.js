@@ -66,7 +66,13 @@ __webpack_require__.r(__webpack_exports__);
       instance.postDataMethod("http://127.0.0.1:8000/login", this.inputField);
     },
     postDataSuccess: function postDataSuccess(response) {
-      console.log("response", response);
+      console.log("response", response.status);
+
+      if (response.status === 200) {
+        this.$router.push({
+          path: "/"
+        });
+      }
     },
     postDataError: function postDataError(error) {
       this.errors = error.errors;
@@ -145,9 +151,7 @@ var render = function() {
     _c("div", { staticClass: "global-container" }, [
       _c("div", { staticClass: "card login-form" }, [
         _c("div", { staticClass: "card-body" }, [
-          _c("h3", { staticClass: "card-title text-center" }, [
-            _vm._v("Log in to Codepen")
-          ]),
+          _c("h3", { staticClass: "card-title text-center" }),
           _vm._v(" "),
           _c("div", { staticClass: "card-text" }, [
             _c("div", { staticClass: "form-group" }, [

@@ -3,7 +3,7 @@
     <div class="global-container">
       <div class="card login-form">
         <div class="card-body">
-          <h3 class="card-title text-center">Log in to Codepen</h3>
+          <h3 class="card-title text-center"></h3>
           <div class="card-text">
             <!--
             <div class="alert alert-danger alert-dismissible fade show" role="alert">Incorrect username or password.</div>-->
@@ -53,13 +53,13 @@ export default {
       let instance = this;
 
       instance.inputField = this.user;
-      instance.postDataMethod(
-        "http://127.0.0.1:8000/login",
-        this.inputField
-      );
+      instance.postDataMethod("http://127.0.0.1:8000/login", this.inputField);
     },
     postDataSuccess(response) {
-      console.log("response", response);
+      console.log("response", response.status);
+      if (response.status === 200) {
+        this.$router.push({ path: "/" });
+      }
     },
     postDataError(error) {
       this.errors = error.errors;

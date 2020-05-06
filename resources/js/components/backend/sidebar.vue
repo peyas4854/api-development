@@ -1,7 +1,6 @@
 <template>
   <div class="sidebar_app">
     <ul class="nav flex-column">
-
       <li class="nav-item">
         <router-link class="nav-link" to="/">Dashboard</router-link>
       </li>
@@ -12,35 +11,59 @@
         <router-link class="nav-link" to="/review">Review</router-link>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="/logout">Logout</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="#">Settings</a>
       </li>
-
     </ul>
   </div>
 </template>
 
 <script>
-export default {};
+import commonMethods from "../../helper/commonMethods";
+export default {
+  extends: commonMethods,
+  methods: {
+    logout() {
+      this.axiosGet(
+        "http://127.0.0.1:8000/logout",
+        function(response) {
+          console.log("paici response ", response.status);
+
+          if (response.status === 200) {
+            this.$router.push({path:'/login'});
+          }
+        },
+        function(response) {
+          console.log("paici 2", response);
+        }
+      );
+    }
+  }
+};
 </script>
 
 <style scoped>
 .sidebar_app {
-    background-color: #02071ba3;
-    position: fixed;
-    width: 16.7%!important;
-    height: 100vh!important;
+  background-color: #02071ba3;
+  position: fixed;
+  width: 16.7% !important;
+  height: 100vh !important;
 }
 .nav-link {
-    display: block;
-    padding: 15px 0px;
-text-align: center;
+  display: block;
+  padding: 15px 0px;
+  text-align: center;
 }
 a {
-    color: #ffffff;
-    text-decoration: none;
-    background-color: transparent;
-
-    font-size: 20px;
+  color: #ffffff;
+  text-decoration: none;
+  background-color: transparent;
+  font-size: 20px;
+  cursor: pointer;
 }
-
+a:hover {
+  color: white !important;
+}
 </style>

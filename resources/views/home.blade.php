@@ -24,8 +24,6 @@
     <div id="app">
        <router-view/>
     </div>
-
-{{-- <h1>assf</h1> --}}
 </body>
 </html>
 

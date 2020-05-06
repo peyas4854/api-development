@@ -53832,7 +53832,7 @@ var loadFront = function loadFront(view) {
 
 var routes = [{
   path: '/',
-  component: loadLayout("BackendLayout"),
+  component: loadLayout("AdminLayout"),
   children: [{
     path: '',
     component: loadView("dashboard")
@@ -54163,9 +54163,15 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
+	"./AdminLayout.vue": [
+		"./resources/js/components/layouts/AdminLayout.vue",
+		5,
+		10
+	],
 	"./BackendLayout.vue": [
 		"./resources/js/components/layouts/BackendLayout.vue",
-		4
+		5,
+		11
 	],
 	"./FrontLayout.vue": [
 		"./resources/js/components/layouts/FrontLayout.vue",
@@ -54182,7 +54188,7 @@ function webpackAsyncContext(req) {
 	}
 
 	var ids = map[req], id = ids[0];
-	return __webpack_require__.e(ids[1]).then(function() {
+	return Promise.all(ids.slice(1).map(__webpack_require__.e)).then(function() {
 		return __webpack_require__(id);
 	});
 }
@@ -54252,14 +54258,22 @@ __webpack_require__.r(__webpack_exports__);
       var instance = this;
       instance.axiosPost(route, fields, function (response) {
         instance.setPreloader(false);
-        console.log("paici success ", response.data);
+        console.log("post success ", response.data);
         instance.postDataSuccess(response);
         instance.toastonSuccess(response.data.message);
       }, function (error) {
         instance.setPreloader(false);
-        console.log("post error", error.response.data);
-        instance.postDataError(error.response.data);
-        instance.toastonErrors(error.response.data.message);
+        console.log("post error", error.response.status);
+
+        if (error.response.status === 404) {
+          instance.toastonErrors(error.response.data.message);
+        }
+
+        if (error.response.status === 422) {
+          instance.toastonErrors(error.response.data.message);
+          instance.postDataError(error.response.data);
+        } //instance.toastonErrors(error.response.data.message)
+
       });
     },
     axoisUpdate: function axoisUpdate(url, id, fields, onSuccess, onError) {
@@ -54337,11 +54351,11 @@ __webpack_require__.r(__webpack_exports__);
 var map = {
 	"./dashboard.vue": [
 		"./resources/js/views/dashboard.vue",
-		6
+		7
 	],
 	"./error.vue": [
 		"./resources/js/views/error.vue",
-		7
+		8
 	],
 	"./front/index.vue": [
 		"./resources/js/views/front/index.vue",
@@ -54353,15 +54367,15 @@ var map = {
 	],
 	"./product.vue": [
 		"./resources/js/views/product.vue",
-		3
+		4
 	],
 	"./review.vue": [
 		"./resources/js/views/review.vue",
-		8
+		9
 	],
 	"./singleproduct.vue": [
 		"./resources/js/views/singleproduct.vue",
-		5
+		6
 	]
 };
 function webpackAsyncContext(req) {
