@@ -32,7 +32,7 @@ export default {
           console.log("paici response ", response.status);
 
           if (response.status === 200) {
-            this.$router.push({path:'/login'});
+            this.$router.push({ path: "/login" });
           }
         },
         function(response) {
@@ -44,7 +44,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .sidebar_app {
   background-color: #02071ba3;
   position: fixed;
@@ -55,15 +55,18 @@ export default {
   display: block;
   padding: 15px 0px;
   text-align: center;
+  transition: 0.3s;
 }
 a {
-  color: #ffffff;
-  text-decoration: none;
-  background-color: transparent;
-  font-size: 20px;
-  cursor: pointer;
+  color: #ffffff !important;
+  font-family: Roboto;
+  font-size: 15px;
 }
-a:hover {
-  color: white !important;
+.nav-item:hover {
+  background-color: #ffffff;
+
+  a {
+    color: black !important;
+  }
 }
 </style>

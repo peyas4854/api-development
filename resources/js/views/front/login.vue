@@ -56,9 +56,12 @@ export default {
       instance.postDataMethod("http://127.0.0.1:8000/login", this.inputField);
     },
     postDataSuccess(response) {
-      console.log("response", response.status);
+      //console.log("response", response.status);
       if (response.status === 200) {
+        //this.setUser(response.data.data.user);
+        //console.log("response", response.data.data.user);
         this.$router.push({ path: "/" });
+        //this.loggenInUser = response.data.data.user;
       }
     },
     postDataError(error) {

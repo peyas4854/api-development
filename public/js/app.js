@@ -53842,6 +53842,10 @@ var routes = [{
   }, {
     path: '/review',
     component: loadView("review")
+  }, {
+    path: '/profile/:id',
+    component: loadView("profile_id"),
+    name: 'profile'
   } // {
   //     path: '/*',
   //     component: loadView("error")
@@ -54165,17 +54169,11 @@ __webpack_require__.r(__webpack_exports__);
 var map = {
 	"./AdminLayout.vue": [
 		"./resources/js/components/layouts/AdminLayout.vue",
-		5,
-		10
-	],
-	"./BackendLayout.vue": [
-		"./resources/js/components/layouts/BackendLayout.vue",
-		5,
-		11
+		0
 	],
 	"./FrontLayout.vue": [
 		"./resources/js/components/layouts/FrontLayout.vue",
-		2
+		3
 	]
 };
 function webpackAsyncContext(req) {
@@ -54188,7 +54186,7 @@ function webpackAsyncContext(req) {
 	}
 
 	var ids = map[req], id = ids[0];
-	return Promise.all(ids.slice(1).map(__webpack_require__.e)).then(function() {
+	return __webpack_require__.e(ids[1]).then(function() {
 		return __webpack_require__(id);
 	});
 }
@@ -54220,7 +54218,8 @@ __webpack_require__.r(__webpack_exports__);
       preLoader: false,
       message: '',
       selectedItemId: '',
-      isLoggedIn: false
+      isLoggedIn: false,
+      loggenInUser: ''
     };
   },
   mounted: function mounted() {
@@ -54335,6 +54334,10 @@ __webpack_require__.r(__webpack_exports__);
       this.$toasted.global.errors({
         message: message
       });
+    },
+    setUser: function setUser($user) {
+      console.log('user', $user);
+      this.loggenInUser = $user;
     }
   }
 });
@@ -54351,31 +54354,35 @@ __webpack_require__.r(__webpack_exports__);
 var map = {
 	"./dashboard.vue": [
 		"./resources/js/views/dashboard.vue",
-		7
+		9
 	],
 	"./error.vue": [
 		"./resources/js/views/error.vue",
-		8
+		10
 	],
 	"./front/index.vue": [
 		"./resources/js/views/front/index.vue",
-		0
+		1
 	],
 	"./front/login.vue": [
 		"./resources/js/views/front/login.vue",
-		1
+		2
 	],
 	"./product.vue": [
 		"./resources/js/views/product.vue",
 		4
 	],
+	"./profile_id.vue": [
+		"./resources/js/views/profile_id.vue",
+		6
+	],
 	"./review.vue": [
 		"./resources/js/views/review.vue",
-		9
+		11
 	],
 	"./singleproduct.vue": [
 		"./resources/js/views/singleproduct.vue",
-		6
+		7
 	]
 };
 function webpackAsyncContext(req) {
@@ -54410,11 +54417,11 @@ module.exports = webpackAsyncContext;
 var map = {
 	"./index.vue": [
 		"./resources/js/views/front/index.vue",
-		0
+		1
 	],
 	"./login.vue": [
 		"./resources/js/views/front/login.vue",
-		1
+		2
 	]
 };
 function webpackAsyncContext(req) {

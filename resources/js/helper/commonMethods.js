@@ -7,7 +7,8 @@ export default {
             preLoader: false,
             message: '',
             selectedItemId: '',
-            isLoggedIn:false,
+            isLoggedIn: false,
+            loggenInUser: '',
 
         }
     },
@@ -63,12 +64,12 @@ export default {
                 function (error) {
                     instance.setPreloader(false);
                     console.log("post error", error.response.status);
-                    if(error.response.status ===404){
-                    instance.toastonErrors(error.response.data.message)
+                    if (error.response.status === 404) {
+                        instance.toastonErrors(error.response.data.message)
                     }
-                    if(error.response.status ===422){
-                    instance.toastonErrors(error.response.data.message)
-                    instance.postDataError(error.response.data)
+                    if (error.response.status === 422) {
+                        instance.toastonErrors(error.response.data.message)
+                        instance.postDataError(error.response.data)
                     }
 
                     //instance.toastonErrors(error.response.data.message)
@@ -141,6 +142,11 @@ export default {
             this.$toasted.global.errors({
                 message: message
             });
+        },
+        setUser($user) {
+            console.log('user', $user)
+            this.loggenInUser = $user;
+
         }
 
 

@@ -136,8 +136,4 @@ export default {
   background-color: #4f96e6;
   color: #ffffff !important;
 }
-.from_group {
-  margin-bottom: 10px;
-}
-
 </style>

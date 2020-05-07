@@ -6,14 +6,9 @@
         <sidebar />
       </div>
       <div class="col-md-10 content-body p-0">
-        <!-- <div class="card bg-light text-dark">
-          <div class="card-body">Light card</div>
-        </div> -->
-<appbar/>
+        <appbar />
         <div class="main-content">
           <router-view />
-          <!-- <transition name="fade">
-          </transition>-->
         </div>
       </div>
     </div>
@@ -33,7 +28,6 @@ export default {
 </script>
 
 <style scoped>
-
 .main-content {
   margin-top: 80px;
   padding: 0px 15px;
