@@ -23,14 +23,6 @@ h6 {
 
 }
 
-.app_primary_btn {
-    background-color: #3e4840d9;
-    color: #ffffff;
-    font-size: 14px;
-    font-family: Roboto;
-    font-weight: 400;
-}
-
 .errors {
     color: red;
     font-family: Roboto;

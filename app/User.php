@@ -47,5 +47,9 @@ class User extends Authenticatable
     public function products(){
         return $this->hasMany(Product::class);
     }
+    public static function updateData($id,$data)
+    {
+        return get_called_class()::where('id',$id)->update($data);
+    }
 
 }

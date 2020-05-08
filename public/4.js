@@ -573,10 +573,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "main_wrapper" }, [
     _c("div", [
-      _c("div", { staticClass: "top_wrapper" }, [
+      _c("div", { staticClass: "main_wrapper_top_header" }, [
         _vm._m(0),
         _vm._v(" "),
-        _c("div", { staticClass: "top_wrapper_button" }, [
+        _c("div", { staticClass: "header_content_button" }, [
           _c(
             "button",
             {
@@ -630,7 +630,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "table_wrapper" },
+        { staticClass: "main_wrapper_card_content" },
         [_c("datatable", { attrs: { dataset: _vm.dataset } })],
         1
       )
@@ -642,10 +642,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "top_wrapper_header" }, [
-      _c("h3", { staticClass: "p-0 top_wrapper_header_content" }, [
-        _vm._v("Product")
-      ])
+    return _c("div", { staticClass: "header_content my-auto" }, [
+      _c("h4", [_vm._v("Product")])
     ])
   }
 ]

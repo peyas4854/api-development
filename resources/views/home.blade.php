@@ -19,6 +19,7 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 <body>
+
     <div id="app">
        <router-view/>
     </div>

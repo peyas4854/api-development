@@ -54169,11 +54169,11 @@ __webpack_require__.r(__webpack_exports__);
 var map = {
 	"./AdminLayout.vue": [
 		"./resources/js/components/layouts/AdminLayout.vue",
-		0
+		3
 	],
 	"./FrontLayout.vue": [
 		"./resources/js/components/layouts/FrontLayout.vue",
-		3
+		2
 	]
 };
 function webpackAsyncContext(req) {
@@ -54354,19 +54354,19 @@ __webpack_require__.r(__webpack_exports__);
 var map = {
 	"./dashboard.vue": [
 		"./resources/js/views/dashboard.vue",
-		9
+		7
 	],
 	"./error.vue": [
 		"./resources/js/views/error.vue",
-		10
+		8
 	],
 	"./front/index.vue": [
 		"./resources/js/views/front/index.vue",
-		1
+		0
 	],
 	"./front/login.vue": [
 		"./resources/js/views/front/login.vue",
-		2
+		1
 	],
 	"./product.vue": [
 		"./resources/js/views/product.vue",
@@ -54374,15 +54374,15 @@ var map = {
 	],
 	"./profile_id.vue": [
 		"./resources/js/views/profile_id.vue",
-		6
+		5
 	],
 	"./review.vue": [
 		"./resources/js/views/review.vue",
-		11
+		9
 	],
 	"./singleproduct.vue": [
 		"./resources/js/views/singleproduct.vue",
-		7
+		6
 	]
 };
 function webpackAsyncContext(req) {
@@ -54417,11 +54417,11 @@ module.exports = webpackAsyncContext;
 var map = {
 	"./index.vue": [
 		"./resources/js/views/front/index.vue",
-		1
+		0
 	],
 	"./login.vue": [
 		"./resources/js/views/front/login.vue",
-		2
+		1
 	]
 };
 function webpackAsyncContext(req) {

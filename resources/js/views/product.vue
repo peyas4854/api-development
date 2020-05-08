@@ -1,11 +1,11 @@
 <template>
   <div class="main_wrapper">
     <div>
-      <div class="top_wrapper">
-        <div class="top_wrapper_header">
-          <h3 class="p-0 top_wrapper_header_content">Product</h3>
+      <div class="main_wrapper_top_header">
+        <div class="header_content my-auto">
+          <h4>Product</h4>
         </div>
-        <div class="top_wrapper_button">
+        <div class="header_content_button">
           <button
             class="btn btn-primary app_primary_btn"
             data-toggle="modal"
@@ -26,7 +26,7 @@
         </div>
       </div>
 
-      <div class="table_wrapper">
+      <div class="main_wrapper_card_content">
         <datatable :dataset="dataset" />
       </div>
     </div>
