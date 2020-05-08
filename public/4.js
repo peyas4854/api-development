@@ -268,7 +268,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.modal-header[data-v-09603204] {\n  background-color: #4f96e6;\n  color: #ffffff !important;\n}\n", ""]);
+exports.push([module.i, "\n.modal-header[data-v-09603204] {\r\n  background-color: #4f96e6;\r\n  color: #ffffff !important;\n}\r\n", ""]);
 
 // exports
 

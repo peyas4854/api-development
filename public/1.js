@@ -96,7 +96,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.global-container[data-v-42cb8358] {\n  height: 100vh;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\nform[data-v-42cb8358] {\n  padding-top: 10px;\n  font-size: 14px;\n  margin-top: 30px;\n}\n.card-title[data-v-42cb8358] {\n  font-weight: 300;\n}\n.btn[data-v-42cb8358] {\n  font-size: 14px;\n  margin-top: 20px;\n}\n.login-form[data-v-42cb8358] {\n  width: 330px;\n  margin: 20px;\n}\n.sign-up[data-v-42cb8358] {\n  text-align: center;\n  padding: 20px 0 0;\n}\n.alert[data-v-42cb8358] {\n  margin-bottom: -30px;\n  font-size: 13px;\n  margin-top: 20px;\n}\n", ""]);
+exports.push([module.i, "\n.global-container[data-v-42cb8358] {\r\n  height: 100vh;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\n}\nform[data-v-42cb8358] {\r\n  padding-top: 10px;\r\n  font-size: 14px;\r\n  margin-top: 30px;\n}\n.card-title[data-v-42cb8358] {\r\n  font-weight: 300;\n}\n.btn[data-v-42cb8358] {\r\n  font-size: 14px;\r\n  margin-top: 20px;\n}\n.login-form[data-v-42cb8358] {\r\n  width: 330px;\r\n  margin: 20px;\n}\n.sign-up[data-v-42cb8358] {\r\n  text-align: center;\r\n  padding: 20px 0 0;\n}\n.alert[data-v-42cb8358] {\r\n  margin-bottom: -30px;\r\n  font-size: 13px;\r\n  margin-top: 20px;\n}\r\n", ""]);
 
 // exports
 

@@ -116,6 +116,7 @@ export default {
         email: this.user.email,
         image: this.uploadImage
       };
+
       console.log("sdf", this.inputFields);
       this.postDataMethod(
         "http://127.0.0.1:8000/admin/update",
