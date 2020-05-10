@@ -14,9 +14,8 @@ use App\Http\Controllers\API\BaseController as BaseController;
 class RegisterController extends BaseController
 {
 
-
-public function index(Request $request)
-    {
+    public function index(Request $request)
+        {
 
         if(!auth::check() && $request->path() !='login'){
         return redirect('/login');
@@ -26,15 +25,13 @@ public function index(Request $request)
         }
         //you are already loggen in
         $user= auth::user();
-        if( $user->userType =='User'){
-                return redirect('/login');
+    //     if( $user->userType =='User'){
+    //             return redirect('/login');
 
-//dd('user');
-       }
+    //    }
         if( $request->path() =='login'){
                 return redirect('/');
 
-//dd('login route go');
         }
          return view('home',compact('user'));
 

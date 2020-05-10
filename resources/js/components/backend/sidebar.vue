@@ -30,9 +30,10 @@ export default {
         "http://127.0.0.1:8000/logout",
         function(response) {
           console.log("paici response ", response.status);
-
           if (response.status === 200) {
-            this.$router.push({ path: "/login" });
+            this.$router.push({
+              path: "/login"
+            });
           }
         },
         function(response) {

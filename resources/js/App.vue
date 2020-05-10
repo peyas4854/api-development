@@ -1,17 +1,19 @@
 <template>
   <div>
-    <h1>app home</h1>
-
-    <p>{{ user }}</p>
+    <router-view />
   </div>
 </template>
-
 <script>
-//import { mapMutations } from "vuex";
+import adminlayout from "./components/layouts/AdminLayout";
+import frontlayout from "./components/layouts/FrontLayout";
 export default {
   props: ["user"],
+  components: {
+    adminlayout,
+    frontlayout
+  },
   created() {
-    console.log("user", this.user);
+    console.log("props", this.user);
     this.$store.commit("set_User", this.user);
   }
 };

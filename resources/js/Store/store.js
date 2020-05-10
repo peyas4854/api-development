@@ -5,9 +5,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
 
     state: {
-        user: {
-
-        },
+        user: {},
     },
     getters: {
         User: state => state.user,
@@ -16,6 +14,7 @@ export default new Vuex.Store({
         set_User(state, data) {
             console.log('set user');
             state.user = data;
+            console.log('set user', state.user);
         }
 
     },

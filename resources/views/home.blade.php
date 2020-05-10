@@ -21,7 +21,7 @@
 <body>
 
     <div id="app">
-
+{{-- <router-view></router-view> --}}
 @if(isset($user))
 <app :user="{{$user}}"/>
 @else

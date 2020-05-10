@@ -36,28 +36,20 @@
                 type="button"
               >
                 <img :src="'/img/'+User.image" alt="avatar" class="avatar" />
-
                 <div class="dropdown-menu" aria-labelledby="avatarDropdown">
                   <div class="ticker"></div>
                   <ul class="list-group">
                     <li class="list-group-item">
-                      <i class="fa fa-user pr-1"></i>
-                      <router-link :to="{ name: 'profile', params: { id: 1 }}" class>Profile</router-link>
+                      <router-link :to="{ name: 'profile', params: { id: User.id }}" class>
+                        <i class="fa fa-user pr-1"></i>
+                        Profile
+                      </router-link>
                     </li>
                     <li class="list-group-item">
                       <i class="fa fa-sign-out pr-1"></i>
                       <a href="/logout">Logout</a>
                     </li>
                   </ul>
-                  <!-- <router-link :to="{ name: 'profile', params: { id: 1 }}" class="avatar-item mb-0">
-                    <i class="fa fa-user pr-1"></i>
-                    Profile
-                  </router-link>
-                  <p class="avatar-item mb-0">
-                    <i class="fa fa-sign-out pr-1"></i>
-                    Logout
-                  </p>-->
-                  <!-- <a class="dropdown-item" href="#">Something else here</a> -->
                 </div>
               </a>
             </li>
@@ -70,7 +62,9 @@
 
 <script>
 import { mapGetters } from "vuex";
+import commonMethods from "../../helper/commonMethods";
 export default {
+  extends: commonMethods,
   computed: {
     ...mapGetters(["User"])
   },

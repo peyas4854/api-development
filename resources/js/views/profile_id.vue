@@ -13,7 +13,8 @@
             <div class="main_wrapper_card_header">
               <div class="image_div text-center">
                 <!--  src="https://www.w3schools.com/howto/img_avatar.png" -->
-                <img :src="'/img/'+user.userImage" alt="profile_image" class="profile_image" />
+                <!-- <img :src="'/img/'+user.userImage" alt="profile_image" class="profile_image" /> -->
+                <img :src="'/img/'+user.image" alt="profile_image" class="profile_image" />
               </div>
 
               <h3 class="text-center mt-2">{{ user.userName}}</h3>
@@ -87,6 +88,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import commonMethod from "../helper/commonMethods";
 export default {
   extends: commonMethod,
@@ -99,9 +101,13 @@ export default {
     };
   },
   created() {
-    this.getUser("http://127.0.0.1:8000/admin");
+    //this.getUser("http://127.0.0.1:8000/admin");
+    this.user = this.User;
+    console.log("profile", this.user);
   },
-
+  computed: {
+    ...mapGetters(["User"])
+  },
   methods: {
     imageChange(e) {
       var fileReader = new FileReader();
@@ -125,7 +131,7 @@ export default {
     },
     postDataSuccess(response) {
       console.log("reponse", response);
-      this.getUser("http://127.0.0.1:8000/admin");
+      //this.getUser("http://127.0.0.1:8000/admin");
     },
     postDataError(error) {
       //this.errors = error.errors;

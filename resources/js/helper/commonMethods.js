@@ -57,7 +57,7 @@ export default {
             instance.axiosPost(route, fields,
                 function (response) {
                     instance.setPreloader(false);
-                    console.log("post success ",response.data);
+                    // console.log("post success ",response.data);
                     instance.postDataSuccess(response);
                     instance.toastonSuccess(response.data.message)
                 },
@@ -143,11 +143,6 @@ export default {
                 message: message
             });
         },
-        setUser($user) {
-            console.log('user', $user)
-            this.loggenInUser = $user;
-
-        }
 
 
     }

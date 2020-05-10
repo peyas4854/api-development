@@ -19,7 +19,6 @@ class UserController extends BaseController
     }
         public function updateAdmin(Request $request){
         $id= auth::user()->id;
-
         if($request->image){
 
                 $explode= explode(',',$request->image);
@@ -50,10 +49,10 @@ class UserController extends BaseController
             ];
     }
 
-    $data= User::updateData($id,$user);
+            $data= User::updateData($id,$user);
 
             if($data){
-            return $this->sendResponse([],'Profile Updated Successfully.');
+            return $this->sendResponse($data,'Profile Updated Successfully.');
             }else{
             return $this->sendError([],'Something Went Wrong!.');
             }

@@ -57,12 +57,15 @@ export default {
       instance.postDataMethod("http://127.0.0.1:8000/login", this.inputField);
     },
     postDataSuccess(response) {
-      if (response.status === 200) {
-        // location.reload();
-        //console.log("response", response.data.data.user);
-        this.set_User(response.data.data.user);
-        //this.$router.push({ path: "/" });
-      }
+      console.log("response", response.data);
+      location.reload();
+      this.$router.push({ path: "/" });
+      //   if (response.status === 200) {
+      //     window.reload();
+      //     //console.log("response", response.data.data.user);
+      //     this.set_User(response.data.data.user);
+      //     //this.$router.push({ path: "/" });
+      //   }
     },
     postDataError(error) {
       this.errors = error.errors;
