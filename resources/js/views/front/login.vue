@@ -61,7 +61,7 @@ export default {
         // location.reload();
         //console.log("response", response.data.data.user);
         this.set_User(response.data.data.user);
-        this.$router.push({ path: "/" });
+        //this.$router.push({ path: "/" });
       }
     },
     postDataError(error) {

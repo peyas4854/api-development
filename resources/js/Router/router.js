@@ -11,7 +11,7 @@ const loadFront = view => () => import(`../views/front/${view}.vue`)
 const routes = [
 
     {
-        path: '/',
+        path: '/admin',
         component: loadLayout("AdminLayout"),
         children: [{
                 path: '',

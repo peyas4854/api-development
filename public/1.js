@@ -77,10 +77,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       if (response.status === 200) {
         // location.reload();
         //console.log("response", response.data.data.user);
-        this.set_User(response.data.data.user);
-        this.$router.push({
-          path: "/"
-        });
+        this.set_User(response.data.data.user); //this.$router.push({ path: "/" });
       }
     },
     postDataError: function postDataError(error) {

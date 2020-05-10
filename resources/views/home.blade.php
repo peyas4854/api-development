@@ -21,7 +21,12 @@
 <body>
 
     <div id="app">
-       <router-view/>
+
+@if(isset($user))
+<app :user="{{$user}}"/>
+@else
+<router-view></router-view>
+@endif
     </div>
 </body>
 </html>

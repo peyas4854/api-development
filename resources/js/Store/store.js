@@ -13,14 +13,9 @@ export default new Vuex.Store({
         User: state => state.user,
     },
     mutations: {
-        set_User(
-            state,
-            user
-        ) {
+        set_User(state, data) {
             console.log('set user');
-            // console.log('state1', state);
-            // console.log('payload1', user);
-            state.user = user;
+            state.user = data;
         }
 
     },

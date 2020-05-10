@@ -36,7 +36,7 @@ public function index(Request $request)
 
 //dd('login route go');
         }
-         return view('home');
+         return view('home',compact('user'));
 
 
     }

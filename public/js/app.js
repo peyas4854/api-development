@@ -2031,12 +2031,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//import { mapMutations } from "vuex";
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["user"],
+  created: function created() {
+    console.log("user", this.user);
+    this.$store.commit("set_User", this.user);
+  }
+});
 
 /***/ }),
 
@@ -38453,7 +38455,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container-fluid" })
+  return _c("div", [
+    _c("h1", [_vm._v("app home")]),
+    _vm._v(" "),
+    _c("p", [_vm._v(_vm._s(_vm.user))])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -54930,7 +54936,7 @@ var loadFront = function loadFront(view) {
 };
 
 var routes = [{
-  path: '/',
+  path: '/admin',
   component: loadLayout("AdminLayout"),
   children: [{
     path: '',
@@ -54999,11 +55005,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     }
   },
   mutations: {
-    set_User: function set_User(state, user) {
-      console.log('set user'); // console.log('state1', state);
-      // console.log('payload1', user);
-
-      state.user = user;
+    set_User: function set_User(state, data) {
+      console.log('set user');
+      state.user = data;
     }
   },
   actions: {}
