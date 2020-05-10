@@ -9,10 +9,12 @@
           <router-view></router-view>
         </div>
 
-        <div class="col-md-3 pr-0"><sidebar/></div>
+        <div class="col-md-3 pr-0">
+          <sidebar />
+        </div>
       </div>
     </div>
-<Appfooter/>
+    <Appfooter />
   </div>
 </template>
 
@@ -24,13 +26,15 @@ export default {
   components: {
     sidebar,
     Appmenu,
-Appfooter
+    Appfooter
   }
 };
 </script>
 
 <style scoped>
-.content-body{
-background-color: #ffffff40;
+.content-body {
+  /* background-color: #ffffff40; */
+  padding-top: 10px !important;
+  margin-top: 100px;
 }
 </style>

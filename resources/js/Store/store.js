@@ -6,15 +6,20 @@ export default new Vuex.Store({
 
     state: {
         user: {},
+        productSearch: '',
     },
     getters: {
         User: state => state.user,
+        productSearchBy: state => state.productSearch,
     },
     mutations: {
         set_User(state, data) {
             console.log('set user');
             state.user = data;
             console.log('set user', state.user);
+        },
+        set_productSearch(state, val) {
+            state.productSearch = val;
         }
 
     },

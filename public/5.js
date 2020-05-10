@@ -58,6 +58,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -83,7 +88,7 @@ __webpack_require__.r(__webpack_exports__);
       instance.axiosGet(route, function (response) {
         console.log("paici response ", response);
         instance.review = response.data.data;
-        var url = 'https://dummyimage.com/vga';
+        var url = "https://dummyimage.com/vga";
       }, function (response) {
         console.log("paici 2", response);
       });
@@ -105,7 +110,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.flex1[data-v-07a539b8] {\r\n  flex: 1;\n}\n.flex2[data-v-07a539b8] {\r\n  flex: 2;\n}\n.card-body.review-content[data-v-07a539b8] {\r\n  border-bottom: 1px solid black;\n}\r\n", ""]);
+exports.push([module.i, "\n.flex1[data-v-07a539b8] {\n  flex: 1;\n}\n.flex2[data-v-07a539b8] {\n  flex: 2;\n}\n.card-body.review-content[data-v-07a539b8] {\n  border-bottom: 1px solid black;\n}\n.rating_number[data-v-07a539b8] {\n  height: rem;\n\n  padding: 20px;\n  justify-content: center;\n  display: flex;\n  align-items: center;\n  font-size: 40px;\n  font-weight: 600;\n  font-family: Roboto;\n  color: #02000a;\n}\n", ""]);
 
 // exports
 
@@ -176,11 +181,22 @@ var render = function() {
                   _c("h3", [_vm._v("Rating")]),
                   _vm._v(" "),
                   _c("div", { staticClass: "top d-flex flex-row" }, [
-                    _c("p", { staticClass: "flex1" }, [_vm._v("name")]),
+                    _c("div", { staticClass: "flex1" }, [
+                      _c("div", { staticClass: "rating_number" }, [
+                        _vm._v("3.5/5")
+                      ])
+                    ]),
                     _vm._v(" "),
                     _c("p", { staticClass: "flex2" }, [_vm._v("name")]),
                     _vm._v(" "),
-                    _c("p", { staticClass: "flex1" }, [_vm._v("name")])
+                    _c("div", { staticClass: "flex1" }, [
+                      _c("div", { staticClass: "rating_number" }, [
+                        _vm._v("\n                120\n                "),
+                        _c("span", { staticClass: "h5 ml-2 my-auto" }, [
+                          _vm._v("Review")
+                        ])
+                      ])
+                    ])
                   ])
                 ])
               ])
