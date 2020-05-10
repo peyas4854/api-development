@@ -71,10 +71,10 @@ public function index(Request $request)
       if( Auth::attempt($credentials)){
         $user = auth::user();
 //dd($user);
-        if($user->userType == 'User'){
-        Auth::logout();
-        return $this->sendError('Invalid Credential!',['error'=>'Unauthorised']);
-        }
+        // if($user->userType == 'User'){
+        // Auth::logout();
+        // return $this->sendError('Invalid Credential!',['error'=>'Unauthorised']);
+        // }
 
           $token =  $user->createToken('MyApp')->accessToken;
           return $this->returnWithToken($token,'User Login successfully.');

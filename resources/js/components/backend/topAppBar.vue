@@ -35,11 +35,7 @@
                 aria-expanded="false"
                 type="button"
               >
-                <img
-                  src="https://www.w3schools.com/howto/img_avatar.png"
-                  alt="avatar"
-                  class="avatar"
-                />
+                <img :src="'/img/'+User.image" alt="avatar" class="avatar" />
 
                 <div class="dropdown-menu" aria-labelledby="avatarDropdown">
                   <div class="ticker"></div>
@@ -73,7 +69,16 @@
 </template>
 
 <script>
-export default {};
+import { mapGetters } from "vuex";
+export default {
+  computed: {
+    ...mapGetters(["User"])
+  },
+
+  created() {
+    console.log("top ap bar", this.User);
+  }
+};
 </script>
 
 <style scoped>

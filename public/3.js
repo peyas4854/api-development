@@ -63,6 +63,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -133,11 +140,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({});
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["User"])),
+  created: function created() {
+    console.log("top ap bar", this.User);
+  }
+});
 
 /***/ }),
 
@@ -211,7 +220,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.bg-light[data-v-64e79d5e] {\r\n  background-color: #06d0f1f2 !important;\r\n  position: fixed;\r\n  width: 100%;\r\n  border: 0px !important;\r\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\r\n  transition: 0.3s;\r\n  z-index: 999;\n}\n.bg-light[data-v-64e79d5e]:hover {\r\n  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);\n}\n.card-body[data-v-64e79d5e] {\r\n  border-bottom: 1px solid #d3d3daf3 !important;\r\n  display: flex;\r\n  padding: 0px 50px;\r\n  height: 70px;\n}\n.avatar[data-v-64e79d5e] {\r\n  vertical-align: middle;\r\n  width: 50px;\r\n  height: 50px;\r\n  border-radius: 50%;\n}\n.image[data-v-64e79d5e] {\r\n  position: relative;\r\n  left: 10em;\n}\n.slider_icon[data-v-64e79d5e] {\r\n  position: relative;\r\n  top: 24px;\r\n  right: 24px;\r\n  font-size: 22px !important;\n}\n.icon_top_bar[data-v-64e79d5e] {\r\n  font-size: 18px;\r\n  color: #ffffff;\n}\n.dropdown-menu.show[data-v-64e79d5e] {\r\n  display: block;\r\n  position: absolute !important;\r\n  left: -10px !important;\r\n  padding: 0px;\n}\n.ticker[data-v-64e79d5e] {\r\n  position: absolute;\r\n  right: 44px;\r\n  top: -8px;\r\n  width: 1.1em;\r\n  height: 1.1em;\r\n  border-radius: 0em 0em 0.5em 0em;\r\n  transform: rotate(225deg);\r\n  background: linear-gradient(-45deg, #ffffff 50%, transparent 50%);\n}\n.icon_number[data-v-64e79d5e] {\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 4px;\n}\r\n/* p.avatar-item.mb-0 {\r\n  padding: 15px 15px;\r\n  transition: 0.3s;\r\n}\r\n.avatar-item:hover {\r\n  color: #f8fafc;\r\n  background-color: #030613c9;\r\n} */\r\n", ""]);
+exports.push([module.i, "\n.bg-light[data-v-64e79d5e] {\n  background-color: #06d0f1f2 !important;\n  position: fixed;\n  width: 100%;\n  border: 0px !important;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n  transition: 0.3s;\n  z-index: 999;\n}\n.bg-light[data-v-64e79d5e]:hover {\n  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);\n}\n.card-body[data-v-64e79d5e] {\n  border-bottom: 1px solid #d3d3daf3 !important;\n  display: flex;\n  padding: 0px 50px;\n  height: 70px;\n}\n.avatar[data-v-64e79d5e] {\n  vertical-align: middle;\n  width: 50px;\n  height: 50px;\n  border-radius: 50%;\n}\n.image[data-v-64e79d5e] {\n  position: relative;\n  left: 10em;\n}\n.slider_icon[data-v-64e79d5e] {\n  position: relative;\n  top: 24px;\n  right: 24px;\n  font-size: 22px !important;\n}\n.icon_top_bar[data-v-64e79d5e] {\n  font-size: 18px;\n  color: #ffffff;\n}\n.dropdown-menu.show[data-v-64e79d5e] {\n  display: block;\n  position: absolute !important;\n  left: -10px !important;\n  padding: 0px;\n}\n.ticker[data-v-64e79d5e] {\n  position: absolute;\n  right: 44px;\n  top: -8px;\n  width: 1.1em;\n  height: 1.1em;\n  border-radius: 0em 0em 0.5em 0em;\n  transform: rotate(225deg);\n  background: linear-gradient(-45deg, #ffffff 50%, transparent 50%);\n}\n.icon_number[data-v-64e79d5e] {\n  position: absolute;\n  top: 0px;\n  right: 4px;\n}\n/* p.avatar-item.mb-0 {\n  padding: 15px 15px;\n  transition: 0.3s;\n}\n.avatar-item:hover {\n  color: #f8fafc;\n  background-color: #030613c9;\n} */\n", ""]);
 
 // exports
 
@@ -412,10 +421,7 @@ var render = function() {
                 [
                   _c("img", {
                     staticClass: "avatar",
-                    attrs: {
-                      src: "https://www.w3schools.com/howto/img_avatar.png",
-                      alt: "avatar"
-                    }
+                    attrs: { src: "/img/" + _vm.User.image, alt: "avatar" }
                   }),
                   _vm._v(" "),
                   _c(

@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 import commonMethods from "../../helper/commonMethods";
 export default {
   extends: commonMethods,
@@ -49,19 +50,18 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(["set_User"]),
     login() {
       let instance = this;
-
       instance.inputField = this.user;
       instance.postDataMethod("http://127.0.0.1:8000/login", this.inputField);
     },
     postDataSuccess(response) {
-      //console.log("response", response.status);
       if (response.status === 200) {
-        //this.setUser(response.data.data.user);
+        // location.reload();
         //console.log("response", response.data.data.user);
+        this.set_User(response.data.data.user);
         this.$router.push({ path: "/" });
-        //this.loggenInUser = response.data.data.user;
       }
     },
     postDataError(error) {

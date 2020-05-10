@@ -9,7 +9,14 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _helper_commonMethods__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helper/commonMethods */ "./resources/js/helper/commonMethods.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _helper_commonMethods__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../helper/commonMethods */ "./resources/js/helper/commonMethods.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -51,35 +58,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  "extends": _helper_commonMethods__WEBPACK_IMPORTED_MODULE_0__["default"],
+  "extends": _helper_commonMethods__WEBPACK_IMPORTED_MODULE_1__["default"],
   data: function data() {
     return {
       user: {},
       errors: []
     };
   },
-  methods: {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])(["set_User"]), {
     login: function login() {
       var instance = this;
       instance.inputField = this.user;
       instance.postDataMethod("http://127.0.0.1:8000/login", this.inputField);
     },
     postDataSuccess: function postDataSuccess(response) {
-      //console.log("response", response.status);
       if (response.status === 200) {
-        //this.setUser(response.data.data.user);
+        // location.reload();
         //console.log("response", response.data.data.user);
+        this.set_User(response.data.data.user);
         this.$router.push({
           path: "/"
-        }); //this.loggenInUser = response.data.data.user;
+        });
       }
     },
     postDataError: function postDataError(error) {
       this.errors = error.errors;
       console.log("error", this.errors);
     }
-  }
+  })
 });
 
 /***/ }),
@@ -96,7 +104,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.global-container[data-v-42cb8358] {\r\n  height: 100vh;\r\n  display: flex;\r\n  align-items: center;\r\n  justify-content: center;\n}\nform[data-v-42cb8358] {\r\n  padding-top: 10px;\r\n  font-size: 14px;\r\n  margin-top: 30px;\n}\n.card-title[data-v-42cb8358] {\r\n  font-weight: 300;\n}\n.btn[data-v-42cb8358] {\r\n  font-size: 14px;\r\n  margin-top: 20px;\n}\n.login-form[data-v-42cb8358] {\r\n  width: 330px;\r\n  margin: 20px;\n}\n.sign-up[data-v-42cb8358] {\r\n  text-align: center;\r\n  padding: 20px 0 0;\n}\n.alert[data-v-42cb8358] {\r\n  margin-bottom: -30px;\r\n  font-size: 13px;\r\n  margin-top: 20px;\n}\r\n", ""]);
+exports.push([module.i, "\n.global-container[data-v-42cb8358] {\n  height: 100vh;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\nform[data-v-42cb8358] {\n  padding-top: 10px;\n  font-size: 14px;\n  margin-top: 30px;\n}\n.card-title[data-v-42cb8358] {\n  font-weight: 300;\n}\n.btn[data-v-42cb8358] {\n  font-size: 14px;\n  margin-top: 20px;\n}\n.login-form[data-v-42cb8358] {\n  width: 330px;\n  margin: 20px;\n}\n.sign-up[data-v-42cb8358] {\n  text-align: center;\n  padding: 20px 0 0;\n}\n.alert[data-v-42cb8358] {\n  margin-bottom: -30px;\n  font-size: 13px;\n  margin-top: 20px;\n}\n", ""]);
 
 // exports
 
