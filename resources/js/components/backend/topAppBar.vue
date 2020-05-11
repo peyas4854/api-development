@@ -2,12 +2,9 @@
   <div>
     <div class="card bg-light text-dark">
       <div class="card-body">
-        <i class="fa fa-sliders slider_icon icon_top_bar"></i>
-        <p class="flex1 p-0 my-auto">Dashboard</p>
-        <!-- <p class="flex1 p-0 my-auto">asffdsfsd</p> -->
-
+        <!-- <p class="flex1 p-0 my-auto">Dashboard</p> -->
         <div class="flex1 my-auto">
-          <ul class="nav">
+          <ul class="nav right_item">
             <li class="nav-item my-auto">
               <a class="nav-link position-relative" href="#">
                 <i class="fa fa-envelope icon_top_bar"></i>
@@ -71,6 +68,12 @@ export default {
 
   created() {
     console.log("top ap bar", this.User);
+  },
+  methods: {
+    toogle() {
+      this.$hub.$emit("emitToogle");
+      console.log("toogle");
+    }
   }
 };
 </script>
@@ -83,7 +86,7 @@ export default {
   border: 0px !important;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
-  z-index: 999;
+  z-index: 9;
 }
 .bg-light:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
@@ -136,12 +139,7 @@ export default {
   top: 0px;
   right: 4px;
 }
-/* p.avatar-item.mb-0 {
-  padding: 15px 15px;
-  transition: 0.3s;
+.right_item {
+  float: right;
 }
-.avatar-item:hover {
-  color: #f8fafc;
-  background-color: #030613c9;
-} */
 </style>

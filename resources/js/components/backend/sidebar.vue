@@ -1,14 +1,27 @@
 <template>
   <div class="sidebar_app">
+    <div class="logo_div">
+      <img src="img/logo/logo.png" alt class="logo" />
+    </div>
     <ul class="nav flex-column">
       <li class="nav-item">
-        <router-link class="nav-link" to="/">Dashboard</router-link>
+        <!-- <router-link class="nav-link" to="/">Dashboard</router-link> -->
+        <router-link
+          :class="[this.$route.path == '/' ? 'active_sidebar' : '', 'nav-link' ]"
+          to="/"
+        >Dashboard</router-link>
       </li>
       <li class="nav-item">
-        <router-link class="nav-link" to="/product">Product</router-link>
+        <router-link
+          :class="[this.$route.path == '/product' ? 'active_sidebar' : '', 'nav-link' ]"
+          to="/product"
+        >Product</router-link>
       </li>
       <li class="nav-item">
-        <router-link class="nav-link" to="/review">Review</router-link>
+        <router-link
+          :class="[this.$route.path == '/review' ? 'active_sidebar' : '', 'nav-link' ]"
+          to="/review"
+        >Review</router-link>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/logout">Logout</a>
@@ -46,28 +59,42 @@ export default {
 </script>
 
 <style scoped lang="scss">
+img.logo {
+  width: 80px;
+  height: 69px;
+}
+.logo_div {
+  border-bottom: 1px solid #ece5e51a;
+  text-align: center;
+}
 .sidebar_app {
-  background-color: #02071ba3;
+  background-color: #505463;
   position: fixed;
-  width: 16.7% !important;
+  width: 182px !important;
   height: 100vh !important;
+  z-index: 99 !important;
 }
 .nav-link {
   display: block;
-  padding: 15px 0px;
+  padding: 25px;
+  margin-bottom: 8px;
   text-align: center;
   transition: 0.3s;
+  background-color: red;
+  /* color: blue!important; */
+  /* background-color: #312b2b!important; */
 }
 a {
   color: #ffffff !important;
   font-family: Roboto;
   font-size: 15px;
 }
+.active_sidebar {
+  color: #00ffc4 !important;
+}
 .nav-item:hover {
-  background-color: #ffffff;
-
   a {
-    color: black !important;
+    color: #00ffc4 !important;
   }
 }
 </style>
