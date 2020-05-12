@@ -7179,7 +7179,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "aside[data-v-432ed138] {\n  height: 100vh;\n  display: none;\n}\n.active[data-v-432ed138] {\n  display: block;\n}\n#app-main[data-v-432ed138] {\n  display: contents;\n}\n.content-body[data-v-432ed138] {\n  margin-left: 185px;\n}\n.container_mr_0[data-v-432ed138] {\n  margin-left: 0px !important;\n}\ni.fa.fa-bars[data-v-432ed138] {\n  position: fixed;\n  top: 23px;\n  font-size: 22px;\n  cursor: pointer;\n  z-index: 99;\n}\n.page_header[data-v-432ed138] {\n  position: fixed;\n  top: 22px;\n  left: 18em;\n  z-index: 9;\n}", ""]);
+exports.push([module.i, "aside[data-v-432ed138] {\n  height: 100vh;\n  display: none;\n}\n.active[data-v-432ed138] {\n  display: block;\n}\n#app-main[data-v-432ed138] {\n  display: contents;\n}\n.content-body[data-v-432ed138] {\n  margin-left: 185px;\n}\n.container_mr_0[data-v-432ed138] {\n  margin-left: 0px !important;\n}\ni.fa.fa-bars[data-v-432ed138] {\n  position: fixed;\n  top: 23px;\n  font-size: 22px;\n  cursor: pointer;\n  z-index: 99;\n}\n.page_header[data-v-432ed138] {\n  position: fixed;\n  top: 22px;\n  margin-left: 33px;\n  z-index: 9;\n}", ""]);
 
 // exports
 
@@ -57575,7 +57575,7 @@ var map = {
 	],
 	"./error.vue": [
 		"./resources/js/views/error.vue",
-		6
+		7
 	],
 	"./front/index.vue": [
 		"./resources/js/views/front/index.vue",
@@ -57595,7 +57595,7 @@ var map = {
 	],
 	"./review.vue": [
 		"./resources/js/views/review.vue",
-		7
+		6
 	],
 	"./singleproduct.vue": [
 		"./resources/js/views/singleproduct.vue",

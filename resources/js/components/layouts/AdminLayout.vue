@@ -92,7 +92,7 @@ i.fa.fa-bars {
 .page_header {
   position: fixed;
   top: 22px;
-  left: 18em;
+ margin-left:33px;
   z-index: 9;
 }
 </style>
