@@ -11,6 +11,13 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _helper_commonMethods__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helper/commonMethods */ "./resources/js/helper/commonMethods.js");
 /* harmony import */ var _components_base_preloader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/base/preloader */ "./resources/js/components/base/preloader.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -63,6 +70,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -73,25 +87,45 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       id: this.$route.params.id,
+      reviewData: "",
       review: ""
     };
   },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])(["User"])),
   created: function created() {
-    console.log("id", this.id);
+    console.log(["product id", this.id], ["user", this.User]);
     this.getreview("http://127.0.0.1:8000/api/products/" + this.id + "/reviews");
   },
   methods: {
     getreview: function getreview(route) {
-      //console.log("df");
       var instance = this;
       instance.preLoader = true;
       instance.axiosGet(route, function (response) {
         console.log("paici response ", response);
-        instance.review = response.data.data;
+        instance.reviewData = response.data.data;
         var url = "https://dummyimage.com/vga";
       }, function (response) {
         console.log("paici 2", response);
       });
+    },
+    submitReview: function submitReview() {
+      var instance = this;
+      instance.inputField = {
+        customer: this.User.name,
+        review: this.review,
+        star: 3
+      };
+      console.log("input", instance.inputField);
+      instance.postDataMethod("http://127.0.0.1:8000/api/products/" + this.id + "/reviews", this.inputField);
+    },
+    postDataSuccess: function postDataSuccess(response) {
+      this.review = "";
+      console.log("reponse", response);
+      this.getreview("http://127.0.0.1:8000/api/products/" + this.id + "/reviews");
+    },
+    postDataError: function postDataError(error) {
+      //this.errors = error.errors;
+      console.log("error", error);
     }
   }
 });
@@ -110,7 +144,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.flex1[data-v-07a539b8] {\n  flex: 1;\n}\n.flex2[data-v-07a539b8] {\n  flex: 2;\n}\n.card-body.review-content[data-v-07a539b8] {\n  border-bottom: 1px solid black;\n}\n.rating_number[data-v-07a539b8] {\n  height: rem;\n\n  padding: 20px;\n  justify-content: center;\n  display: flex;\n  align-items: center;\n  font-size: 40px;\n  font-weight: 600;\n  font-family: Roboto;\n  color: #02000a;\n}\n", ""]);
+exports.push([module.i, "\n.flex1[data-v-07a539b8] {\n  flex: 1;\n}\n.flex2[data-v-07a539b8] {\n  flex: 2;\n}\n.card-body.review-content[data-v-07a539b8] {\n  border-bottom: 1px solid black;\n}\n.rating_number[data-v-07a539b8] {\n  height: rem;\n  padding: 20px;\n  justify-content: center;\n  display: flex;\n  align-items: center;\n  font-size: 40px;\n  font-weight: 600;\n  font-family: Roboto;\n  color: #02000a;\n}\n", ""]);
 
 // exports
 
@@ -191,8 +225,12 @@ var render = function() {
                     _vm._v(" "),
                     _c("div", { staticClass: "flex1" }, [
                       _c("div", { staticClass: "rating_number" }, [
-                        _vm._v("\n                120\n                "),
-                        _c("span", { staticClass: "h5 ml-2 my-auto" }, [
+                        _vm._v(
+                          "\n                " +
+                            _vm._s(_vm.reviewData.length) +
+                            "\n                "
+                        ),
+                        _c("span", { staticClass: "h6 ml-2 my-auto" }, [
                           _vm._v("Review")
                         ])
                       ])
@@ -206,14 +244,14 @@ var render = function() {
               _c(
                 "div",
                 { staticClass: "card" },
-                _vm._l(_vm.review, function(reviews, i) {
+                _vm._l(_vm.reviewData, function(reviews, i) {
                   return _c(
                     "div",
                     { key: i, staticClass: "card-body review-content" },
                     [
                       _c("p", [_vm._v(_vm._s(reviews.review))]),
                       _vm._v(" "),
-                      _c("p", [_vm._v(_vm._s(reviews.customer_name))]),
+                      _c("p", [_vm._v("By " + _vm._s(reviews.customer_name))]),
                       _vm._v(" "),
                       _c("div", { staticClass: "d-flex" }, [
                         _c("p", { staticClass: "flex1" }, [_vm._v("rating")]),
@@ -235,8 +273,43 @@ var render = function() {
                   ]),
                   _vm._v(" "),
                   _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.review,
+                        expression: "review"
+                      }
+                    ],
                     staticClass: "form-control",
-                    attrs: { type: "text", placeholder: "Description" }
+                    attrs: {
+                      type: "text",
+                      placeholder: "Want to give a review ..."
+                    },
+                    domProps: { value: _vm.review },
+                    on: {
+                      keypress: function($event) {
+                        if (
+                          !$event.type.indexOf("key") &&
+                          _vm._k(
+                            $event.keyCode,
+                            "enter",
+                            13,
+                            $event.key,
+                            "Enter"
+                          )
+                        ) {
+                          return null
+                        }
+                        return _vm.submitReview()
+                      },
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.review = $event.target.value
+                      }
+                    }
                   })
                 ])
               ])

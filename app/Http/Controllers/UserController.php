@@ -45,7 +45,7 @@ class UserController extends BaseController
     }else{
             $user=[
             'name'=>$request->name,
-            'email'=>$request->name,
+            'email'=>$request->email,
             ];
     }
 

@@ -2090,7 +2090,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   "extends": _helper_commonMethods__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -39299,7 +39298,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "logo_div" }, [
       _c("img", {
         staticClass: "logo",
-        attrs: { src: "img/logo/logo.png", alt: "" }
+        attrs: { src: "/img/logo/logo.png", alt: "" }
       })
     ])
   },

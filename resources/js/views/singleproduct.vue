@@ -16,8 +16,8 @@
               <p class="flex2">name</p>
               <div class="flex1">
                 <div class="rating_number">
-                  120
-                  <span class="h5 ml-2 my-auto">Review</span>
+                  {{ reviewData.length }}
+                  <span class="h6 ml-2 my-auto">Review</span>
                 </div>
               </div>
             </div>
@@ -26,9 +26,9 @@
       </div>
       <div class="product-review">
         <div class="card">
-          <div class="card-body review-content" v-for="(reviews,i) in review" :key="i">
+          <div class="card-body review-content" v-for="(reviews,i) in reviewData" :key="i">
             <p>{{ reviews.review}}</p>
-            <p>{{ reviews.customer_name}}</p>
+            <p>By {{ reviews.customer_name}}</p>
 
             <div class="d-flex">
               <p class="flex1">rating</p>
@@ -42,7 +42,13 @@
         <div class="card">
           <div class="card-body">
             <label for="description">Review</label>
-            <textarea type="text" class="form-control" placeholder="Description" />
+            <textarea
+              type="text"
+              class="form-control"
+              placeholder="Want to give a review ..."
+              v-model="review"
+              @keypress.enter="submitReview()"
+            />
           </div>
         </div>
       </div>
@@ -53,7 +59,7 @@
 <script>
 import commonMethod from "../helper/commonMethods";
 import preLoader from "../components/base/preloader";
-
+import { mapGetters } from "vuex";
 export default {
   extends: commonMethod,
   components: {
@@ -62,11 +68,15 @@ export default {
   data() {
     return {
       id: this.$route.params.id,
+      reviewData: "",
       review: ""
     };
   },
+  computed: {
+    ...mapGetters(["User"])
+  },
   created() {
-    console.log("id", this.id);
+    console.log(["product id", this.id], ["user", this.User]);
     this.getreview(
       "http://127.0.0.1:8000/api/products/" + this.id + "/reviews"
     );
@@ -74,20 +84,44 @@ export default {
 
   methods: {
     getreview(route) {
-      //console.log("df");
       let instance = this;
       instance.preLoader = true;
       instance.axiosGet(
         route,
         function(response) {
           console.log("paici response ", response);
-          instance.review = response.data.data;
+          instance.reviewData = response.data.data;
           const url = "https://dummyimage.com/vga";
         },
         function(response) {
           console.log("paici 2", response);
         }
       );
+    },
+    submitReview() {
+      let instance = this;
+
+      instance.inputField = {
+        customer: this.User.name,
+        review: this.review,
+        star: 3
+      };
+      console.log("input", instance.inputField);
+      instance.postDataMethod(
+        "http://127.0.0.1:8000/api/products/" + this.id + "/reviews",
+        this.inputField
+      );
+    },
+    postDataSuccess(response) {
+      this.review = "";
+      console.log("reponse", response);
+      this.getreview(
+        "http://127.0.0.1:8000/api/products/" + this.id + "/reviews"
+      );
+    },
+    postDataError(error) {
+      //this.errors = error.errors;
+      console.log("error", error);
     }
   }
 };
@@ -105,7 +139,6 @@ export default {
 }
 .rating_number {
   height: rem;
-
   padding: 20px;
   justify-content: center;
   display: flex;

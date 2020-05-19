@@ -1,11 +1,10 @@
 <template>
   <div class="sidebar_app">
     <div class="logo_div">
-      <img src="img/logo/logo.png" alt class="logo" />
+      <img src="/img/logo/logo.png" alt class="logo" />
     </div>
     <ul class="nav flex-column">
       <li class="nav-item">
-        <!-- <router-link class="nav-link" to="/">Dashboard</router-link> -->
         <router-link
           :class="[this.$route.path == '/' ? 'active_sidebar' : '', 'nav-link' ]"
           to="/"

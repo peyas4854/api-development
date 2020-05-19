@@ -47,20 +47,23 @@ class ReviewController extends BaseController
      */
     public function store(Product $product,Request $request)
     {
+
+// dd($request->all());
         $this->validate($request,[
             'customer'=>'required',
             'review'=>'required',
             'star'=>'required|integer|between:1,5',
         ]);
+
         $review=[
             'product_id'=>$product->id,
             'customer'=>$request->customer,
             'review'=>$request->review,
             'star'=>$request->star,
              ];
-
             /* store method in base model*/
             $data =Review::store($review);
+
 
             if($data){
                 return $this->sendResponse(new ReviewResource($data),'Review Store Successfully.');
