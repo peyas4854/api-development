@@ -1,7 +1,7 @@
 
 <template>
   <div class="container-fluid">
-    <div class="row" >
+    <div class="row">
       <div class="col-md-2 p-0">
         <sidebar />
       </div>
@@ -26,9 +26,6 @@ export default {
   extends: commonMethod,
   components: {
     sidebar
-  },
-  created() {
-    console.log("backloayout", this.isLoggedIn);
   }
 };
 </script>

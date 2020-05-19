@@ -9,7 +9,16 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _helper_commonMethods__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../helper/commonMethods */ "./resources/js/helper/commonMethods.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _helper_commonMethods__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../helper/commonMethods */ "./resources/js/helper/commonMethods.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
 //
 //
 //
@@ -51,29 +60,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  "extends": _helper_commonMethods__WEBPACK_IMPORTED_MODULE_0__["default"],
+  "extends": _helper_commonMethods__WEBPACK_IMPORTED_MODULE_1__["default"],
   data: function data() {
     return {
       user: {},
       errors: []
     };
   },
-  methods: {
+  methods: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapMutations"])(["set_User"]), {
     login: function login() {
       var instance = this;
-      instance.inputField = instance.user;
-      instance.postDataMethod("http://127.0.0.1:8000/api/login", instance.inputField);
+      instance.inputField = this.user;
+      instance.postDataMethod("http://127.0.0.1:8000/login", this.inputField);
     },
     postDataSuccess: function postDataSuccess(response) {
-      console.log("respnse", response.data.data.user);
-      var $user = response.data.data.user; //this.authenticate($user);
-      // this.$router.push( {path:'/'})
+      console.log("response", response.data);
+      location.reload();
+      this.$router.push({
+        path: "/"
+      }); //   if (response.status === 200) {
+      //     window.reload();
+      //     //console.log("response", response.data.data.user);
+      //     this.set_User(response.data.data.user);
+      //     //this.$router.push({ path: "/" });
+      //   }
     },
     postDataError: function postDataError(error) {
-      this.errors = error.errors; //console.log("error", error.errors);
+      this.errors = error.errors;
+      console.log("error", this.errors);
     }
-  }
+  })
 });
 
 /***/ }),
@@ -146,9 +164,7 @@ var render = function() {
     _c("div", { staticClass: "global-container" }, [
       _c("div", { staticClass: "card login-form" }, [
         _c("div", { staticClass: "card-body" }, [
-          _c("h3", { staticClass: "card-title text-center" }, [
-            _vm._v("Login")
-          ]),
+          _c("h3", { staticClass: "card-title text-center" }),
           _vm._v(" "),
           _c("div", { staticClass: "card-text" }, [
             _c("div", { staticClass: "form-group" }, [
@@ -223,6 +239,7 @@ var render = function() {
               "button",
               {
                 staticClass: "btn btn-primary btn-block",
+                attrs: { type: "submit" },
                 on: {
                   click: function($event) {
                     return _vm.login()

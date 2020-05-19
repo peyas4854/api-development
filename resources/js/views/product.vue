@@ -1,11 +1,11 @@
 <template>
   <div class="main_wrapper">
     <div>
-      <div class="top_wrapper">
-        <div class="top_wrapper_header">
-          <h3 class="p-0 top_wrapper_header_content">Product</h3>
+      <div class="main_wrapper_top_header">
+        <div class="header_content my-auto">
+          <h4>Product</h4>
         </div>
-        <div class="top_wrapper_button">
+        <div class="header_content_button">
           <button
             class="btn btn-primary app_primary_btn"
             data-toggle="modal"
@@ -14,7 +14,6 @@
           >Add</button>
         </div>
       </div>
-
       <div class="modal fade" id="add-edit-modal" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <productmodal
@@ -26,43 +25,8 @@
           ></productmodal>
         </div>
       </div>
-      <!-- <div v-if="preLoader == true">
-        <preloader />
-      </div>-->
-      <div class="table_wrapper">
-        <!-- <table class="table">
-          <thead>
-            <tr>
-              <th>Product name</th>
-              <th>Price</th>
 
-              <th>Discount</th>
-              <th>Stock</th>
-              <th>Created user</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody v-for="products in product" :key="products.id">
-            <tr>
-              <td>{{ products.name }}</td>
-              <td>{{ products.price }}</td>
-
-              <td>{{ products.discount }}</td>
-              <td>{{ products.stock }}</td>
-              <td>{{ products.created_by }}</td>
-              <td>
-                <button
-                  type="button"
-                  class="btn btn-primary btn-sm"
-                  data-toggle="modal"
-                  data-target="#add-edit-modal"
-                  @click="addEdit(products.id)"
-                >Edit</button>
-                <button type="button" class="btn btn-danger btn-sm">Delete</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>-->
+      <div class="main_wrapper_card_content">
         <datatable :dataset="dataset" />
       </div>
     </div>
@@ -83,7 +47,7 @@ export default {
       message: "",
       modalID: "#add-edit-modal",
       dataset: {
-        source: "http://127.0.0.1:8000/products",
+        source: "http://127.0.0.1:8000/api/products",
         headers: [
           "Product name",
           "Price",
@@ -140,22 +104,4 @@ export default {
 </script>
 
 <style scoped>
-.main_wrapper {
-  background-color: #ffffff;
-  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.2);
-}
-.top_wrapper {
-  padding: 10px 22px;
-  height: 60px;
-  background-color: #0e77e0a1 !important;
-}
-.top_wrapper_header {
-  float: left;
-}
-.top_wrapper_button {
-  float: right;
-}
-.top_wrapper_header_content {
-  color: #ffffff;
-}
 </style>

@@ -1,18 +1,22 @@
 <template>
-  <div class="container-fluid">
-    <!-- <h1 class="text-center">
-      <router-link to="/">App home</router-link>
-    </h1>
-
-    <router-link to="/home2">home 2</router-link>
-    <router-link to="/home3">home 3</router-link>
-
-    <router-view></router-view> -->
+  <div>
+    <router-view />
   </div>
 </template>
-
 <script>
-export default {};
+import adminlayout from "./components/layouts/AdminLayout";
+import frontlayout from "./components/layouts/FrontLayout";
+export default {
+  props: ["user"],
+  components: {
+    adminlayout,
+    frontlayout
+  },
+  created() {
+    console.log("props", this.user);
+    this.$store.commit("set_User", this.user);
+  }
+};
 </script>
 
 <style>

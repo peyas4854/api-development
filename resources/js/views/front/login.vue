@@ -3,7 +3,8 @@
     <div class="global-container">
       <div class="card login-form">
         <div class="card-body">
-          <h3 class="card-title text-center">Login</h3>
+          <h3 class="card-title text-center"></h3>
+
           <div class="card-text">
             <!--
             <div class="alert alert-danger alert-dismissible fade show" role="alert">Incorrect username or password.</div>-->
@@ -25,7 +26,8 @@
               <input type="password" class="form-control form-control-sm" v-model="user.password" />
               <p class="errors" v-if="errors.password">{{ errors.password[0] }}</p>
             </div>
-            <button class="btn btn-primary btn-block" @click="login()">Sign in</button>
+
+            <button type="submit" class="btn btn-primary btn-block" @click="login()">Sign in</button>
 
             <div class="sign-up">
               Don't have an account?
@@ -39,6 +41,8 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
+
 import commonMethods from "../../helper/commonMethods";
 export default {
   extends: commonMethods,
@@ -49,23 +53,26 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(["set_User"]),
     login() {
       let instance = this;
-      instance.inputField = instance.user;
-      instance.postDataMethod(
-        "http://127.0.0.1:8000/api/login",
-        instance.inputField
-      );
+      instance.inputField = this.user;
+      instance.postDataMethod("http://127.0.0.1:8000/login", this.inputField);
     },
     postDataSuccess(response) {
-      console.log("respnse", response.data.data.user);
-      const $user = response.data.data.user;
-      //this.authenticate($user);
-     // this.$router.push( {path:'/'})
+      console.log("response", response.data);
+      location.reload();
+      this.$router.push({ path: "/" });
+      //   if (response.status === 200) {
+      //     window.reload();
+      //     //console.log("response", response.data.data.user);
+      //     this.set_User(response.data.data.user);
+      //     //this.$router.push({ path: "/" });
+      //   }
     },
     postDataError(error) {
       this.errors = error.errors;
-      //console.log("error", error.errors);
+      console.log("error", this.errors);
     }
   }
 };

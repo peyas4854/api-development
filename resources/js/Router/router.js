@@ -12,7 +12,7 @@ const routes = [
 
     {
         path: '/',
-        component: loadLayout("BackendLayout"),
+        component: loadLayout("AdminLayout"),
         children: [{
                 path: '',
                 component: loadView("dashboard")
@@ -24,6 +24,11 @@ const routes = [
             {
                 path: '/review',
                 component: loadView("review")
+            },
+            {
+                path: '/profile/:id',
+                component: loadView("profile_id"),
+                name: 'profile',
             },
 
             // {
@@ -37,28 +42,24 @@ const routes = [
         component: loadLayout("FrontLayout"),
         children: [
 
-        {
-            path: '',
-            component: loadFront("index")
-        },
-        {
-            path: '/singleproduct/:id',
-            component: loadView("singleproduct"),
-            name:'singleproduct'
+            {
+                path: '',
+                component: loadFront("index")
+            },
+            {
+                path: '/singleproduct/:id',
+                component: loadView("singleproduct"),
+                name: 'singleproduct'
 
-        },
+            },
 
         ]
 
     },
-        {
-                path: '/login',
-                component: loadFront("login")
-        },
-
-
-
-
+    {
+        path: '/login',
+        component: loadFront("login")
+    },
 
 ]
 

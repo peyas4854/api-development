@@ -61,16 +61,7 @@
 import commonMethods from "../../../helper/commonMethods";
 export default {
   extends: commonMethods,
-  // props: {
-  //   id: {
-  //     type: Number,
-  //     required: false
-  //   },
-  //   modalID: {
-  //     type: String,
-  //     required: false
-  //   }
-  // },
+
   props: ["id", "modalID"],
   data() {
     return {
@@ -139,5 +130,4 @@ export default {
 .from_group {
   margin-bottom: 10px;
 }
-
 </style>

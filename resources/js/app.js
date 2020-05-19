@@ -78,10 +78,12 @@ Vue.component('datatable', require('./components/base/datatable.vue').default);
 //import router from './Router/router.js';
 
 import router from './Router/router.js';
+import store from './Store/store.js';
 
 
 const app = new Vue({
     el: '#app',
     router,
+    store
 
 });

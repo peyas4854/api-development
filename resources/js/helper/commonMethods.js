@@ -7,27 +7,8 @@ export default {
             preLoader: false,
             message: '',
             selectedItemId: '',
-            isLoggedIn: '',
-            user: {},
-        }
-    },
-    watch: {
-        isLoggedIn(newval) {
-             this.isLoggedIn = newval;
-            console.log('isLoggedIn', this.isLoggedIn)
-        }
-    },
 
-    mounted() {
-console.log('isLoggedIn',this.isLoggedIn);
-        window.setTimeout(function () {
-            $(".alert").fadeTo(500, 0).slideUp(500, function () {
-                $(this).remove();
-            });
-        }, 5000);
-    },
-    created() {
-        //console.log('mounted form created')
+        }
     },
     methods: {
 
@@ -62,15 +43,26 @@ console.log('isLoggedIn',this.isLoggedIn);
             instance.axiosPost(route, fields,
                 function (response) {
                     instance.setPreloader(false);
-                    console.log(" success ", response.data);
+
+                    // console.log("post success ",response.data);
+
                     instance.postDataSuccess(response);
                     instance.toastonSuccess(response.data.message)
                 },
                 function (error) {
                     instance.setPreloader(false);
-                    console.log(" error", error.response.data);
-                    instance.postDataError(error.response.data)
-                    instance.toastonErrors(error.response.data.message)
+
+                    console.log("post error", error.response.status);
+                    if (error.response.status === 404) {
+                        instance.toastonErrors(error.response.data.message)
+                    }
+                    if (error.response.status === 422) {
+                        instance.toastonErrors(error.response.data.message)
+                        instance.postDataError(error.response.data)
+                    }
+
+                    //instance.toastonErrors(error.response.data.message)
+
                 }
             )
         },
@@ -148,6 +140,7 @@ console.log('isLoggedIn',this.isLoggedIn);
             this.isLoggedIn = true;
 
         }
+
 
 
     }

@@ -15,13 +15,19 @@
     return view('welcome');
 }); */
 
-Auth::routes();
-Route::resource('products', 'ProductController');
-Route::group(['prefix'=>'products'],function(){
-    Route::apiresource('/{product}/reviews', 'ReviewController');
 
-});
-Route::get('/', 'HomeController@index')->name('home');
-Route::get('/{any}', 'HomeController@index')->where('any','.*');
-//Route::get('/{any}/{any}', 'HomeController@index')->name('home');
+//Auth::routes();
+Route::post('/login', 'API\RegisterController@login');
+Route::get('/logout', 'API\RegisterController@logout');
+Route::get('/admin', 'UserController@getAdmin');
+
+Route::post('/admin/update', 'UserController@updateAdmin');
+
+Route::get('/', 'API\RegisterController@index');
+
+
+
+Route::get('/{any}', 'API\RegisterController@index')->where('any','.*');
+
+
 
