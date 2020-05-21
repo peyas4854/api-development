@@ -9,25 +9,21 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 /* Route::get('/', function () {
-    return view('welcome');
+return view('welcome');
 }); */
-
 
 //Auth::routes();
 Route::post('/login', 'API\RegisterController@login');
 Route::get('/logout', 'API\RegisterController@logout');
 Route::get('/admin', 'UserController@getAdmin');
 
-Route::post('/admin/update', 'UserController@updateAdmin');
+Route::post('/admin/update/{user}', 'UserController@updateAdmin');
+
+Route::post('/admin/password/{user}', 'UserController@changePassword')->name('password');
 
 Route::get('/', 'API\RegisterController@index');
 
-
-
-Route::get('/{any}', 'API\RegisterController@index')->where('any','.*');
-
-
-
+Route::get('/{any}', 'API\RegisterController@index')->where('any', '.*');

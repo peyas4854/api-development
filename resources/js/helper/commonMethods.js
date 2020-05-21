@@ -51,12 +51,10 @@ export default {
                 },
                 function (error) {
                     instance.setPreloader(false);
-
                     console.log("post error", error.response.status);
                     if (error.response.status === 404) {
                         instance.toastonErrors(error.response.data.message)
-                    }
-                    if (error.response.status === 422) {
+                    } else if (error.response.status === 422) {
                         instance.toastonErrors(error.response.data.message)
                         instance.postDataError(error.response.data)
                     }

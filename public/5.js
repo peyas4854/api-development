@@ -106,6 +106,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -113,14 +116,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   data: function data() {
     return {
       user: {},
+      userName: this.$store.state.user.name,
       profileTab: true,
       changePasswordTab: false,
-      uploadImage: ""
+      uploadImage: "",
+      errors: []
     };
   },
-  created: function created() {
-    this.user = this.User;
-    console.log("profile", this.user);
+  created: function created() {//console.log(["profile", this.user], ["vue x", this.User]);
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["User"])),
   methods: {
@@ -136,21 +139,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     save: function save() {
       this.inputFields = {
-        name: this.user.name,
-        email: this.user.email,
+        name: this.User.name,
+        email: this.User.email,
         image: this.uploadImage
       };
-      console.log("inputFields", this.inputFields);
-      console.log("windows", window);
-      this.postDataMethod("http://127.0.0.1:8000/admin/update", this.inputFields);
+      this.postDataMethod("http://127.0.0.1:8000/admin/update/" + this.User.id, this.inputFields);
+    },
+    changePassword: function changePassword() {
+      this.inputFields = {
+        password: this.user.password,
+        password_confirmation: this.user.c_password
+      };
+      this.postDataMethod("http://127.0.0.1:8000/admin/password/" + this.User.id, this.inputFields);
     },
     postDataSuccess: function postDataSuccess(response) {
-      console.log("reponse", response);
-      location.reload();
+      var user = response.data.data;
+      this.userName = user.name, this.$store.commit("set_User", user);
+      this.errors = [];
+      this.user.password = "";
+      this.user.c_password = ""; //location.reload();
     },
     postDataError: function postDataError(error) {
-      //this.errors = error.errors;
-      console.log("error", error);
+      this.errors = error.errors;
     },
     changeTab: function changeTab(val) {
       if (val == 1) {
@@ -250,14 +260,14 @@ var render = function() {
                       _c("img", {
                         staticClass: "profile_image",
                         attrs: {
-                          src: "/img/" + _vm.user.image,
+                          src: "/img/" + _vm.User.image,
                           alt: "profile_image"
                         }
                       })
                     ]),
                     _vm._v(" "),
                     _c("h3", { staticClass: "text-center mt-2" }, [
-                      _vm._v(_vm._s(_vm.user.userName))
+                      _vm._v(_vm._s(_vm.userName))
                     ])
                   ])
                 ]),
@@ -321,26 +331,32 @@ var render = function() {
                                   {
                                     name: "model",
                                     rawName: "v-model",
-                                    value: _vm.user.name,
-                                    expression: "user.name"
+                                    value: _vm.User.name,
+                                    expression: "User.name"
                                   }
                                 ],
                                 staticClass: "form-control",
                                 attrs: { type: "text", placeholder: "Name" },
-                                domProps: { value: _vm.user.name },
+                                domProps: { value: _vm.User.name },
                                 on: {
                                   input: function($event) {
                                     if ($event.target.composing) {
                                       return
                                     }
                                     _vm.$set(
-                                      _vm.user,
+                                      _vm.User,
                                       "name",
                                       $event.target.value
                                     )
                                   }
                                 }
-                              })
+                              }),
+                              _vm._v(" "),
+                              _vm.errors.name
+                                ? _c("p", { staticClass: "errors" }, [
+                                    _vm._v(_vm._s(_vm.errors.name[0]))
+                                  ])
+                                : _vm._e()
                             ]
                           ),
                           _vm._v(" "),
@@ -357,26 +373,32 @@ var render = function() {
                                   {
                                     name: "model",
                                     rawName: "v-model",
-                                    value: _vm.user.email,
-                                    expression: "user.email"
+                                    value: _vm.User.email,
+                                    expression: "User.email"
                                   }
                                 ],
                                 staticClass: "form-control",
-                                attrs: { type: "email", placeholder: "Price" },
-                                domProps: { value: _vm.user.email },
+                                attrs: { type: "email", placeholder: "Email" },
+                                domProps: { value: _vm.User.email },
                                 on: {
                                   input: function($event) {
                                     if ($event.target.composing) {
                                       return
                                     }
                                     _vm.$set(
-                                      _vm.user,
+                                      _vm.User,
                                       "email",
                                       $event.target.value
                                     )
                                   }
                                 }
-                              })
+                              }),
+                              _vm._v(" "),
+                              _vm.errors.email
+                                ? _c("p", { staticClass: "errors" }, [
+                                    _vm._v(_vm._s(_vm.errors.email[0]))
+                                  ])
+                                : _vm._e()
                             ]
                           ),
                           _vm._v(" "),
@@ -484,23 +506,31 @@ var render = function() {
                                   )
                                 }
                               }
-                            })
+                            }),
+                            _vm._v(" "),
+                            _vm.errors.password
+                              ? _c("p", { staticClass: "errors" }, [
+                                  _vm._v(_vm._s(_vm.errors.password[0]))
+                                ])
+                              : _vm._e()
                           ])
                         ])
                       ]),
                       _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-primary app_primary_btn mt-3",
-                          on: {
-                            click: function($event) {
-                              return _vm.save()
+                      _c("div", { staticClass: "from_button_section" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary app_primary_btn mt-3",
+                            on: {
+                              click: function($event) {
+                                return _vm.changePassword()
+                              }
                             }
-                          }
-                        },
-                        [_vm._v("Save")]
-                      )
+                          },
+                          [_vm._v("Save")]
+                        )
+                      ])
                     ])
                   : _vm._e()
               ])

@@ -12,12 +12,10 @@
           <div class="main_wrapper">
             <div class="main_wrapper_card_header">
               <div class="image_div text-center">
-                <!--  src="https://www.w3schools.com/howto/img_avatar.png" -->
-                <!-- <img :src="'/img/'+user.userImage" alt="profile_image" class="profile_image" /> -->
-                <img :src="'/img/'+user.image" alt="profile_image" class="profile_image" />
+                <img :src="'/img/'+User.image" alt="profile_image" class="profile_image" />
               </div>
 
-              <h3 class="text-center mt-2">{{ user.userName}}</h3>
+              <h3 class="text-center mt-2">{{ userName }}</h3>
             </div>
           </div>
           <div class="main_wrapper mt-3">
@@ -43,12 +41,13 @@
               <div class="row">
                 <div class="col-md-6 from_group col-sm-12">
                   <label for="name">Name</label>
-                  <input type="text" class="form-control" placeholder="Name" v-model="user.name" />
-                  <!-- <p class="errors" v-if="errors.name">{{ errors.name[0] }}</p> -->
+                  <input type="text" class="form-control" placeholder="Name" v-model="User.name" />
+                  <p class="errors" v-if="errors.name">{{ errors.name[0] }}</p>
                 </div>
                 <div class="col-md-6 from_group col-sm-12">
                   <label for="price">Email</label>
-                  <input type="email" class="form-control" placeholder="Price" v-model="user.email" />
+                  <input type="email" class="form-control" placeholder="Email" v-model="User.email" />
+                  <p class="errors" v-if="errors.email">{{ errors.email[0] }}</p>
                 </div>
 
                 <div class="col-md-6 from_group col-sm-12">
@@ -76,10 +75,14 @@
                 <div class="from_group col-sm-12">
                   <label for="price">Confirm Password</label>
                   <input type="password" class="form-control" placeholder v-model="user.c_password" />
+                  <p class="errors" v-if="errors.password">{{ errors.password[0] }}</p>
                 </div>
               </div>
             </form>
-            <button class="btn btn-primary app_primary_btn mt-3" @click="save()">Save</button>
+
+            <div class="from_button_section">
+              <button class="btn btn-primary app_primary_btn mt-3" @click="changePassword()">Save</button>
+            </div>
           </div>
         </div>
       </div>
@@ -95,17 +98,21 @@ export default {
   data() {
     return {
       user: {},
+      userName: this.$store.state.user.name,
       profileTab: true,
       changePasswordTab: false,
-      uploadImage: ""
+      uploadImage: "",
+      errors: []
     };
   },
   created() {
-    this.user = this.User;
-    console.log("profile", this.user);
+    //console.log(["profile", this.user], ["vue x", this.User]);
   },
   computed: {
     ...mapGetters(["User"])
+    // userName() {
+    //   return this.User.name;
+    // }
   },
   methods: {
     imageChange(e) {
@@ -117,25 +124,36 @@ export default {
     },
     save() {
       this.inputFields = {
-        name: this.user.name,
-        email: this.user.email,
+        name: this.User.name,
+        email: this.User.email,
         image: this.uploadImage
       };
-
-      console.log("inputFields", this.inputFields);
-      console.log("windows", window);
       this.postDataMethod(
-        "http://127.0.0.1:8000/admin/update",
+        "http://127.0.0.1:8000/admin/update/" + this.User.id,
+        this.inputFields
+      );
+    },
+    changePassword() {
+      this.inputFields = {
+        password: this.user.password,
+        password_confirmation: this.user.c_password
+      };
+
+      this.postDataMethod(
+        "http://127.0.0.1:8000/admin/password/" + this.User.id,
         this.inputFields
       );
     },
     postDataSuccess(response) {
-      console.log("reponse", response);
-      location.reload();
+      const user = response.data.data;
+      (this.userName = user.name), this.$store.commit("set_User", user);
+      this.errors = [];
+      this.user.password = "";
+      this.user.c_password = "";
+      //location.reload();
     },
     postDataError(error) {
-      //this.errors = error.errors;
-      console.log("error", error);
+      this.errors = error.errors;
     },
     changeTab(val) {
       if (val == 1) {

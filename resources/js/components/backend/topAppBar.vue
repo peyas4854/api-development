@@ -67,12 +67,11 @@ export default {
   },
 
   created() {
-    console.log("top ap bar", this.User);
+    // console.log("top ap bar", this.User);
   },
   methods: {
     toogle() {
       this.$hub.$emit("emitToogle");
-      console.log("toogle");
     }
   }
 };
