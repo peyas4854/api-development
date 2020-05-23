@@ -131,15 +131,6 @@ export default {
                 message: message
             });
         },
-        authenticate($user) {
-            console.log('user', $user);
-            this.user = $user;
-            // this.isLoggedIn = true;
-            this.isLoggedIn = true;
-
-        }
-
-
 
     }
 

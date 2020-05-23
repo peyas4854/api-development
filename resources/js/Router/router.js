@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
+// import store from '../Store/store.js';
 Vue.use(VueRouter);
 
 const loadLayout = layout => () => import(`../components/layouts/${layout}.vue`)
 const loadView = view => () => import(`../views/${view}.vue`)
 const loadFront = view => () => import(`../views/front/${view}.vue`)
+
 
 
 const routes = [
@@ -15,31 +16,37 @@ const routes = [
         component: loadLayout("AdminLayout"),
         children: [{
                 path: '',
-                component: loadView("dashboard")
+                component: loadView("dashboard"),
+
             },
             {
                 path: '/product',
-                component: loadView("product")
+                component: loadView("product"),
+
             },
             {
                 path: '/review',
-                component: loadView("review")
+                component: loadView("review"),
+
             },
             {
                 path: '/profile/:id',
                 component: loadView("profile_id"),
                 name: 'profile',
+
             },
 
             // {
             //     path: '/*',
             //     component: loadView("error")
             // },
-        ]
+        ],
+
     },
     {
         path: '/index',
         component: loadLayout("FrontLayout"),
+
         children: [
 
             {
@@ -68,4 +75,5 @@ const router = new VueRouter({
     hasbang: false,
     mode: 'history',
 });
+
 export default router

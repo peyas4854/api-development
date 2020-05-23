@@ -1,17 +1,17 @@
 <template>
   <div>
     <div class="global-container">
+      <div class="image-div">
+        <img src="img/login/login.jpg" alt class="image" />
+      </div>
       <div class="card login-form">
         <div class="card-body">
-          <h3 class="card-title text-center"></h3>
-
           <div class="card-text">
-            <!--
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">Incorrect username or password.</div>-->
-
-            <!-- to error: add class "has-danger" -->
+            <div>
+              <h1>Login</h1>
+            </div>
             <div class="form-group">
-              <label for="email">Email address</label>
+              <label for="email">Email</label>
               <input
                 type="email"
                 class="form-control form-control-sm"
@@ -22,12 +22,12 @@
             </div>
             <div class="form-group">
               <label for="password">Password</label>
-              <a href="#">Forgot password?</a>
               <input type="password" class="form-control form-control-sm" v-model="user.password" />
+              <!-- <a href="#">Forgot password?</a> -->
               <p class="errors" v-if="errors.password">{{ errors.password[0] }}</p>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-block" @click="login()">Sign in</button>
+            <button class="btn btn-primary btn-block" @click="login()">Sign in</button>
 
             <div class="sign-up">
               Don't have an account?
@@ -62,7 +62,7 @@ export default {
     postDataSuccess(response) {
       console.log("response", response.data);
       location.reload();
-      this.$router.push({ path: "/" });
+      //this.$router.push({ path: "/" });
       //   if (response.status === 200) {
       //     window.reload();
       //     //console.log("response", response.data.data.user);
@@ -78,37 +78,87 @@ export default {
 };
 </script>
 
-<style scoped>
-.global-container {
+<style scoped lang="scss">
+.image-div {
   height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
-
-form {
-  padding-top: 10px;
-  font-size: 14px;
-  margin-top: 30px;
+.image-div:after {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: #00020459;
+  height: 100%;
+  width: 100%;
+}
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.login-form {
+  width: 330px;
+  position: absolute !important;
+  background-color: transparent !important;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+.card-body {
+  display: flex;
+  flex: inherit;
+  background-color: #08010170;
+  justify-content: center;
+  align-items: center;
+  padding: 80px;
 }
 
 .card-title {
   font-weight: 300;
+  color: #ffffff;
+}
+
+.card-text {
+  width: 400px;
+  h1 {
+    text-align: center;
+    color: #ffffff;
+  }
+  .form-group {
+    margin-bottom: 20px;
+    label {
+      color: #ffffff;
+    }
+    input {
+      height: 50px !important;
+    }
+  }
+  .sign-up {
+    text-align: center;
+    padding: 20px 0 0;
+    color: #ffffff;
+    a {
+      color: #ffffff !important;
+    }
+  }
+  button {
+    height: 58px;
+    background-color: #0883c5;
+    border: none !important;
+    border: none;
+    transition: 0.3s;
+  }
+  button:hover {
+    background-color: #0cdcb1;
+  }
 }
 
 .btn {
   font-size: 14px;
   margin-top: 20px;
-}
-
-.login-form {
-  width: 330px;
-  margin: 20px;
-}
-
-.sign-up {
-  text-align: center;
-  padding: 20px 0 0;
 }
 
 .alert {

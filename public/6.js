@@ -76,6 +76,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -91,7 +93,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       review: ""
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])(["User"])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])(["User"]), {
+    avg_review: function avg_review() {
+      var total = this.reviewData.reduce(function (prev, cur) {
+        return prev + cur.star;
+      }, 0);
+      return Math.round(total / this.reviewData.length);
+    }
+  }),
   created: function created() {
     console.log(["product id", this.id], ["user", this.User]);
     this.getreview("http://127.0.0.1:8000/api/products/" + this.id + "/reviews");
@@ -144,7 +153,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.flex1[data-v-07a539b8] {\r\n  flex: 1;\n}\n.flex2[data-v-07a539b8] {\r\n  flex: 2;\n}\n.card-body.review-content[data-v-07a539b8] {\r\n  border-bottom: 1px solid black;\n}\n.rating_number[data-v-07a539b8] {\r\n  height: rem;\r\n  padding: 20px;\r\n  justify-content: center;\r\n  display: flex;\r\n  align-items: center;\r\n  font-size: 40px;\r\n  font-weight: 600;\r\n  font-family: Roboto;\r\n  color: #02000a;\n}\r\n", ""]);
+exports.push([module.i, "\n.flex1[data-v-07a539b8] {\n  flex: 1;\n}\n.flex2[data-v-07a539b8] {\n  flex: 2;\n}\n.card-body.review-content[data-v-07a539b8] {\n  border-bottom: 1px solid black;\n}\n.rating_number[data-v-07a539b8] {\n  height: rem;\n  padding: 20px;\n  justify-content: center;\n  display: flex;\n  align-items: center;\n  font-size: 40px;\n  font-weight: 600;\n  font-family: Roboto;\n  color: #02000a;\n}\n.checked[data-v-07a539b8] {\n  color: orange;\n}\n", ""]);
 
 // exports
 
@@ -217,7 +226,7 @@ var render = function() {
                   _c("div", { staticClass: "top d-flex flex-row" }, [
                     _c("div", { staticClass: "flex1" }, [
                       _c("div", { staticClass: "rating_number" }, [
-                        _vm._v("3.5/5")
+                        _vm._v(_vm._s(_vm.avg_review) + "/5")
                       ])
                     ]),
                     _vm._v(" "),
@@ -249,15 +258,25 @@ var render = function() {
                     "div",
                     { key: i, staticClass: "card-body review-content" },
                     [
-                      _c("p", [_vm._v(_vm._s(reviews.review))]),
-                      _vm._v(" "),
-                      _c("p", [_vm._v("By " + _vm._s(reviews.customer_name))]),
-                      _vm._v(" "),
                       _c("div", { staticClass: "d-flex" }, [
-                        _c("p", { staticClass: "flex1" }, [_vm._v("rating")]),
+                        _c(
+                          "p",
+                          { staticClass: "flex1" },
+                          _vm._l(reviews.star, function(star, i) {
+                            return _c("span", {
+                              key: i,
+                              staticClass: "fa fa-star checked"
+                            })
+                          }),
+                          0
+                        ),
                         _vm._v(" "),
                         _c("p", {}, [_vm._v(_vm._s(reviews.created_at))])
-                      ])
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [_vm._v(_vm._s(reviews.review))]),
+                      _vm._v(" "),
+                      _c("p", [_vm._v("By " + _vm._s(reviews.customer_name))])
                     ]
                   )
                 }),

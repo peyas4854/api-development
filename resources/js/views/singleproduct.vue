@@ -11,7 +11,7 @@
             <h3>Rating</h3>
             <div class="top d-flex flex-row">
               <div class="flex1">
-                <div class="rating_number">3.5/5</div>
+                <div class="rating_number">{{ avg_review }}/5</div>
               </div>
               <p class="flex2">name</p>
               <div class="flex1">
@@ -27,13 +27,15 @@
       <div class="product-review">
         <div class="card">
           <div class="card-body review-content" v-for="(reviews,i) in reviewData" :key="i">
-            <p>{{ reviews.review}}</p>
-            <p>By {{ reviews.customer_name}}</p>
-
             <div class="d-flex">
-              <p class="flex1">rating</p>
+              <p class="flex1">
+                <span class="fa fa-star checked" v-for="(star,i) in reviews.star" :key="i"></span>
+              </p>
               <p class>{{ reviews.created_at }}</p>
             </div>
+
+            <p>{{ reviews.review}}</p>
+            <p>By {{ reviews.customer_name}}</p>
           </div>
         </div>
       </div>
@@ -73,7 +75,14 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["User"])
+    ...mapGetters(["User"]),
+    avg_review() {
+      let total = this.reviewData.reduce(function(prev, cur) {
+        return prev + cur.star;
+      }, 0);
+
+      return Math.round(total / this.reviewData.length);
+    }
   },
   created() {
     console.log(["product id", this.id], ["user", this.User]);
@@ -147,5 +156,8 @@ export default {
   font-weight: 600;
   font-family: Roboto;
   color: #02000a;
+}
+.checked {
+  color: orange;
 }
 </style>

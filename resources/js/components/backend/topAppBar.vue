@@ -42,9 +42,9 @@
                         Profile
                       </router-link>
                     </li>
-                    <li class="list-group-item">
+                    <li class="list-group-item" @click="logout()">
                       <i class="fa fa-sign-out pr-1"></i>
-                      <a href="/logout">Logout</a>
+                      logout
                     </li>
                   </ul>
                 </div>
@@ -72,6 +72,23 @@ export default {
   methods: {
     toogle() {
       this.$hub.$emit("emitToogle");
+    },
+    logout() {
+      this.axiosGet(
+        "http://127.0.0.1:8000/logout",
+        function(response) {
+          console.log("paici response ", response.status);
+          if (response.status === 200) {
+            // this.$router.push({
+            //   path: "/login"
+            // });
+            location.reload();
+          }
+        },
+        function(response) {
+          console.log("paici 2", response);
+        }
+      );
     }
   }
 };

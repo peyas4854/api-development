@@ -23,14 +23,10 @@
         >Review</router-link>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="/logout">Logout</a>
-      </li>
-      <li class="nav-item">
         <a class="nav-link" href="#">Settings</a>
       </li>
-
       <li class="nav-item">
-        <a class="nav-link" @click="logout()">Logout</a>
+        <a class="nav-link" href="/logout">Logout</a>
       </li>
     </ul>
   </div>
@@ -39,65 +35,9 @@
 <script>
 import commonMethods from "../../helper/commonMethods";
 export default {
-  extends: commonMethods,
-  methods: {
-    logout() {
-      this.axiosGet(
-        "http://127.0.0.1:8000/logout",
-        function(response) {
-          console.log("paici response ", response.status);
-          if (response.status === 200) {
-            this.$router.push({
-              path: "/login"
-            });
-          }
-        },
-        function(response) {
-          console.log("paici 2", response);
-        }
-      );
-    }
-  }
+  extends: commonMethods
 };
 </script>
 
 <style scoped lang="scss">
-img.logo {
-  width: 80px;
-  height: 69px;
-}
-.logo_div {
-  border-bottom: 1px solid #ece5e51a;
-  text-align: center;
-}
-.sidebar_app {
-  background-color: #505463;
-  position: fixed;
-  width: 182px !important;
-  height: 100vh !important;
-  z-index: 99 !important;
-}
-.nav-link {
-  display: block;
-  padding: 25px;
-  margin-bottom: 8px;
-  text-align: center;
-  transition: 0.3s;
-  background-color: red;
-  /* color: blue!important; */
-  /* background-color: #312b2b!important; */
-}
-a {
-  color: #ffffff !important;
-  font-family: Roboto;
-  font-size: 15px;
-}
-.active_sidebar {
-  color: #00ffc4 !important;
-}
-.nav-item:hover {
-  a {
-    color: #00ffc4 !important;
-  }
-}
 </style>

@@ -13,7 +13,12 @@
               <h4>{{ products.name }}</h4>
               <p class="price">${{ products.price }}</p>
               <div class="rating">
-                <span class="fa fa-star checked" v-for="(rating,i) in products.avg_rating" :key="i"></span>
+                <span
+                  class="fa fa-star checked"
+                  v-for="rating in products.avg_rating"
+                  :key="rating"
+                ></span>
+                <span v-if=" products.avg_rating !== 0 ">({{ products.total_review}})</span>
               </div>
 
               <button>Add to Cart</button>
@@ -49,14 +54,11 @@ export default {
   computed: {
     filterProduct() {
       if (this.productSearchBy !== "") {
-        console.log(typeof this.product);
-        console.log("val", this.productSearchBy);
         return this.product.filter(c =>
           c.name
             .toLowerCase()
             .includes(this.productSearchBy.trim().toLowerCase())
         );
-        console.log("result", result);
       } else {
         return this.product;
       }
@@ -132,5 +134,8 @@ a:hover {
   justify-content: center;
   align-items: center;
   height: 40vh;
+}
+.rating {
+  min-height: 22px;
 }
 </style>
