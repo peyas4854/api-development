@@ -4,6 +4,7 @@
 
 use App\Model\Product;
 use App\Model\Review;
+use App\User;
 use Faker\Generator as Faker;
 
 $factory->define(Review::class, function (Faker $faker) {
@@ -11,7 +12,9 @@ $factory->define(Review::class, function (Faker $faker) {
         'product_id' => function () {
             return product::all()->random();
         },
-        'customer' => $faker->name,
+        'user_id' => function () {
+            return user::all()->random();
+        },
         'review' => $faker->paragraph,
         'star' => $faker->numberBetween(1, 5),
 

@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// import store from '../Store/store.js';
+import store from '../Store/store.js';
 Vue.use(VueRouter);
 
 const loadLayout = layout => () => import(`../components/layouts/${layout}.vue`)
@@ -12,7 +12,7 @@ const loadFront = view => () => import(`../views/front/${view}.vue`)
 const routes = [
 
     {
-        path: '/',
+        path: '/dashboard',
         component: loadLayout("AdminLayout"),
         children: [{
                 path: '',
@@ -44,8 +44,9 @@ const routes = [
 
     },
     {
-        path: '/index',
+        path: '/',
         component: loadLayout("FrontLayout"),
+
 
         children: [
 
@@ -70,10 +71,29 @@ const routes = [
 
 ]
 
+
 const router = new VueRouter({
     routes,
     hasbang: false,
     mode: 'history',
 });
+// router.beforeEach((to, from, next) => {
+//     //console.log('Global -- beforeEach - fired')
 
+//     // re-route
+//     if (to.path === '/dashboard') {
+//         console.log('Global -- go index')
+//         console.log('pp', typeof (store.getters))
+//         console.log('pp', store.state.user)
+//         next('/')
+//     }
+//     // Abort navigation based on some criteria:
+//     else if (to.path === '/dashboard' && store.state.user.userType == 'Admin') {
+//         console.log('Global -- admin')
+
+//         next('/dashboard')
+//     } else {
+//         next()
+//     }
+// })
 export default router

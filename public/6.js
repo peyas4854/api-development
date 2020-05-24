@@ -78,6 +78,86 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -90,8 +170,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     return {
       id: this.$route.params.id,
       reviewData: "",
-      review: ""
+      review: "",
+      star: "",
+      errors: [],
+      commentsToShow: 2,
+      totalComments: 0
     };
+  },
+  mounted: function mounted() {
+    //this.totalComments = this.reviewData.length;
+    console.log("total", this.reviewData.length);
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])(["User"]), {
     avg_review: function avg_review() {
@@ -120,20 +208,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     submitReview: function submitReview() {
       var instance = this;
       instance.inputField = {
-        customer: this.User.name,
+        user_id: this.User.id,
         review: this.review,
-        star: 3
+        star: this.star
       };
       console.log("input", instance.inputField);
       instance.postDataMethod("http://127.0.0.1:8000/api/products/" + this.id + "/reviews", this.inputField);
     },
     postDataSuccess: function postDataSuccess(response) {
       this.review = "";
+      this.star = "";
       console.log("reponse", response);
       this.getreview("http://127.0.0.1:8000/api/products/" + this.id + "/reviews");
     },
     postDataError: function postDataError(error) {
-      //this.errors = error.errors;
+      this.errors = error.errors;
       console.log("error", error);
     }
   }
@@ -249,87 +338,299 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "product-review" }, [
+            _vm.commentsToShow < _vm.reviewData.length ||
+            _vm.reviewData.length > _vm.commentsToShow
+              ? _c("h2", { staticClass: "text-left" }, [
+                  _vm._v("\n      Total show\n      "),
+                  _c("span", { staticClass: "badge badge-secondary" }, [
+                    _vm._v(_vm._s(_vm.commentsToShow))
+                  ])
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("div", { staticClass: "product-review mb-1" }, [
               _c(
                 "div",
                 { staticClass: "card" },
-                _vm._l(_vm.reviewData, function(reviews, i) {
-                  return _c(
-                    "div",
-                    { key: i, staticClass: "card-body review-content" },
-                    [
-                      _c("div", { staticClass: "d-flex" }, [
-                        _c(
-                          "p",
-                          { staticClass: "flex1" },
-                          _vm._l(reviews.star, function(star, i) {
-                            return _c("span", {
-                              key: i,
-                              staticClass: "fa fa-star checked"
-                            })
-                          }),
-                          0
-                        ),
-                        _vm._v(" "),
-                        _c("p", {}, [_vm._v(_vm._s(reviews.created_at))])
-                      ]),
-                      _vm._v(" "),
-                      _c("p", [_vm._v(_vm._s(reviews.review))]),
-                      _vm._v(" "),
-                      _c("p", [_vm._v("By " + _vm._s(reviews.customer_name))])
-                    ]
-                  )
+                _vm._l(_vm.commentsToShow, function(commentIndex, i) {
+                  return commentIndex < _vm.reviewData.length
+                    ? _c(
+                        "div",
+                        { key: i, staticClass: "card-body review-content" },
+                        [
+                          _c("div", { staticClass: "d-flex" }, [
+                            _c(
+                              "p",
+                              { staticClass: "flex1" },
+                              _vm._l(
+                                _vm.reviewData[commentIndex].star,
+                                function(star, i) {
+                                  return _c("span", {
+                                    key: i,
+                                    staticClass: "fa fa-star checked"
+                                  })
+                                }
+                              ),
+                              0
+                            ),
+                            _vm._v(" "),
+                            _c("p", {}, [
+                              _vm._v(
+                                _vm._s(_vm.reviewData[commentIndex].created_at)
+                              )
+                            ])
+                          ]),
+                          _vm._v(" "),
+                          _c("p", [
+                            _vm._v(_vm._s(_vm.reviewData[commentIndex].review))
+                          ]),
+                          _vm._v(" "),
+                          _c("p", [
+                            _vm._v(
+                              "By " +
+                                _vm._s(
+                                  _vm.reviewData[commentIndex].user.userName
+                                )
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _vm.User.userType == "Admin" ||
+                          _vm.User.id == _vm.reviewData[commentIndex].user.id
+                            ? _c("div", { staticClass: "mt-2" }, [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-outline-primary btn-sm mr-2",
+                                    attrs: { type: "button" }
+                                  },
+                                  [_vm._v("Edit")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-outline-danger btn-sm",
+                                    attrs: { type: "button" }
+                                  },
+                                  [_vm._v("Delete")]
+                                )
+                              ])
+                            : _vm._e()
+                        ]
+                      )
+                    : _vm._e()
                 }),
                 0
               )
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "create-review" }, [
+            _vm.commentsToShow < _vm.reviewData.length ||
+            _vm.reviewData.length > _vm.commentsToShow
+              ? _c("div", { staticClass: "text-center p-3" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-outline-primary btn-lg",
+                      on: {
+                        click: function($event) {
+                          _vm.commentsToShow += 3
+                        }
+                      }
+                    },
+                    [_vm._v("Show more")]
+                  )
+                ])
+              : _vm._e(),
+            _vm._v(" "),
+            _c("div", { staticClass: "create-review mb-3" }, [
               _c("div", { staticClass: "card" }, [
                 _c("div", { staticClass: "card-body" }, [
-                  _c("label", { attrs: { for: "description" } }, [
-                    _vm._v("Review")
+                  _c("div", { staticClass: "mb-2" }, [
+                    _c("label", { attrs: { for: "description" } }, [
+                      _vm._v("Review")
+                    ]),
+                    _vm._v(" "),
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.review,
+                          expression: "review"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        placeholder: "Want to give a review ..."
+                      },
+                      domProps: { value: _vm.review },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.review = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _vm.errors.review
+                      ? _c("p", { staticClass: "errors" }, [
+                          _vm._v(_vm._s(_vm.errors.review[0]))
+                        ])
+                      : _vm._e()
                   ]),
                   _vm._v(" "),
-                  _c("textarea", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.review,
-                        expression: "review"
+                  _c("div", { staticClass: "form-check-inline" }, [
+                    _c("label", { staticClass: "form-check-label" }, [
+                      _vm._v("Rating:")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check-inline" }, [
+                    _c("label", { staticClass: "form-check-label" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.star,
+                            expression: "star"
+                          }
+                        ],
+                        staticClass: "form-check-input",
+                        attrs: { type: "radio", value: "1" },
+                        domProps: { checked: _vm._q(_vm.star, "1") },
+                        on: {
+                          change: function($event) {
+                            _vm.star = "1"
+                          }
+                        }
+                      }),
+                      _vm._v(" 1\n            ")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check-inline" }, [
+                    _c("label", { staticClass: "form-check-label" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.star,
+                            expression: "star"
+                          }
+                        ],
+                        staticClass: "form-check-input",
+                        attrs: { type: "radio", value: "2" },
+                        domProps: { checked: _vm._q(_vm.star, "2") },
+                        on: {
+                          change: function($event) {
+                            _vm.star = "2"
+                          }
+                        }
+                      }),
+                      _vm._v(" 2\n            ")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check-inline" }, [
+                    _c("label", { staticClass: "form-check-label" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.star,
+                            expression: "star"
+                          }
+                        ],
+                        staticClass: "form-check-input",
+                        attrs: { type: "radio", value: "3" },
+                        domProps: { checked: _vm._q(_vm.star, "3") },
+                        on: {
+                          change: function($event) {
+                            _vm.star = "3"
+                          }
+                        }
+                      }),
+                      _vm._v(" 3\n            ")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check-inline" }, [
+                    _c("label", { staticClass: "form-check-label" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.star,
+                            expression: "star"
+                          }
+                        ],
+                        staticClass: "form-check-input",
+                        attrs: { type: "radio", value: "4" },
+                        domProps: { checked: _vm._q(_vm.star, "4") },
+                        on: {
+                          change: function($event) {
+                            _vm.star = "4"
+                          }
+                        }
+                      }),
+                      _vm._v(" 4\n            ")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-check-inline" }, [
+                    _c("label", { staticClass: "form-check-label" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.star,
+                            expression: "star"
+                          }
+                        ],
+                        staticClass: "form-check-input",
+                        attrs: { type: "radio", value: "5" },
+                        domProps: { checked: _vm._q(_vm.star, "5") },
+                        on: {
+                          change: function($event) {
+                            _vm.star = "5"
+                          }
+                        }
+                      }),
+                      _vm._v(" 5\n            ")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _vm.errors.star
+                    ? _c("p", { staticClass: "errors" }, [
+                        _vm._v(_vm._s(_vm.errors.star[0]))
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-footer" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary btn-sm",
+                      attrs: { type: "button" },
+                      on: {
+                        click: function($event) {
+                          return _vm.submitReview()
+                        }
                       }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      type: "text",
-                      placeholder: "Want to give a review ..."
                     },
-                    domProps: { value: _vm.review },
-                    on: {
-                      keypress: function($event) {
-                        if (
-                          !$event.type.indexOf("key") &&
-                          _vm._k(
-                            $event.keyCode,
-                            "enter",
-                            13,
-                            $event.key,
-                            "Enter"
-                          )
-                        ) {
-                          return null
-                        }
-                        return _vm.submitReview()
-                      },
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.review = $event.target.value
-                      }
-                    }
-                  })
+                    [_vm._v("Submit")]
+                  )
                 ])
               ])
             ])

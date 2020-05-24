@@ -2030,7 +2030,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2369,26 +2368,6 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -7202,7 +7181,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.navbar[data-v-a45d06a4] {\n  position: fixed !important;\n  top: 0px;\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n  justify-content: space-between;\n  padding: 0.5rem 1rem;\n  z-index: 999;\n  width: 100%;\n  box-shadow: 4px 5px 5px 6px #e6dbdb40;\n  margin-bottom: 12px !important;\n  /* padding-bottom: 16px; */\n  height: 6em !important;\n}\n.avatar[data-v-a45d06a4] {\n  vertical-align: middle;\n  width: 50px;\n  height: 50px;\n  border-radius: 50%;\n}\n.image[data-v-a45d06a4] {\n  position: relative;\n  left: 10em;\n}\n", ""]);
+exports.push([module.i, "\n.navbar[data-v-a45d06a4] {\n  position: fixed !important;\n  top: 0px;\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n  justify-content: space-between;\n  padding: 0.5rem 1rem;\n  z-index: 999;\n  width: 100%;\n  box-shadow: 4px 5px 5px 6px #e6dbdb40;\n  margin-bottom: 12px !important;\n  /* padding-bottom: 16px; */\n  height: 6em !important;\n}\ninput.form-control.mr-sm-2[data-v-a45d06a4] {\n  width: 500px;\n  height: 50px;\n  background-color: #ffffff;\n}\n", ""]);
 
 // exports
 
@@ -39117,11 +39096,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [_c("h3", [_vm._v("app vue")]), _vm._v(" "), _c("router-view")],
-    1
-  )
+  return _c("div", [_c("router-view")], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -39665,7 +39640,14 @@ var render = function() {
             attrs: { id: "navbarSupportedContent" }
           },
           [
-            _vm._m(0),
+            _c("ul", { staticClass: "navbar-nav mr-auto" }, [
+              _c(
+                "li",
+                { staticClass: "nav-item active" },
+                [_c("router-link", { attrs: { to: "/" } }, [_vm._v("Home")])],
+                1
+              )
+            ]),
             _vm._v(" "),
             _c("ul", { staticClass: "navbar-nav ml-auto" }, [
               _c("li", { staticClass: "nav-item" }, [
@@ -39704,68 +39686,7 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("ul", { staticClass: "navbar-nav mr-auto" }, [
-      _c("li", { staticClass: "nav-item active" }, [
-        _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-          _vm._v("\n            Home\n            "),
-          _c("span", { staticClass: "sr-only" }, [_vm._v("(current)")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("li", { staticClass: "nav-item" }, [
-        _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-          _vm._v("Link")
-        ])
-      ]),
-      _vm._v(" "),
-      _c("li", { staticClass: "nav-item dropdown" }, [
-        _c(
-          "a",
-          {
-            staticClass: "nav-link dropdown-toggle",
-            attrs: {
-              href: "#",
-              id: "navbarDropdown",
-              role: "button",
-              "data-toggle": "dropdown",
-              "aria-haspopup": "true",
-              "aria-expanded": "false"
-            }
-          },
-          [_vm._v("Dropdown")]
-        ),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "dropdown-menu",
-            attrs: { "aria-labelledby": "navbarDropdown" }
-          },
-          [
-            _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-              _vm._v("Action")
-            ]),
-            _vm._v(" "),
-            _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-              _vm._v("Another action")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "dropdown-divider" }),
-            _vm._v(" "),
-            _c("a", { staticClass: "dropdown-item", attrs: { href: "#" } }, [
-              _vm._v("Something else here")
-            ])
-          ]
-        )
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -56236,8 +56157,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var _Store_store_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Store/store.js */ "./resources/js/Store/store.js");
 
- // import store from '../Store/store.js';
+
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
 
@@ -56260,7 +56182,7 @@ var loadFront = function loadFront(view) {
 };
 
 var routes = [{
-  path: '/',
+  path: '/dashboard',
   component: loadLayout("AdminLayout"),
   children: [{
     path: '',
@@ -56281,7 +56203,7 @@ var routes = [{
   // },
   ]
 }, {
-  path: '/index',
+  path: '/',
   component: loadLayout("FrontLayout"),
   children: [{
     path: '',
@@ -56299,7 +56221,24 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   routes: routes,
   hasbang: false,
   mode: 'history'
-});
+}); // router.beforeEach((to, from, next) => {
+//     //console.log('Global -- beforeEach - fired')
+//     // re-route
+//     if (to.path === '/dashboard') {
+//         console.log('Global -- go index')
+//         console.log('pp', typeof (store.getters))
+//         console.log('pp', store.state.user)
+//         next('/')
+//     }
+//     // Abort navigation based on some criteria:
+//     else if (to.path === '/dashboard' && store.state.user.userType == 'Admin') {
+//         console.log('Global -- admin')
+//         next('/dashboard')
+//     } else {
+//         next()
+//     }
+// })
+
 /* harmony default export */ __webpack_exports__["default"] = (router);
 
 /***/ }),

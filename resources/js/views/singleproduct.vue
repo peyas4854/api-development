@@ -24,9 +24,16 @@
           </div>
         </div>
       </div>
-      <div class="product-review">
+      <h2
+        class="text-left"
+        v-if="commentsToShow < reviewData.length || reviewData.length > commentsToShow "
+      >
+        Total show
+        <span class="badge badge-secondary">{{ commentsToShow}}</span>
+      </h2>
+      <div class="product-review mb-1">
         <div class="card">
-          <div class="card-body review-content" v-for="(reviews,i) in reviewData" :key="i">
+          <!-- <div class="card-body review-content" v-for="(reviews,i) in reviewData" :key="i">
             <div class="d-flex">
               <p class="flex1">
                 <span class="fa fa-star checked" v-for="(star,i) in reviews.star" :key="i"></span>
@@ -35,22 +42,95 @@
             </div>
 
             <p>{{ reviews.review}}</p>
-            <p>By {{ reviews.customer_name}}</p>
+            <p>By {{ reviews.user.userName}}</p>
+            <div class="mt-2" v-if="User.userType == 'Admin' || User.id ==reviews.user.id ">
+              <button type="button" class="btn btn-outline-primary btn-sm mr-2">Edit</button>
+              <button type="button" class="btn btn-outline-danger btn-sm">Delete</button>
+            </div>
+          </div>-->
+          <div
+            class="card-body review-content"
+            v-if="commentIndex < reviewData.length"
+            v-for="(commentIndex,i) in commentsToShow"
+            :key="i"
+          >
+            <div class="d-flex">
+              <p class="flex1">
+                <span
+                  class="fa fa-star checked"
+                  v-for="(star,i) in reviewData[commentIndex].star"
+                  :key="i"
+                ></span>
+              </p>
+              <p class>{{ reviewData[commentIndex].created_at }}</p>
+            </div>
+            <p>{{ reviewData[commentIndex].review}}</p>
+            <p>By {{ reviewData[commentIndex].user.userName}}</p>
+            <div
+              class="mt-2"
+              v-if="User.userType == 'Admin' || User.id ==reviewData[commentIndex].user.id "
+            >
+              <button type="button" class="btn btn-outline-primary btn-sm mr-2">Edit</button>
+              <button type="button" class="btn btn-outline-danger btn-sm">Delete</button>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="create-review">
+      <div
+        class="text-center p-3"
+        v-if="commentsToShow < reviewData.length || reviewData.length > commentsToShow "
+      >
+        <button @click="commentsToShow += 3" class="btn btn-outline-primary btn-lg">Show more</button>
+      </div>
+
+      <div class="create-review mb-3">
         <div class="card">
           <div class="card-body">
-            <label for="description">Review</label>
-            <textarea
-              type="text"
-              class="form-control"
-              placeholder="Want to give a review ..."
-              v-model="review"
-              @keypress.enter="submitReview()"
-            />
+            <div class="mb-2">
+              <label for="description">Review</label>
+              <textarea
+                type="text"
+                class="form-control"
+                placeholder="Want to give a review ..."
+                v-model="review"
+              />
+              <p class="errors" v-if="errors.review">{{ errors.review[0] }}</p>
+            </div>
+
+            <div class="form-check-inline">
+              <label class="form-check-label">Rating:</label>
+            </div>
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" v-model="star" value="1" /> 1
+              </label>
+            </div>
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" v-model="star" value="2" /> 2
+              </label>
+            </div>
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" v-model="star" value="3" /> 3
+              </label>
+            </div>
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" v-model="star" value="4" /> 4
+              </label>
+            </div>
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" v-model="star" value="5" /> 5
+              </label>
+            </div>
+            <p class="errors" v-if="errors.star">{{ errors.star[0] }}</p>
+          </div>
+
+          <div class="card-footer">
+            <button type="button" class="btn btn-primary btn-sm" @click="submitReview()">Submit</button>
           </div>
         </div>
       </div>
@@ -71,8 +151,17 @@ export default {
     return {
       id: this.$route.params.id,
       reviewData: "",
-      review: ""
+      review: "",
+      star: "",
+      errors: [],
+      commentsToShow: 2,
+      totalComments: 0
     };
+  },
+  mounted() {
+    //this.totalComments = this.reviewData.length;
+
+    console.log("total", this.reviewData.length);
   },
   computed: {
     ...mapGetters(["User"]),
@@ -100,6 +189,7 @@ export default {
         function(response) {
           console.log("paici response ", response);
           instance.reviewData = response.data.data;
+
           const url = "https://dummyimage.com/vga";
         },
         function(response) {
@@ -111,9 +201,9 @@ export default {
       let instance = this;
 
       instance.inputField = {
-        customer: this.User.name,
+        user_id: this.User.id,
         review: this.review,
-        star: 3
+        star: this.star
       };
       console.log("input", instance.inputField);
       instance.postDataMethod(
@@ -123,13 +213,14 @@ export default {
     },
     postDataSuccess(response) {
       this.review = "";
+      this.star = "";
       console.log("reponse", response);
       this.getreview(
         "http://127.0.0.1:8000/api/products/" + this.id + "/reviews"
       );
     },
     postDataError(error) {
-      //this.errors = error.errors;
+      this.errors = error.errors;
       console.log("error", error);
     }
   }

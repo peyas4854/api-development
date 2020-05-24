@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Review;
-use App\Model\Product;
-use App\Model\BaseModel;
-use Illuminate\Http\Request;
-use App\Http\Resources\ReviewResource;
 use App\Http\Controllers\API\BaseController;
+use App\Http\Resources\ReviewResource;
+use App\Model\Product;
+use App\Model\Review;
+use Illuminate\Http\Request;
 
 class ReviewController extends BaseController
 {
@@ -24,9 +23,9 @@ class ReviewController extends BaseController
     public function index(Product $product)
     {
         return $this->sendResponse(
-        ReviewResource::collection($product->reviews),
-        'Review retrived successfully'
-         );
+            ReviewResource::collection($product->reviews),
+            'Review retrived successfully'
+        );
     }
 
     /**
@@ -45,31 +44,30 @@ class ReviewController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Product $product,Request $request)
+    public function store(Product $product, Request $request)
     {
 
 // dd($request->all());
-        $this->validate($request,[
-            'customer'=>'required',
-            'review'=>'required',
-            'star'=>'required|integer|between:1,5',
+        $this->validate($request, [
+            'user_id' => 'required',
+            'review' => 'required',
+            'star' => 'required|integer|between:1,5',
         ]);
 
-        $review=[
-            'product_id'=>$product->id,
-            'customer'=>$request->customer,
-            'review'=>$request->review,
-            'star'=>$request->star,
-             ];
-            /* store method in base model*/
-            $data =Review::store($review);
+        $review = [
+            'product_id' => $product->id,
+            'user_id' => $request->user_id,
+            'review' => $request->review,
+            'star' => $request->star,
+        ];
+        /* store method in base model*/
+        $data = Review::store($review);
 
-
-            if($data){
-                return $this->sendResponse(new ReviewResource($data),'Review Store Successfully.');
-            }else{
-                return $this->sendError([],'Something Went Wrong!.');
-            }
+        if ($data) {
+            return $this->sendResponse(new ReviewResource($data), 'Review Store Successfully.');
+        } else {
+            return $this->sendError([], 'Something Went Wrong!.');
+        }
     }
 
     /**
@@ -78,10 +76,10 @@ class ReviewController extends BaseController
      * @param  \App\Model\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product,Review $review)
+    public function show(Product $product, Review $review)
     {
 
-        return $this->sendResponse(new ReviewResource($review),'Review retrived successfully');
+        return $this->sendResponse(new ReviewResource($review), 'Review retrived successfully');
     }
 
     /**
@@ -102,27 +100,27 @@ class ReviewController extends BaseController
      * @param  \App\Model\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Product $product, Review $review)
+    public function update(Request $request, Product $product, Review $review)
     {
 
         /*  validation make by validate class*/
-        $this->validate($request,[
-            'customer'=>'required',
-            'review'=>'required',
-            'star'=>'required|integer|between:1,5',
+        $this->validate($request, [
+            'user_id' => 'required',
+            'review' => 'required',
+            'star' => 'required|integer|between:1,5',
         ]);
         /* product_id get by Product $product & insert by relation. */
         $review->update([
-            'customer'=>$request->customer,
-            'review'=>$request->review,
-            'star'=>$request->star,
-             ]);
+            'user_id' => $request->user_id,
+            'review' => $request->review,
+            'star' => $request->star,
+        ]);
 
-            if($review){
-                return $this->sendResponse(new ReviewResource($review),'Review Updated Successfully.');
-            }else{
-                return $this->sendError([],'Something Went Wrong!.');
-            }
+        if ($review) {
+            return $this->sendResponse(new ReviewResource($review), 'Review Updated Successfully.');
+        } else {
+            return $this->sendError([], 'Something Went Wrong!.');
+        }
     }
 
     /**
@@ -131,10 +129,10 @@ class ReviewController extends BaseController
      * @param  \App\Model\Review  $review
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product,Review $review)
+    public function destroy(Product $product, Review $review)
     {
 
         $review->delete();
-        return $this->sendResponse([],'Review deleted successfully');
+        return $this->sendResponse([], 'Review deleted successfully');
     }
 }
