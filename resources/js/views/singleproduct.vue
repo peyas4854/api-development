@@ -24,16 +24,13 @@
           </div>
         </div>
       </div>
-      <h2
-        class="text-left"
-        v-if="commentsToShow < reviewData.length || reviewData.length > commentsToShow "
-      >
+      <h2 class="text-left" v-if="lodeMore <= reviewData.length ">
         Total show
-        <span class="badge badge-secondary">{{ commentsToShow}}</span>
+        <span class="badge badge-secondary">{{ filterReview.length}}</span>
       </h2>
       <div class="product-review mb-1">
         <div class="card">
-          <!-- <div class="card-body review-content" v-for="(reviews,i) in reviewData" :key="i">
+          <div class="card-body review-content" v-for="(reviews,i) in filterReview" :key="i">
             <div class="d-flex">
               <p class="flex1">
                 <span class="fa fa-star checked" v-for="(star,i) in reviews.star" :key="i"></span>
@@ -47,41 +44,11 @@
               <button type="button" class="btn btn-outline-primary btn-sm mr-2">Edit</button>
               <button type="button" class="btn btn-outline-danger btn-sm">Delete</button>
             </div>
-          </div>-->
-          <div
-            class="card-body review-content"
-            v-if="commentIndex < reviewData.length"
-            v-for="(commentIndex,i) in commentsToShow"
-            :key="i"
-          >
-            <div class="d-flex">
-              <p class="flex1">
-                <span
-                  class="fa fa-star checked"
-                  v-for="(star,i) in reviewData[commentIndex].star"
-                  :key="i"
-                ></span>
-              </p>
-              <p class>{{ reviewData[commentIndex].created_at }}</p>
-            </div>
-            <p>{{ reviewData[commentIndex].review}}</p>
-            <p>By {{ reviewData[commentIndex].user.userName}}</p>
-            <div
-              class="mt-2"
-              v-if="User.userType == 'Admin' || User.id ==reviewData[commentIndex].user.id "
-            >
-              <button type="button" class="btn btn-outline-primary btn-sm mr-2">Edit</button>
-              <button type="button" class="btn btn-outline-danger btn-sm">Delete</button>
-            </div>
           </div>
         </div>
       </div>
-
-      <div
-        class="text-center p-3"
-        v-if="commentsToShow < reviewData.length || reviewData.length > commentsToShow "
-      >
-        <button @click="commentsToShow += 3" class="btn btn-outline-primary btn-lg">Show more</button>
+      <div class="text-center p-3" v-if="lodeMore <= reviewData.length ">
+        <button @click="lodeMore +=1" class="btn btn-outline-primary btn-lg">Show more</button>
       </div>
 
       <div class="create-review mb-3">
@@ -154,14 +121,9 @@ export default {
       review: "",
       star: "",
       errors: [],
-      commentsToShow: 2,
-      totalComments: 0
-    };
-  },
-  mounted() {
-    //this.totalComments = this.reviewData.length;
 
-    console.log("total", this.reviewData.length);
+      lodeMore: 2
+    };
   },
   computed: {
     ...mapGetters(["User"]),
@@ -171,6 +133,14 @@ export default {
       }, 0);
 
       return Math.round(total / this.reviewData.length);
+    },
+
+    filterReview() {
+      let setLength = 2;
+      let totalLength = this.reviewData.slice(0, this.lodeMore);
+
+      console.log("result", totalLength);
+      return totalLength;
     }
   },
   created() {

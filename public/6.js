@@ -125,39 +125,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -173,13 +140,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       review: "",
       star: "",
       errors: [],
-      commentsToShow: 2,
-      totalComments: 0
+      lodeMore: 2
     };
-  },
-  mounted: function mounted() {
-    //this.totalComments = this.reviewData.length;
-    console.log("total", this.reviewData.length);
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])(["User"]), {
     avg_review: function avg_review() {
@@ -187,6 +149,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return prev + cur.star;
       }, 0);
       return Math.round(total / this.reviewData.length);
+    },
+    filterReview: function filterReview() {
+      var setLength = 2;
+      var totalLength = this.reviewData.slice(0, this.lodeMore);
+      console.log("result", totalLength);
+      return totalLength;
     }
   }),
   created: function created() {
@@ -338,12 +306,11 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm.commentsToShow < _vm.reviewData.length ||
-            _vm.reviewData.length > _vm.commentsToShow
+            _vm.lodeMore <= _vm.reviewData.length
               ? _c("h2", { staticClass: "text-left" }, [
                   _vm._v("\n      Total show\n      "),
                   _c("span", { staticClass: "badge badge-secondary" }, [
-                    _vm._v(_vm._s(_vm.commentsToShow))
+                    _vm._v(_vm._s(_vm.filterReview.length))
                   ])
                 ])
               : _vm._e(),
@@ -352,82 +319,62 @@ var render = function() {
               _c(
                 "div",
                 { staticClass: "card" },
-                _vm._l(_vm.commentsToShow, function(commentIndex, i) {
-                  return commentIndex < _vm.reviewData.length
-                    ? _c(
-                        "div",
-                        { key: i, staticClass: "card-body review-content" },
-                        [
-                          _c("div", { staticClass: "d-flex" }, [
+                _vm._l(_vm.filterReview, function(reviews, i) {
+                  return _c(
+                    "div",
+                    { key: i, staticClass: "card-body review-content" },
+                    [
+                      _c("div", { staticClass: "d-flex" }, [
+                        _c(
+                          "p",
+                          { staticClass: "flex1" },
+                          _vm._l(reviews.star, function(star, i) {
+                            return _c("span", {
+                              key: i,
+                              staticClass: "fa fa-star checked"
+                            })
+                          }),
+                          0
+                        ),
+                        _vm._v(" "),
+                        _c("p", {}, [_vm._v(_vm._s(reviews.created_at))])
+                      ]),
+                      _vm._v(" "),
+                      _c("p", [_vm._v(_vm._s(reviews.review))]),
+                      _vm._v(" "),
+                      _c("p", [_vm._v("By " + _vm._s(reviews.user.userName))]),
+                      _vm._v(" "),
+                      _vm.User.userType == "Admin" ||
+                      _vm.User.id == reviews.user.id
+                        ? _c("div", { staticClass: "mt-2" }, [
                             _c(
-                              "p",
-                              { staticClass: "flex1" },
-                              _vm._l(
-                                _vm.reviewData[commentIndex].star,
-                                function(star, i) {
-                                  return _c("span", {
-                                    key: i,
-                                    staticClass: "fa fa-star checked"
-                                  })
-                                }
-                              ),
-                              0
+                              "button",
+                              {
+                                staticClass:
+                                  "btn btn-outline-primary btn-sm mr-2",
+                                attrs: { type: "button" }
+                              },
+                              [_vm._v("Edit")]
                             ),
                             _vm._v(" "),
-                            _c("p", {}, [
-                              _vm._v(
-                                _vm._s(_vm.reviewData[commentIndex].created_at)
-                              )
-                            ])
-                          ]),
-                          _vm._v(" "),
-                          _c("p", [
-                            _vm._v(_vm._s(_vm.reviewData[commentIndex].review))
-                          ]),
-                          _vm._v(" "),
-                          _c("p", [
-                            _vm._v(
-                              "By " +
-                                _vm._s(
-                                  _vm.reviewData[commentIndex].user.userName
-                                )
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-outline-danger btn-sm",
+                                attrs: { type: "button" }
+                              },
+                              [_vm._v("Delete")]
                             )
-                          ]),
-                          _vm._v(" "),
-                          _vm.User.userType == "Admin" ||
-                          _vm.User.id == _vm.reviewData[commentIndex].user.id
-                            ? _c("div", { staticClass: "mt-2" }, [
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass:
-                                      "btn btn-outline-primary btn-sm mr-2",
-                                    attrs: { type: "button" }
-                                  },
-                                  [_vm._v("Edit")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "button",
-                                  {
-                                    staticClass:
-                                      "btn btn-outline-danger btn-sm",
-                                    attrs: { type: "button" }
-                                  },
-                                  [_vm._v("Delete")]
-                                )
-                              ])
-                            : _vm._e()
-                        ]
-                      )
-                    : _vm._e()
+                          ])
+                        : _vm._e()
+                    ]
+                  )
                 }),
                 0
               )
             ]),
             _vm._v(" "),
-            _vm.commentsToShow < _vm.reviewData.length ||
-            _vm.reviewData.length > _vm.commentsToShow
+            _vm.lodeMore <= _vm.reviewData.length
               ? _c("div", { staticClass: "text-center p-3" }, [
                   _c(
                     "button",
@@ -435,7 +382,7 @@ var render = function() {
                       staticClass: "btn btn-outline-primary btn-lg",
                       on: {
                         click: function($event) {
-                          _vm.commentsToShow += 3
+                          _vm.lodeMore += 1
                         }
                       }
                     },
