@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
                 ->onDelete('cascade');
             $table->string('name');
             $table->text('detail');
-            $table->integer('price');
+            $table->string('price');
             $table->string('stock');
             $table->string('discount');
             $table->timestamps();

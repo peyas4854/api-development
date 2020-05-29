@@ -48,16 +48,10 @@ export default {
       modalID: "#add-edit-modal",
       dataset: {
         source: "http://127.0.0.1:8000/api/products",
-        headers: [
-          "Product name",
-          "Price",
-          "Discount",
-          "Stock",
-          "Created By",
-          "Action"
-        ],
+        //same as data from server
+        headers: ["Name", "Price", "Discount", "Stock"],
         colums: [
-          { title: " Product name", key: "name", type: "text" },
+          { title: " Name", key: "name", type: "text" },
           { title: " Price", key: "price", type: "text" },
           { title: " Discount", key: "discount", type: "text" },
           { title: " Stock", key: "stock", type: "text" },

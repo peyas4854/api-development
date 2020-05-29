@@ -3,9 +3,18 @@
     <preloader v-if="preLoader == true" />
     <div v-else>
       <div class="form-row p-3">
-        <div class="col-md-6">
+        <div class="col-md-4 filter_feilds">
           <label for="search">Search</label>
-          <input type="text" class="form-control" v-model="searchtable" placeholder="Search" />
+          <input class="form-control" type="search" v-model="searchtable" placeholder="Search" />
+        </div>
+        <div class="col-md-4 filter_feilds">
+          <label for="search">Search by</label>
+
+          <select class="form-control" id="sel1" v-model="filterSelect">
+            <option value>Please select one</option>
+            <option v-for="(data,i) in dataset.headers" :key="i" :value="data">{{ data }}</option>
+          </select>
+          <p class="errors ml-1" v-if="searchtable !='' && filterSelect == ''">Please select one</p>
         </div>
       </div>
 
@@ -16,7 +25,7 @@
           </tr>
         </thead>
         <tbody v-if="tableData.length > 0">
-          <tr v-for="(data,i) in tableData" :key="i">
+          <tr v-for="(data,i) in filterData" :key="i">
             <td v-for="(column,i) in dataset.colums" :key="i">
               <span v-if="column.type === 'text'">{{ data[column.key]}}</span>
               <span v-if="column.type === 'component' ">
@@ -37,10 +46,13 @@
             </td>
           </tr>
         </tbody>
-        <tbody v-else class="text-center">
-          <h1>No data Found!</h1>
-        </tbody>
       </table>
+      <div class="text-center" v-if=" filterData.length == 0 ">
+        <p>No data Found! Try again..</p>
+      </div>
+      <div class="text-center p-3" v-if="loadMore <= tableData.length && searchtable==''">
+        <button @click="loadMore +=10" class="btn btn-outline-primary btn-lg">Load more</button>
+      </div>
     </div>
   </div>
 </template>
@@ -58,14 +70,21 @@ export default {
   data() {
     return {
       tableData: {},
-      searchtable: ""
+      searchtable: "",
+      filterSelect: "",
+      loadMore: 5,
+      error: false
     };
   },
-
   watch: {
     searchtable(newval, oldval) {
-      // console.log("new", newval);
-      this.searchMethod(newval);
+      if (this.filterSelect != "") {
+        this.searchtable = newval;
+      } else {
+        console.log("error");
+        this.error = true;
+        return this.showMoreMethods();
+      }
     }
   },
   mounted() {
@@ -76,8 +95,16 @@ export default {
       }
     });
   },
+  computed: {
+    filterData() {
+      if (this.searchtable != "" && this.filterSelect != "") {
+        return this.searchMethods();
+      } else {
+        return this.showMoreMethods();
+      }
+    }
+  },
   created() {
-    console.log("dataset", this.dataset);
     this.getData(this.dataset.source);
   },
   methods: {
@@ -101,18 +128,24 @@ export default {
     reload() {
       this.getData(this.dataset.source);
     },
-    searchMethod(val) {
-      console.log("paici", val);
-      //console.log("paici", this.tableData);
-      const key = JSON.parse(JSON.stringify(this.dataset.colums));
-      console.log("key", key);
-
-      const data = JSON.parse(JSON.stringify(this.tableData));
-
-      const result = data.filter(e => e.name === val);
-
-      console.log("result", result);
+    searchMethods() {
+      let query = this.filterSelect.toLowerCase();
+      const result = this.tableData.filter(c =>
+        c[query].includes(this.searchtable.toLowerCase())
+      );
+      console.log("search result", result);
+      return result;
+    },
+    showMoreMethods() {
+      let totalLength = this.tableData.slice(0, this.loadMore);
+      return totalLength;
     }
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.filter_feilds {
+  height: 80px;
+}
+</style>

@@ -140,7 +140,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       review: "",
       star: "",
       errors: [],
-      lodeMore: 2
+      loadMore: 2
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])(["User"]), {
@@ -151,8 +151,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return Math.round(total / this.reviewData.length);
     },
     filterReview: function filterReview() {
-      var setLength = 2;
-      var totalLength = this.reviewData.slice(0, this.lodeMore);
+      var totalLength = this.reviewData.slice(0, this.loadMore);
       console.log("result", totalLength);
       return totalLength;
     }
@@ -306,7 +305,7 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm.lodeMore <= _vm.reviewData.length
+            _vm.loadMore <= _vm.reviewData.length
               ? _c("h2", { staticClass: "text-left" }, [
                   _vm._v("\n      Total show\n      "),
                   _c("span", { staticClass: "badge badge-secondary" }, [
@@ -374,7 +373,7 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _vm.lodeMore <= _vm.reviewData.length
+            _vm.loadMore <= _vm.reviewData.length
               ? _c("div", { staticClass: "text-center p-3" }, [
                   _c(
                     "button",
@@ -382,7 +381,7 @@ var render = function() {
                       staticClass: "btn btn-outline-primary btn-lg",
                       on: {
                         click: function($event) {
-                          _vm.lodeMore += 1
+                          _vm.loadMore += 1
                         }
                       }
                     },

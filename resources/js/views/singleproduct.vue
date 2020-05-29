@@ -24,7 +24,7 @@
           </div>
         </div>
       </div>
-      <h2 class="text-left" v-if="lodeMore <= reviewData.length ">
+      <h2 class="text-left" v-if="loadMore <= reviewData.length ">
         Total show
         <span class="badge badge-secondary">{{ filterReview.length}}</span>
       </h2>
@@ -47,8 +47,8 @@
           </div>
         </div>
       </div>
-      <div class="text-center p-3" v-if="lodeMore <= reviewData.length ">
-        <button @click="lodeMore +=1" class="btn btn-outline-primary btn-lg">Show more</button>
+      <div class="text-center p-3" v-if="loadMore <= reviewData.length ">
+        <button @click="loadMore +=1" class="btn btn-outline-primary btn-lg">Show more</button>
       </div>
 
       <div class="create-review mb-3">
@@ -121,8 +121,7 @@ export default {
       review: "",
       star: "",
       errors: [],
-
-      lodeMore: 2
+      loadMore: 2
     };
   },
   computed: {
@@ -136,9 +135,7 @@ export default {
     },
 
     filterReview() {
-      let setLength = 2;
-      let totalLength = this.reviewData.slice(0, this.lodeMore);
-
+      let totalLength = this.reviewData.slice(0, this.loadMore);
       console.log("result", totalLength);
       return totalLength;
     }

@@ -185,9 +185,10 @@ __webpack_require__.r(__webpack_exports__);
       modalID: "#add-edit-modal",
       dataset: {
         source: "http://127.0.0.1:8000/api/products",
-        headers: ["Product name", "Price", "Discount", "Stock", "Created By", "Action"],
+        //same as data from server
+        headers: ["Name", "Price", "Discount", "Stock"],
         colums: [{
-          title: " Product name",
+          title: " Name",
           key: "name",
           type: "text"
         }, {
