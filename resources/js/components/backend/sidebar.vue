@@ -23,6 +23,12 @@
         >Review</router-link>
       </li>
       <li class="nav-item">
+        <router-link
+          :class="[this.$route.path == '/user' ? 'active_sidebar' : '', 'nav-link' ]"
+          to="/user"
+        >User</router-link>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="#">Settings</a>
       </li>
       <li class="nav-item">

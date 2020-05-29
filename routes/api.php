@@ -1,6 +1,5 @@
 <?php
 
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -10,18 +9,15 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/
-
-
-
+ */
 
 // // Route::middleware('auth:api')->group( function () {
 // //    Route::apiresource('products', 'ProductController');
 // // });
 
- Route::apiresource('products', 'ProductController');
+Route::apiresource('products', 'ProductController');
 
- Route::group(['prefix'=>'products'],function(){
-     Route::apiresource('/{product}/reviews', 'ReviewController');
+Route::group(['prefix' => 'products'], function () {
+    Route::apiresource('/{product}/reviews', 'ReviewController');
 
- });
+});

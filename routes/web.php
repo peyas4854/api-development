@@ -20,10 +20,15 @@ Route::post('/login', 'API\RegisterController@login');
 Route::get('/logout', 'API\RegisterController@logout');
 Route::get('/admin', 'UserController@getAdmin');
 
+//profile
 Route::post('/admin/update/{user}', 'UserController@updateAdmin');
-
 Route::post('/admin/password/{user}', 'UserController@changePassword')->name('password');
 
-Route::get('/', 'API\RegisterController@index');
+//user list
+Route::get('/userlist', 'UserController@getAllUser');
+Route::get('/user/{user}', 'UserController@editUser');
+Route::post('/user/update/{user}', 'UserController@updateUser');
+Route::post('/user/invite', 'UserController@inviteUser');
 
+Route::get('/', 'API\RegisterController@index');
 Route::get('/{any}', 'API\RegisterController@index')->where('any', '.*');

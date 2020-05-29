@@ -35,6 +35,12 @@ const routes = [
                 name: 'profile',
 
             },
+            {
+                path: '/user',
+                component: loadView("userList"),
+                name: 'user',
+
+            },
 
             // {
             //     path: '/*',

@@ -168,8 +168,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -563,69 +561,64 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "main_wrapper" }, [
-    _c("div", [
-      _c("div", { staticClass: "main_wrapper_top_header" }, [
-        _vm._m(0),
-        _vm._v(" "),
-        _c("div", { staticClass: "header_content_button" }, [
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary app_primary_btn",
-              attrs: {
-                "data-toggle": "modal",
-                "data-target": "#add-edit-modal"
-              },
-              on: {
-                click: function($event) {
-                  return _vm.addEdit("")
-                }
+    _c("div", { staticClass: "main_wrapper_top_header" }, [
+      _vm._m(0),
+      _vm._v(" "),
+      _c("div", { staticClass: "header_content_button" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary app_primary_btn",
+            attrs: { "data-toggle": "modal", "data-target": "#add-edit-modal" },
+            on: {
+              click: function($event) {
+                return _vm.addEdit("")
               }
-            },
-            [_vm._v("Add")]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "modal fade",
-          attrs: {
-            id: "add-edit-modal",
-            tabindex: "-1",
-            role: "dialog",
-            "aria-hidden": "true"
-          }
-        },
-        [
-          _c(
-            "div",
-            {
-              staticClass: "modal-dialog modal-dialog-centered",
-              attrs: { role: "document" }
-            },
-            [
-              _vm.isActive
-                ? _c("productmodal", {
-                    ref: "vuemodal",
-                    staticClass: "modal-content",
-                    attrs: { id: _vm.selectedItemId, modalID: _vm.modalID }
-                  })
-                : _vm._e()
-            ],
-            1
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "main_wrapper_card_content" },
-        [_c("datatable", { attrs: { dataset: _vm.dataset } })],
-        1
-      )
-    ])
+            }
+          },
+          [_vm._v("Add")]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "add-edit-modal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "modal-dialog modal-dialog-centered",
+            attrs: { role: "document" }
+          },
+          [
+            _vm.isActive
+              ? _c("productmodal", {
+                  ref: "vuemodal",
+                  staticClass: "modal-content",
+                  attrs: { id: _vm.selectedItemId, modalID: _vm.modalID }
+                })
+              : _vm._e()
+          ],
+          1
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "main_wrapper_card_content" },
+      [_c("datatable", { attrs: { dataset: _vm.dataset } })],
+      1
+    )
   ])
 }
 var staticRenderFns = [

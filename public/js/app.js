@@ -2090,6 +2090,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   "extends": _helper_commonMethods__WEBPACK_IMPORTED_MODULE_0__["default"]
@@ -39261,6 +39267,25 @@ var render = function() {
         1
       ),
       _vm._v(" "),
+      _c(
+        "li",
+        { staticClass: "nav-item" },
+        [
+          _c(
+            "router-link",
+            {
+              class: [
+                this.$route.path == "/user" ? "active_sidebar" : "",
+                "nav-link"
+              ],
+              attrs: { to: "/user" }
+            },
+            [_vm._v("User")]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
       _vm._m(1),
       _vm._v(" "),
       _vm._m(2)
@@ -56355,6 +56380,10 @@ var routes = [{
     path: '/profile/:id',
     component: loadView("profile_id"),
     name: 'profile'
+  }, {
+    path: '/user',
+    component: loadView("userList"),
+    name: 'user'
   } // {
   //     path: '/*',
   //     component: loadView("error")
@@ -57529,6 +57558,10 @@ var map = {
 	"./singleproduct.vue": [
 		"./resources/js/views/singleproduct.vue",
 		6
+	],
+	"./userList.vue": [
+		"./resources/js/views/userList.vue",
+		9
 	]
 };
 function webpackAsyncContext(req) {
