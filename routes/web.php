@@ -26,7 +26,9 @@ Route::post('/admin/password/{user}', 'UserController@changePassword')->name('pa
 
 //user list
 Route::get('/userlist', 'UserController@getAllUser');
+
 Route::get('/user/{user}', 'UserController@editUser');
+
 Route::post('/user/update/{user}', 'UserController@updateUser');
 Route::post('/user/invite', 'UserController@inviteUser');
 

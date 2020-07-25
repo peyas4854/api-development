@@ -1,87 +1,72 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import store from '../Store/store.js';
+import Vue from "vue";
+import VueRouter from "vue-router";
+import store from "../Store/store.js";
 Vue.use(VueRouter);
 
-const loadLayout = layout => () => import(`../components/layouts/${layout}.vue`)
-const loadView = view => () => import(`../views/${view}.vue`)
-const loadFront = view => () => import(`../views/front/${view}.vue`)
-
-
+const loadLayout = layout => () =>
+    import(`../components/layouts/${layout}.vue`);
+const loadView = view => () => import(`../views/${view}.vue`);
+const loadFront = view => () => import(`../views/front/${view}.vue`);
 
 const routes = [
-
     {
-        path: '/dashboard',
+        path: "/",
         component: loadLayout("AdminLayout"),
-        children: [{
-                path: '',
-                component: loadView("dashboard"),
-
+        children: [
+            {
+                path: "",
+                component: loadView("dashboard")
             },
             {
-                path: '/product',
-                component: loadView("product"),
-
+                path: "/product",
+                component: loadView("product")
             },
             {
-                path: '/review',
-                component: loadView("review"),
-
+                path: "/review",
+                component: loadView("review")
             },
             {
-                path: '/profile/:id',
+                path: "/profile/:id",
                 component: loadView("profile_id"),
-                name: 'profile',
-
+                name: "profile"
             },
             {
-                path: '/user',
+                path: "/user",
                 component: loadView("userList"),
-                name: 'user',
-
-            },
-
-            // {
-            //     path: '/*',
-            //     component: loadView("error")
-            // },
-        ],
-
+                name: "user"
+            }
+        ]
     },
     {
-        path: '/',
+        path: "/home",
         component: loadLayout("FrontLayout"),
 
-
         children: [
-
             {
-                path: '',
+                path: "",
                 component: loadFront("index")
             },
             {
-                path: '/singleproduct/:id',
+                path: "/singleproduct/:id",
                 component: loadView("singleproduct"),
-                name: 'singleproduct'
-
-            },
-
+                name: "singleproduct"
+            }
         ]
-
     },
     {
-        path: '/login',
+        path: "/login",
         component: loadFront("login")
     },
-
-]
-
+    {
+        path: "/*",
+        component: loadView("error")
+    }
+];
 
 const router = new VueRouter({
     routes,
     hasbang: false,
-    mode: 'history',
+    mode: "history"
 });
 // router.beforeEach((to, from, next) => {
 //     //console.log('Global -- beforeEach - fired')
@@ -102,4 +87,4 @@ const router = new VueRouter({
 //         next()
 //     }
 // })
-export default router
+export default router;

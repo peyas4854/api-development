@@ -59,6 +59,19 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -76,14 +89,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       instance.postDataMethod("http://127.0.0.1:8000/login", this.inputField);
     },
     postDataSuccess: function postDataSuccess(response) {
-      console.log("response", response.data);
-      location.reload(); //this.$router.push({ path: "/" });
-      //   if (response.status === 200) {
-      //     window.reload();
-      //     //console.log("response", response.data.data.user);
-      //     this.set_User(response.data.data.user);
-      //     //this.$router.push({ path: "/" });
-      //   }
+      console.log("after response", response.data);
+      var user = response.data.data.user;
+      location.reload();
+      console.log("user", user);
     },
     postDataError: function postDataError(error) {
       this.errors = error.errors;
@@ -194,7 +203,11 @@ var render = function() {
               _vm._v(" "),
               _vm.errors.email
                 ? _c("p", { staticClass: "errors" }, [
-                    _vm._v(_vm._s(_vm.errors.email[0]))
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(_vm.errors.email[0]) +
+                        "\n                        "
+                    )
                   ])
                 : _vm._e()
             ]),
@@ -226,7 +239,11 @@ var render = function() {
               _vm._v(" "),
               _vm.errors.password
                 ? _c("p", { staticClass: "errors" }, [
-                    _vm._v(_vm._s(_vm.errors.password[0]))
+                    _vm._v(
+                      "\n                            " +
+                        _vm._s(_vm.errors.password[0]) +
+                        "\n                        "
+                    )
                   ])
                 : _vm._e()
             ]),
@@ -241,7 +258,11 @@ var render = function() {
                   }
                 }
               },
-              [_vm._v("Sign in")]
+              [
+                _vm._v(
+                  "\n                        Sign in\n                    "
+                )
+              ]
             ),
             _vm._v(" "),
             _vm._m(2)
@@ -274,7 +295,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "sign-up" }, [
-      _vm._v("\n            Don't have an account?\n            "),
+      _vm._v(
+        "\n                        Don't have an account?\n                        "
+      ),
       _c("a", { attrs: { href: "" } }, [_vm._v("Create One")])
     ])
   }

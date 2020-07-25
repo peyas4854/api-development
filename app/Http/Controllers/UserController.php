@@ -87,9 +87,9 @@ class UserController extends BaseController
     {
 
         if (auth::user()->userType == 'Admin') {
+            return $data = User::orderBy('id', 'DESC')->paginate(5);
 
-            $data = User::orderBy('id', 'ASC')->get();
-            return $this->sendResponse($data, 'User Retrived Successfully.');
+            //return $this->sendResponse($data, 'User Retrived Successfully.');
         }
         return $this->sendResponse([], 'access denied!');
     }

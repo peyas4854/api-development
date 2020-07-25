@@ -2039,7 +2039,13 @@ __webpack_require__.r(__webpack_exports__);
     frontlayout: _components_layouts_FrontLayout__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   created: function created() {
-    console.log("props", this.user);
+    // if (this.user.userType == "User") {
+    //     console.log('user');
+    //     this.$router.push({ path: "/home" });
+    // }else{
+    //      console.log('admin');
+    //     this.$router.push({ path: "/dashboard" });
+    // }
     this.$store.commit("set_User", this.user);
   }
 });
@@ -2405,6 +2411,15 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -39848,7 +39863,7 @@ var render = function() {
                     attrs: {
                       type: "search",
                       placeholder: "Search",
-                      "aria-label": "Search"
+                      "aria-label": "text"
                     },
                     domProps: { value: _vm.productSearch },
                     on: {
@@ -39862,6 +39877,25 @@ var render = function() {
                   })
                 ])
               ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "dropdown" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-secondary dropdown-toggle",
+                  attrs: {
+                    type: "button",
+                    id: "dropdownMenuButton",
+                    "data-toggle": "dropdown",
+                    "aria-haspopup": "true",
+                    "aria-expanded": "false"
+                  }
+                },
+                [_vm._v(_vm._s(_vm.User.name))]
+              ),
+              _vm._v(" "),
+              _vm._m(0)
             ])
           ]
         )
@@ -39869,7 +39903,25 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "dropdown-menu",
+        attrs: { "aria-labelledby": "dropdownMenuButton" }
+      },
+      [
+        _c("a", { staticClass: "dropdown-item", attrs: { href: "/logout" } }, [
+          _vm._v("Logout")
+        ])
+      ]
+    )
+  }
+]
 render._withStripped = true
 
 
@@ -56365,49 +56417,48 @@ var loadFront = function loadFront(view) {
 };
 
 var routes = [{
-  path: '/dashboard',
+  path: "/",
   component: loadLayout("AdminLayout"),
   children: [{
-    path: '',
+    path: "",
     component: loadView("dashboard")
   }, {
-    path: '/product',
+    path: "/product",
     component: loadView("product")
   }, {
-    path: '/review',
+    path: "/review",
     component: loadView("review")
   }, {
-    path: '/profile/:id',
+    path: "/profile/:id",
     component: loadView("profile_id"),
-    name: 'profile'
+    name: "profile"
   }, {
-    path: '/user',
+    path: "/user",
     component: loadView("userList"),
-    name: 'user'
-  } // {
-  //     path: '/*',
-  //     component: loadView("error")
-  // },
-  ]
-}, {
-  path: '/',
-  component: loadLayout("FrontLayout"),
-  children: [{
-    path: '',
-    component: loadFront("index")
-  }, {
-    path: '/singleproduct/:id',
-    component: loadView("singleproduct"),
-    name: 'singleproduct'
+    name: "user"
   }]
 }, {
-  path: '/login',
+  path: "/home",
+  component: loadLayout("FrontLayout"),
+  children: [{
+    path: "",
+    component: loadFront("index")
+  }, {
+    path: "/singleproduct/:id",
+    component: loadView("singleproduct"),
+    name: "singleproduct"
+  }]
+}, {
+  path: "/login",
   component: loadFront("login")
+}, {
+  path: "/*",
+  component: loadView("error")
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   routes: routes,
   hasbang: false,
-  mode: 'history'
+  mode: "history"
 }); // router.beforeEach((to, from, next) => {
 //     //console.log('Global -- beforeEach - fired')
 //     // re-route
@@ -57189,7 +57240,7 @@ var map = {
 	],
 	"./BackendLayout.vue": [
 		"./resources/js/components/layouts/BackendLayout.vue",
-		3
+		4
 	],
 	"./FrontLayout.vue": [
 		"./resources/js/components/layouts/FrontLayout.vue"
@@ -57529,11 +57580,11 @@ __webpack_require__.r(__webpack_exports__);
 var map = {
 	"./dashboard.vue": [
 		"./resources/js/views/dashboard.vue",
-		4
+		5
 	],
 	"./error.vue": [
 		"./resources/js/views/error.vue",
-		8
+		9
 	],
 	"./front/index.vue": [
 		"./resources/js/views/front/index.vue",
@@ -57549,19 +57600,19 @@ var map = {
 	],
 	"./profile_id.vue": [
 		"./resources/js/views/profile_id.vue",
-		5
+		6
 	],
 	"./review.vue": [
 		"./resources/js/views/review.vue",
-		7
+		8
 	],
 	"./singleproduct.vue": [
 		"./resources/js/views/singleproduct.vue",
-		6
+		7
 	],
 	"./userList.vue": [
 		"./resources/js/views/userList.vue",
-		9
+		3
 	]
 };
 function webpackAsyncContext(req) {
@@ -57643,8 +57694,8 @@ module.exports = webpackAsyncContext;
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\web project\apiDevelopment\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\web project\apiDevelopment\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! G:\web project\apiDevelopment\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! G:\web project\apiDevelopment\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

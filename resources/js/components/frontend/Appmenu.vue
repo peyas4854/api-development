@@ -16,16 +16,25 @@
                 class="form-control mr-sm-2"
                 type="search"
                 placeholder="Search"
-                aria-label="Search"
+                aria-label="text"
                 v-model="productSearch"
               />
             </div>
           </li>
-          <!-- <li class="nav-item my-auto ml-3">
-            <a to="/login" v-if=" User.length < 0 ">login</a>
-            <a href="/logout" v-else>logout</a>
-          </li>-->
         </ul>
+        <div class="dropdown">
+          <button
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            id="dropdownMenuButton"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >{{ User.name }}</button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="/logout">Logout</a>
+          </div>
+        </div>
       </div>
     </nav>
   </div>
