@@ -1,0 +1,46 @@
+.sidebar_app {
+    background-color: #505463;
+    position: fixed;
+    width: 182px !important;
+    height: 100vh !important;
+    z-index: 99 !important;
+    overflow: auto;
+
+    .logo_div {
+        border-bottom: 1px solid #ece5e51a;
+        text-align: center;
+
+        img.logo {
+            width: 80px;
+            height: 69px;
+        }
+    }
+
+    .nav-item {
+        .nav-link {
+            display: block;
+            padding: 25px;
+            margin-bottom: 8px;
+            text-align: center;
+            transition: 0.3s;
+            background-color: red;
+        }
+
+        a {
+            color: #ffffff !important;
+            font-family: Roboto;
+            font-size: 15px;
+        }
+
+        .active_sidebar {
+            color: #00ffc4 !important;
+            background-color: #00000075 !important;
+        }
+    }
+
+    .nav-item:hover {
+        a {
+            color: #00ffc4 !important;
+        }
+    }
+}
