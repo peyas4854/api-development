@@ -11,6 +11,14 @@ window.Vue = require('vue');
 // an EventHub to share events between components
 Vue.prototype.$hub = new Vue();
 
+import VueInternationalization from 'vue-i18n';
+import Locale from './vue-i18n-locales.generated';
+Vue.use(VueInternationalization);
+const lang = document.documentElement.lang.substr(0, 2);
+const i18n = new VueInternationalization({
+    locale: lang,
+    messages: Locale
+});
 // register the plugin on vue
 import Toasted from 'vue-toasted';
 
@@ -84,6 +92,7 @@ import store from './Store/store.js';
 const app = new Vue({
     el: '#app',
     router,
+    i18n,
     store
 
 });

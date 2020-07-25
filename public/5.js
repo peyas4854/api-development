@@ -124,69 +124,81 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-3 col-sm-6" }, [
+        _c("div", { staticClass: "card_d" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "card_bottom" }, [
+            _c("h4", { staticClass: "bottom_text" }, [
+              _vm._v(_vm._s(_vm.$t("body.english")))
+            ])
+          ])
+        ])
+      ]),
+      _vm._v(" "),
+      _vm._m(1),
+      _vm._v(" "),
+      _vm._m(2),
+      _vm._v(" "),
+      _vm._m(3)
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-3 col-sm-6" }, [
-          _c("div", { staticClass: "card_d" }, [
-            _c("div", { staticClass: "card_top" }, [
-              _c("h4", { staticClass: "top_text" }, [_vm._v("100")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card_bottom" }, [
-              _c("h4", { staticClass: "bottom_text" }, [
-                _vm._v("Member Online")
-              ])
-            ])
-          ])
+    return _c("div", { staticClass: "card_top" }, [
+      _c("h4", { staticClass: "top_text" }, [_vm._v("100")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3 col-sm-6" }, [
+      _c("div", { staticClass: "card_d" }, [
+        _c("div", { staticClass: "card_top" }, [
+          _c("h4", { staticClass: "top_text" }, [_vm._v("100")])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-3 col-sm-6" }, [
-          _c("div", { staticClass: "card_d" }, [
-            _c("div", { staticClass: "card_top" }, [
-              _c("h4", { staticClass: "top_text" }, [_vm._v("100")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card_bottom" }, [
-              _c("h4", { staticClass: "bottom_text" }, [
-                _vm._v("Member Online")
-              ])
-            ])
-          ])
+        _c("div", { staticClass: "card_bottom" }, [
+          _c("h4", { staticClass: "bottom_text" }, [_vm._v("Member Online")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3 col-sm-6" }, [
+      _c("div", { staticClass: "card_d" }, [
+        _c("div", { staticClass: "card_top" }, [
+          _c("h4", { staticClass: "top_text" }, [_vm._v("100")])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-3 col-sm-6" }, [
-          _c("div", { staticClass: "card_d" }, [
-            _c("div", { staticClass: "card_top" }, [
-              _c("h4", { staticClass: "top_text" }, [_vm._v("100")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card_bottom" }, [
-              _c("h4", { staticClass: "bottom_text" }, [
-                _vm._v("Member Online")
-              ])
-            ])
-          ])
+        _c("div", { staticClass: "card_bottom" }, [
+          _c("h4", { staticClass: "bottom_text" }, [_vm._v("Member Online")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3 col-sm-6" }, [
+      _c("div", { staticClass: "card_d" }, [
+        _c("div", { staticClass: "card_top" }, [
+          _c("h4", { staticClass: "top_text" }, [_vm._v("100")])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-3 col-sm-6" }, [
-          _c("div", { staticClass: "card_d" }, [
-            _c("div", { staticClass: "card_top" }, [
-              _c("h4", { staticClass: "top_text" }, [_vm._v("100")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card_bottom" }, [
-              _c("h4", { staticClass: "bottom_text" }, [
-                _vm._v("Member Online")
-              ])
-            ])
-          ])
+        _c("div", { staticClass: "card_bottom" }, [
+          _c("h4", { staticClass: "bottom_text" }, [_vm._v("Member Online")])
         ])
       ])
     ])
