@@ -7,7 +7,7 @@
             <h4 class="top_text">100</h4>
           </div>
           <div class="card_bottom">
-            <h4 class="bottom_text">{{ $t('body.english') }}</h4>
+            <h4 class="bottom_text">{{ $t('BODY.LANGUAGE')}}</h4>
           </div>
         </div>
       </div>

@@ -132,7 +132,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "card_bottom" }, [
             _c("h4", { staticClass: "bottom_text" }, [
-              _vm._v(_vm._s(_vm.$t("body.english")))
+              _vm._v(_vm._s(_vm.$t("BODY.LANGUAGE")))
             ])
           ])
         ])

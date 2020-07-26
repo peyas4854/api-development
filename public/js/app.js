@@ -2185,11 +2185,24 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   "extends": _helper_commonMethods__WEBPACK_IMPORTED_MODULE_1__["default"],
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])(["User"])),
+  data: function data() {
+    return {
+      lang: localStorage.getItem('lang') || 'en'
+    };
+  },
   created: function created() {// console.log("top ap bar", this.User);
   },
   methods: {
@@ -2209,6 +2222,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }, function (response) {
         console.log("paici 2", response);
       });
+    },
+    handleChange: function handleChange(event) {
+      console.log('lang', event.target.value);
+      localStorage.setItem('lang', event.target.value); //window.location.reload();
+
+      location.reload();
     }
   }
 });
@@ -41509,6 +41528,48 @@ var render = function() {
       _c("div", { staticClass: "card-body" }, [
         _c("div", { staticClass: "flex1 my-auto" }, [
           _c("ul", { staticClass: "nav right_item" }, [
+            _c("li", { staticClass: "nav-item my-auto" }, [
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.lang,
+                      expression: "lang"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  on: {
+                    change: [
+                      function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.lang = $event.target.multiple
+                          ? $$selectedVal
+                          : $$selectedVal[0]
+                      },
+                      function($event) {
+                        return _vm.handleChange($event)
+                      }
+                    ]
+                  }
+                },
+                [
+                  _c("option", { attrs: { value: "en" } }, [_vm._v("English")]),
+                  _vm._v(" "),
+                  _c("option", { attrs: { value: "ru" } }, [_vm._v("Russian")])
+                ]
+              )
+            ]),
+            _vm._v(" "),
             _vm._m(0),
             _vm._v(" "),
             _vm._m(1),
@@ -58675,12 +58736,11 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-i18n */ "./node_modules/vue-i18n/dist/vue-i18n.esm.js");
-/* harmony import */ var _vue_i18n_locales_generated__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./vue-i18n-locales.generated */ "./resources/js/vue-i18n-locales.generated.js");
-/* harmony import */ var vue_toasted__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-toasted */ "./node_modules/vue-toasted/dist/vue-toasted.min.js");
-/* harmony import */ var vue_toasted__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_toasted__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _Router_router_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Router/router.js */ "./resources/js/Router/router.js");
-/* harmony import */ var _Store_store_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Store/store.js */ "./resources/js/Store/store.js");
+/* harmony import */ var vue_toasted__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-toasted */ "./node_modules/vue-toasted/dist/vue-toasted.min.js");
+/* harmony import */ var vue_toasted__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_toasted__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Router_router_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Router/router.js */ "./resources/js/Router/router.js");
+/* harmony import */ var _Store_store_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Store/store.js */ "./resources/js/Store/store.js");
+/* harmony import */ var _i18n_vue_i18n_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./i18n/vue-i18n.js */ "./resources/js/i18n/vue-i18n.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -58690,18 +58750,19 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js"); // an EventHub to share events between components
 
-Vue.prototype.$hub = new Vue();
+Vue.prototype.$hub = new Vue(); //localization 
+// import VueInternationalization from 'vue-i18n';
+// import Locale from './vue-i18n-locales.generated';
+// Vue.use(VueInternationalization);
+// const lang = document.documentElement.lang.substr(0, 2);
+// const i18n = new VueInternationalization({
+//     locale: lang,
+//     messages: Locale
+// });
+// register the plugin on vue
 
 
-Vue.use(vue_i18n__WEBPACK_IMPORTED_MODULE_0__["default"]);
-var lang = document.documentElement.lang.substr(0, 2);
-var i18n = new vue_i18n__WEBPACK_IMPORTED_MODULE_0__["default"]({
-  locale: lang,
-  messages: _vue_i18n_locales_generated__WEBPACK_IMPORTED_MODULE_1__["default"]
-}); // register the plugin on vue
-
-
-Vue.use(vue_toasted__WEBPACK_IMPORTED_MODULE_2___default.a);
+Vue.use(vue_toasted__WEBPACK_IMPORTED_MODULE_0___default.a);
 var success = {
   theme: "toasted-primary",
   type: success,
@@ -58757,11 +58818,12 @@ Vue.component('datatable', __webpack_require__(/*! ./components/base/datatable.v
 
 
 
+
 var app = new Vue({
   el: '#app',
-  router: _Router_router_js__WEBPACK_IMPORTED_MODULE_3__["default"],
-  i18n: i18n,
-  store: _Store_store_js__WEBPACK_IMPORTED_MODULE_4__["default"]
+  router: _Router_router_js__WEBPACK_IMPORTED_MODULE_1__["default"],
+  i18n: _i18n_vue_i18n_js__WEBPACK_IMPORTED_MODULE_3__["default"],
+  store: _Store_store_js__WEBPACK_IMPORTED_MODULE_2__["default"]
 });
 
 /***/ }),
@@ -59724,6 +59786,86 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/i18n/en.js":
+/*!*********************************!*\
+  !*** ./resources/js/i18n/en.js ***!
+  \*********************************/
+/*! exports provided: locale */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "locale", function() { return locale; });
+// USA
+var locale = {
+  BODY: {
+    LANGUAGE: "ENGLISH"
+  }
+};
+
+/***/ }),
+
+/***/ "./resources/js/i18n/ru.js":
+/*!*********************************!*\
+  !*** ./resources/js/i18n/ru.js ***!
+  \*********************************/
+/*! exports provided: locale */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "locale", function() { return locale; });
+// RUSSIAN
+var locale = {
+  BODY: {
+    LANGUAGE: "RUSSIAN"
+  }
+};
+
+/***/ }),
+
+/***/ "./resources/js/i18n/vue-i18n.js":
+/*!***************************************!*\
+  !*** ./resources/js/i18n/vue-i18n.js ***!
+  \***************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-i18n */ "./node_modules/vue-i18n/dist/vue-i18n.esm.js");
+/* harmony import */ var _en_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./en.js */ "./resources/js/i18n/en.js");
+/* harmony import */ var _ru_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ru.js */ "./resources/js/i18n/ru.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_i18n__WEBPACK_IMPORTED_MODULE_1__["default"]);
+var messages = {};
+messages = _objectSpread({}, messages, {
+  en: _en_js__WEBPACK_IMPORTED_MODULE_2__["locale"],
+  ru: _ru_js__WEBPACK_IMPORTED_MODULE_3__["locale"]
+}); //get local storage language value 
+
+var lang = localStorage.getItem("lang") || "en";
+var i18n = new vue_i18n__WEBPACK_IMPORTED_MODULE_1__["default"]({
+  locale: lang,
+  // set locale
+  messages: messages // set locale messages
+
+});
+/* harmony default export */ __webpack_exports__["default"] = (i18n);
+
+/***/ }),
+
 /***/ "./resources/js/views lazy recursive ^\\.\\/.*\\.vue$":
 /*!****************************************************************!*\
   !*** ./resources/js/views lazy ^\.\/.*\.vue$ namespace object ***!
@@ -59827,25 +59969,6 @@ webpackAsyncContext.keys = function webpackAsyncContextKeys() {
 };
 webpackAsyncContext.id = "./resources/js/views/front lazy recursive ^\\.\\/.*\\.vue$";
 module.exports = webpackAsyncContext;
-
-/***/ }),
-
-/***/ "./resources/js/vue-i18n-locales.generated.js":
-/*!****************************************************!*\
-  !*** ./resources/js/vue-i18n-locales.generated.js ***!
-  \****************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ({
-  "en": {
-    "body": {
-      'english': 'English language'
-    }
-  }
-});
 
 /***/ }),
 

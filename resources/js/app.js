@@ -11,14 +11,17 @@ window.Vue = require('vue');
 // an EventHub to share events between components
 Vue.prototype.$hub = new Vue();
 
-import VueInternationalization from 'vue-i18n';
-import Locale from './vue-i18n-locales.generated';
-Vue.use(VueInternationalization);
-const lang = document.documentElement.lang.substr(0, 2);
-const i18n = new VueInternationalization({
-    locale: lang,
-    messages: Locale
-});
+//localization 
+// import VueInternationalization from 'vue-i18n';
+// import Locale from './vue-i18n-locales.generated';
+// Vue.use(VueInternationalization);
+// const lang = document.documentElement.lang.substr(0, 2);
+// const i18n = new VueInternationalization({
+//     locale: lang,
+//     messages: Locale
+// });
+
+
 // register the plugin on vue
 import Toasted from 'vue-toasted';
 
@@ -87,6 +90,7 @@ Vue.component('datatable', require('./components/base/datatable.vue').default);
 
 import router from './Router/router.js';
 import store from './Store/store.js';
+import i18n from './i18n/vue-i18n.js';
 
 
 const app = new Vue({

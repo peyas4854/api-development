@@ -6,6 +6,14 @@
         <div class="flex1 my-auto">
           <ul class="nav right_item">
             <li class="nav-item my-auto">
+             
+                <select class="form-control" v-model="lang" @change="handleChange($event)">
+                  <option value="en">English</option>
+                  <option value="ru">Russian</option>
+                </select>
+             
+            </li>
+            <li class="nav-item my-auto">
               <a class="nav-link position-relative" href="#">
                 <i class="fa fa-envelope icon_top_bar"></i>
                 <span class="badge badge-pill badge-danger icon_number">5</span>
@@ -63,7 +71,12 @@ import commonMethods from "../../helper/commonMethods";
 export default {
   extends: commonMethods,
   computed: {
-    ...mapGetters(["User"])
+    ...mapGetters(["User"]),
+  },
+  data(){
+    return{
+    lang: localStorage.getItem('lang')||'en',
+    }
   },
 
   created() {
@@ -76,7 +89,7 @@ export default {
     logout() {
       this.axiosGet(
         "http://127.0.0.1:8000/logout",
-        function(response) {
+        function (response) {
           console.log("paici response ", response.status);
           if (response.status === 200) {
             // this.$router.push({
@@ -85,12 +98,19 @@ export default {
             location.reload();
           }
         },
-        function(response) {
+        function (response) {
           console.log("paici 2", response);
         }
       );
+    },
+    handleChange(event){
+      console.log('lang',event.target.value);
+      localStorage.setItem('lang',event.target.value)
+      //window.location.reload();
+      location.reload();
+
     }
-  }
+  },
 };
 </script>
 
