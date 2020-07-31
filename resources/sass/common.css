@@ -1,0 +1,16 @@
+.app_primary_btn {
+  background-color: #070510a3;
+  color: #ffffff;
+  font-size: 14px;
+  font-family: Roboto;
+  font-weight: 400;
+  -webkit-transition: .3s;
+  transition: .3s;
+  padding: 10px 35px;
+}
+
+.btn.app_primary_btn:hover {
+  color: white;
+  background-color: #10adb9fa;
+}
+/*# sourceMappingURL=common.css.map */

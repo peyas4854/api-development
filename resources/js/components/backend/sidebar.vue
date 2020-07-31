@@ -29,6 +29,18 @@
         >User</router-link>
       </li>
       <li class="nav-item">
+        <router-link
+          :class="[this.$route.path == '/calendar' ? 'active_sidebar' : '', 'nav-link' ]"
+          to="/calendar"
+        >Calendar</router-link>
+      </li>
+      <li class="nav-item">
+        <router-link
+          :class="[this.$route.path == '/schedule' ? 'active_sidebar' : '', 'nav-link' ]"
+          to="/schedule"
+        >Schudule</router-link>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="#">Settings</a>
       </li>
       <li class="nav-item">

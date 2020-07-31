@@ -2102,6 +2102,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   "extends": _helper_commonMethods__WEBPACK_IMPORTED_MODULE_0__["default"]
@@ -41463,6 +41475,44 @@ var render = function() {
         1
       ),
       _vm._v(" "),
+      _c(
+        "li",
+        { staticClass: "nav-item" },
+        [
+          _c(
+            "router-link",
+            {
+              class: [
+                this.$route.path == "/calendar" ? "active_sidebar" : "",
+                "nav-link"
+              ],
+              attrs: { to: "/calendar" }
+            },
+            [_vm._v("Calendar")]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "li",
+        { staticClass: "nav-item" },
+        [
+          _c(
+            "router-link",
+            {
+              class: [
+                this.$route.path == "/schedule" ? "active_sidebar" : "",
+                "nav-link"
+              ],
+              attrs: { to: "/schedule" }
+            },
+            [_vm._v("Schudule")]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
       _vm._m(1),
       _vm._v(" "),
       _vm._m(2)
@@ -58640,6 +58690,14 @@ var routes = [{
     path: "/user",
     component: loadView("userList"),
     name: "user"
+  }, {
+    path: "/calendar",
+    component: loadView("calendar"),
+    name: "calendar"
+  }, {
+    path: "/schedule",
+    component: loadView("schedule"),
+    name: "schedule"
   }]
 }, {
   path: "/home",
@@ -59874,13 +59932,19 @@ var i18n = new vue_i18n__WEBPACK_IMPORTED_MODULE_1__["default"]({
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
+	"./calendar.vue": [
+		"./resources/js/views/calendar.vue",
+		12,
+		11,
+		14
+	],
 	"./dashboard.vue": [
 		"./resources/js/views/dashboard.vue",
-		5
+		6
 	],
 	"./error.vue": [
 		"./resources/js/views/error.vue",
-		9
+		10
 	],
 	"./front/index.vue": [
 		"./resources/js/views/front/index.vue",
@@ -59896,15 +59960,20 @@ var map = {
 	],
 	"./profile_id.vue": [
 		"./resources/js/views/profile_id.vue",
-		6
+		7
 	],
 	"./review.vue": [
 		"./resources/js/views/review.vue",
-		8
+		9
+	],
+	"./schedule.vue": [
+		"./resources/js/views/schedule.vue",
+		12,
+		13
 	],
 	"./singleproduct.vue": [
 		"./resources/js/views/singleproduct.vue",
-		7
+		8
 	],
 	"./userList.vue": [
 		"./resources/js/views/userList.vue",
@@ -59921,7 +59990,7 @@ function webpackAsyncContext(req) {
 	}
 
 	var ids = map[req], id = ids[0];
-	return __webpack_require__.e(ids[1]).then(function() {
+	return Promise.all(ids.slice(1).map(__webpack_require__.e)).then(function() {
 		return __webpack_require__(id);
 	});
 }
