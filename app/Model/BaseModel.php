@@ -14,4 +14,13 @@ class BaseModel extends Model
     {
         return get_called_class()::where('id',$id)->update($data);
     }
+    public static function getOne($id)
+    {
+        return get_called_class()::find($id);
+    }
+    public static function deleteData($id)
+    {
+        return get_called_class()::where('id', $id)->delete();
+    }
+    
 }

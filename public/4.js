@@ -47,10 +47,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   "extends": _helper_commonMethods__WEBPACK_IMPORTED_MODULE_0__["default"],
-  props: ["id", "modalID"],
+  props: ["id", "modalID", 'dayClickDate'],
   data: function data() {
     return {
       event: {},
@@ -58,10 +59,12 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    console.log("modal created");
-
     if (this.id) {
-      this.getProduct("http://127.0.0.1:8000/api/products/" + this.id);
+      this.getEvent("http://127.0.0.1:8000/event/" + this.id);
+    } else if (this.dayClickDate) {
+      console.log('day click');
+      this.event.start_date = this.dayClickDate;
+      this.event.end_date = this.dayClickDate;
     }
   },
   methods: {
@@ -74,30 +77,32 @@ __webpack_require__.r(__webpack_exports__);
       };
 
       if (this.id) {
-        instance.axoisUpdate("http://127.0.0.1:8000/api/products/" + this.id, this.inputField);
+        instance.axoisUpdate("http://127.0.0.1:8000/event/" + this.id, this.inputField);
       } else {
-        console.log('event', instance.inputField);
         instance.postDataMethod("event", this.inputField);
       }
     },
     postDataSuccess: function postDataSuccess(response) {
       $(this.modalID).modal("hide");
-      this.$hub.$emit("reloadDataTable");
+      this.$hub.$emit("reloadCalendar");
     },
     postDataError: function postDataError(error) {
       this.errors = error.errors;
     },
-    getProduct: function getProduct(route) {
-      //console.log("df");
-      var instance = this;
-      instance.preLoader = true;
+    getEvent: function getEvent(route) {
+      var instance = this; //instance.preLoader = true;
+
       instance.axiosGet(route, function (response) {
-        instance.product = response.data.data;
-        instance.preLoader = false;
+        instance.event.title = response.data.data.title;
+        instance.event.start_date = response.data.data.start;
+        instance.event.end_date = response.data.data.end; //instance.preLoader = false;
       }, function (response) {
-        // console.log("paici 2", response);
-        instance.preLoader = true;
+        console.log("paici 2", response); //instance.preLoader = true;
       });
+    },
+    removeEvent: function removeEvent(id) {
+      this.axiosDelete("http://127.0.0.1:8000/event/" + id);
+      this.postDataSuccess();
     }
   }
 });
@@ -157,7 +162,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -179,6 +183,7 @@ __webpack_require__.r(__webpack_exports__);
         weekends: true,
         initialView: "dayGridMonth",
         dateClick: this.handleDateClick,
+        eventClick: this.eventClick,
         headerToolbar: {
           left: "prev,next today",
           center: "title",
@@ -187,13 +192,23 @@ __webpack_require__.r(__webpack_exports__);
         selectable: true,
         events: []
       },
-      modalID: "#add-edit-modal"
+      modalID: "#add-edit-modal",
+      updateEvent: "",
+      dayClickDate: ''
     };
   },
   mounted: function mounted() {
     var instance = this;
     this.$hub.$on("addEdit", function (id) {
       instance.addEdit(id);
+    });
+    this.$hub.$on("reloadCalendar", function () {
+      var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+
+      if (value) {
+        instance.getevent("/event");
+        console.log("reload ");
+      }
     });
     this.modalCloseAction(this.modalID);
   },
@@ -211,7 +226,16 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     handleDateClick: function handleDateClick(arg) {
-      console.log('event', arg);
+      console.log("event", arg.dateStr);
+      this.dayClickDate = arg.dateStr;
+      this.addEdit();
+      $(this.modalID).modal("show");
+    },
+    eventClick: function eventClick(arg) {
+      this.addEdit(arg.event.id); //this.updateEvent = arg;
+
+      $(this.modalID).modal("show");
+      console.log("title", arg.event.id);
     }
   }
 });
@@ -236,9 +260,7 @@ var render = function() {
   return _c("div", {}, [
     _c("div", { staticClass: "modal-header" }, [
       _vm.id
-        ? _c("h4", { staticClass: "modal-title" }, [
-            _vm._v("Edit Product " + _vm._s(_vm.id))
-          ])
+        ? _c("h4", { staticClass: "modal-title" }, [_vm._v("Edit Event")])
         : _c("h4", { staticClass: "modal-title" }, [_vm._v("Add Event")]),
       _vm._v(" "),
       _c(
@@ -326,7 +348,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "col-md-6 from_group col-sm-12" }, [
-                _c("label", { attrs: { for: "name" } }, [_vm._v("End date ")]),
+                _c("label", { attrs: { for: "name" } }, [_vm._v("End date")]),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
@@ -373,6 +395,21 @@ var render = function() {
         },
         [_vm._v("Save")]
       ),
+      _vm._v(" "),
+      _vm.id
+        ? _c(
+            "button",
+            {
+              staticClass: "btn btn-warning",
+              on: {
+                click: function($event) {
+                  return _vm.removeEvent(_vm.id)
+                }
+              }
+            },
+            [_vm._v("Delete")]
+          )
+        : _vm._e(),
       _vm._v(" "),
       _c(
         "button",
@@ -459,9 +496,12 @@ var render = function() {
           [
             _vm.isActive
               ? _c("eventmodal", {
-                  ref: "vuemodal",
                   staticClass: "modal-content",
-                  attrs: { id: _vm.selectedItemId, modalID: _vm.modalID }
+                  attrs: {
+                    id: _vm.selectedItemId,
+                    modalID: _vm.modalID,
+                    dayClickDate: _vm.dayClickDate
+                  }
                 })
               : _vm._e()
           ],

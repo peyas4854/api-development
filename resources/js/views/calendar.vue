@@ -5,25 +5,24 @@
         <div class="header_content my-auto">
           <h4>Calendar</h4>
         </div>
-         <div class="header_content_button">
-        <button
-          class="btn btn-primary app_primary_btn"
-          data-toggle="modal"
-          data-target="#add-edit-modal"
-          @click="addEdit('')"
-        >Add</button>
-      </div>
+        <div class="header_content_button">
+          <button
+            class="btn btn-primary app_primary_btn"
+            data-toggle="modal"
+            data-target="#add-edit-modal"
+            @click="addEdit('')"
+          >Add</button>
+        </div>
       </div>
     </div>
     <div class="modal fade" id="add-edit-modal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
-        <eventmodal
-          class="modal-content"
-          v-if="isActive"
-          :id="selectedItemId"
-          :modalID="modalID"
-          ref="vuemodal"
-        ></eventmodal>
+        <eventmodal class="modal-content" v-if="isActive" 
+        :id="selectedItemId"
+         :modalID="modalID"
+         :dayClickDate="dayClickDate"
+         
+         ></eventmodal>
       </div>
     </div>
 
@@ -48,7 +47,7 @@ export default {
   extends: commonMethod,
   components: {
     FullCalendar,
-    eventmodal
+    eventmodal,
   },
   data() {
     return {
@@ -57,6 +56,7 @@ export default {
         weekends: true,
         initialView: "dayGridMonth",
         dateClick: this.handleDateClick,
+        eventClick: this.eventClick,
         headerToolbar: {
           left: "prev,next today",
           center: "title",
@@ -65,13 +65,22 @@ export default {
         selectable: true,
         events: [],
       },
-       modalID: "#add-edit-modal",
+      modalID: "#add-edit-modal",
+      updateEvent: "",
+      dayClickDate:'',
     };
   },
-   mounted() {
+  mounted() {
     let instance = this;
     this.$hub.$on("addEdit", function (id) {
       instance.addEdit(id);
+    });
+
+    this.$hub.$on("reloadCalendar", function (value = true) {
+      if (value) {
+        instance.getevent("/event");
+        console.log("reload ");
+      }
     });
     this.modalCloseAction(this.modalID);
   },
@@ -93,9 +102,19 @@ export default {
         }
       );
     },
-   
-    handleDateClick: function (arg) {
-      console.log('event',arg);
+
+    handleDateClick(arg) {
+      console.log("event", arg.dateStr);
+      this.dayClickDate=arg.dateStr;
+     
+      this.addEdit();
+       $(this.modalID).modal("show");
+    },
+    eventClick(arg) {
+      this.addEdit(arg.event.id);
+      //this.updateEvent = arg;
+      $(this.modalID).modal("show");
+      console.log("title", arg.event.id);
     },
   },
 };

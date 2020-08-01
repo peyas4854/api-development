@@ -112,7 +112,7 @@ export default {
             });
         },
         addEdit(id) {
-            console.log('log');
+           
             this.selectedItemId = id;
             this.isActive = true;
         },

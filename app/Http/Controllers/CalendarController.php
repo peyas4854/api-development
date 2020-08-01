@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Model\Calendar;
+use App\Model\BaseModel;
 use Illuminate\Http\Request;
 use App\Http\Resources\CalendarResource;
 use App\Http\Controllers\API\BaseController as BaseController;
-
+use Symfony\Component\HttpFoundation\Response;
 class CalendarController extends BaseController
 {
     /**
@@ -65,9 +66,12 @@ class CalendarController extends BaseController
      * @param  \App\Model\Calendar  $calendar
      * @return \Illuminate\Http\Response
      */
-    public function show(Calendar $calendar)
+    public function show( $id)
     {
-        //
+        //dd($id);
+        $data = Calendar::getOne($id);
+       
+        return $this->sendResponse(new CalendarResource($data),'');
     }
 
     /**
@@ -88,9 +92,25 @@ class CalendarController extends BaseController
      * @param  \App\Model\Calendar  $calendar
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Calendar $calendar)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+        ]);
+        $event = [
+            'title' => $request->title,
+            'start_date' => $request->start_date,
+            'end_date' => $request->end_date,
+        ];
+        
+        if ($event) {
+            Calendar::updateData($id, $event);
+            return $this->sendResponse([], 'Event Updated successfully');
+        } else {
+            return $this->sendError([], 'Something Went Wrong!.');
+        }
     }
 
     /**
@@ -99,8 +119,15 @@ class CalendarController extends BaseController
      * @param  \App\Model\Calendar  $calendar
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Calendar $calendar)
+    public function destroy($id)
     {
-        //
+        $data = Calendar::deleteData($id);
+        if ($data) {
+           
+            return $this->sendResponse([], 'Event Delete successfully');
+        } else {
+            return $this->sendError([], 'Something Went Wrong!.');
+        }
+
     }
 }

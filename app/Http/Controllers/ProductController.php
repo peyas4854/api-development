@@ -81,6 +81,7 @@ class ProductController extends BaseController
      */
     public function show(Product $product)
     {
+        dd($product);
         return $this->sendResponse(new ProductResource($product),'Product Show successfully');
     }
 

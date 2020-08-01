@@ -59514,7 +59514,7 @@ var map = {
 	],
 	"./BackendLayout.vue": [
 		"./resources/js/components/layouts/BackendLayout.vue",
-		5
+		6
 	],
 	"./FrontLayout.vue": [
 		"./resources/js/components/layouts/FrontLayout.vue"
@@ -59821,7 +59821,6 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     addEdit: function addEdit(id) {
-      console.log('log');
       this.selectedItemId = id;
       this.isActive = true;
     },
@@ -59958,7 +59957,7 @@ var map = {
 	],
 	"./product.vue": [
 		"./resources/js/views/product.vue",
-		6
+		5
 	],
 	"./profile_id.vue": [
 		"./resources/js/views/profile_id.vue",
