@@ -59514,7 +59514,7 @@ var map = {
 	],
 	"./BackendLayout.vue": [
 		"./resources/js/components/layouts/BackendLayout.vue",
-		4
+		5
 	],
 	"./FrontLayout.vue": [
 		"./resources/js/components/layouts/FrontLayout.vue"
@@ -59743,7 +59743,8 @@ __webpack_require__.r(__webpack_exports__);
       //let instance = this;
       this.setPreloader(true);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(url).then(function (response) {
-        if (onSuccess) onSuccess(response);
+        if (onSuccess) onSuccess(response); //set preloader globally 
+
         this.setPreloader(false); //this.toastonSuccess(response.data.message)
       }.bind(this))["catch"](function (error) {
         if (onError) onError(error);
@@ -59820,6 +59821,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     addEdit: function addEdit(id) {
+      console.log('log');
       this.selectedItemId = id;
       this.isActive = true;
     },
@@ -59934,50 +59936,50 @@ var i18n = new vue_i18n__WEBPACK_IMPORTED_MODULE_1__["default"]({
 var map = {
 	"./calendar.vue": [
 		"./resources/js/views/calendar.vue",
-		12,
-		11,
-		14
+		0,
+		13,
+		4
 	],
 	"./dashboard.vue": [
 		"./resources/js/views/dashboard.vue",
-		6
+		7
 	],
 	"./error.vue": [
 		"./resources/js/views/error.vue",
-		10
+		11
 	],
 	"./front/index.vue": [
 		"./resources/js/views/front/index.vue",
-		0
+		1
 	],
 	"./front/login.vue": [
 		"./resources/js/views/front/login.vue",
-		1
+		2
 	],
 	"./product.vue": [
 		"./resources/js/views/product.vue",
-		3
+		6
 	],
 	"./profile_id.vue": [
 		"./resources/js/views/profile_id.vue",
-		7
+		8
 	],
 	"./review.vue": [
 		"./resources/js/views/review.vue",
-		9
+		10
 	],
 	"./schedule.vue": [
 		"./resources/js/views/schedule.vue",
-		12,
-		13
+		0,
+		12
 	],
 	"./singleproduct.vue": [
 		"./resources/js/views/singleproduct.vue",
-		8
+		9
 	],
 	"./userList.vue": [
 		"./resources/js/views/userList.vue",
-		2
+		3
 	]
 };
 function webpackAsyncContext(req) {
@@ -60012,11 +60014,11 @@ module.exports = webpackAsyncContext;
 var map = {
 	"./index.vue": [
 		"./resources/js/views/front/index.vue",
-		0
+		1
 	],
 	"./login.vue": [
 		"./resources/js/views/front/login.vue",
-		1
+		2
 	]
 };
 function webpackAsyncContext(req) {

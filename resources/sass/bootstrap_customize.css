@@ -6,7 +6,6 @@ a:hover {
 a {
   color: black !important;
   text-decoration: none !important;
-  background-color: transparent !important;
 }
 
 a:not([href]) {

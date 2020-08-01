@@ -5,33 +5,56 @@
         <div class="header_content my-auto">
           <h4>Calendar</h4>
         </div>
+         <div class="header_content_button">
+        <button
+          class="btn btn-primary app_primary_btn"
+          data-toggle="modal"
+          data-target="#add-edit-modal"
+          @click="addEdit('')"
+        >Add</button>
+      </div>
       </div>
     </div>
+    <div class="modal fade" id="add-edit-modal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <eventmodal
+          class="modal-content"
+          v-if="isActive"
+          :id="selectedItemId"
+          :modalID="modalID"
+          ref="vuemodal"
+        ></eventmodal>
+      </div>
+    </div>
+
     <div class="main_wrapper_card_content">
-      <FullCalendar
-        :options="calendarOptions"
-       
-      ></FullCalendar>
+      <preloader v-if="preLoader == true" />
+      <div v-else>
+        <FullCalendar :options="calendarOptions"></FullCalendar>
+      </div>
     </div>
   </div>
 </template>
-
 <script>
 import FullCalendar from "@fullcalendar/vue";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import list from "@fullcalendar/list";
 import interactionPlugin from "@fullcalendar/interaction";
+import commonMethod from "../helper/commonMethods";
+import preLoader from "../components/base/preloader";
+import eventmodal from "../components/backend/calendar/CalendarModal";
 export default {
+  extends: commonMethod,
   components: {
     FullCalendar,
+    eventmodal
   },
   data() {
     return {
       calendarOptions: {
         plugins: [dayGridPlugin, timeGridPlugin, list, interactionPlugin],
         weekends: true,
-
         initialView: "dayGridMonth",
         dateClick: this.handleDateClick,
         headerToolbar: {
@@ -40,44 +63,43 @@ export default {
           right: "dayGridMonth,timeGridWeek,timeGridDay",
         },
         selectable: true,
-        events: [
-          {
-            title: "event 1",
-            start: "2020-08-03",
-            end: "2020-08-05",
-            //display:'background',
-            className: "bg-color",
-            // backgroundColor: "blue",
-            borderColor: "black",
-            textColor: "red",
-            editable: true,
-          },
-          {
-            title: "event 2",
-            textColor: "red",
-            date: "2020-08-24",
-          },
-        ],
+        events: [],
       },
+       modalID: "#add-edit-modal",
     };
   },
+   mounted() {
+    let instance = this;
+    this.$hub.$on("addEdit", function (id) {
+      instance.addEdit(id);
+    });
+    this.modalCloseAction(this.modalID);
+  },
   created() {
-    $(".fc-event-title-container").css({ background: "red" });
+    this.getevent("/event");
   },
   methods: {
+    getevent(route) {
+      let instance = this;
+      instance.axiosGet(
+        route,
+        function (response) {
+          console.log("response", response.data.data);
+          instance.calendarOptions.events = response.data.data;
+          //preloader set globally in comoon axois
+        },
+        function (error) {
+          console.log("user erro", error);
+        }
+      );
+    },
+   
     handleDateClick: function (arg) {
-      alert("date click! " + arg.dateStr);
+      console.log('event',arg);
     },
   },
 };
 </script>
 
 <style scoped lang="scss">
-.bg-color {
-  background-color: red !important;
-  padding: 40px!important;
-}
-.fc-event-title-container {
-  background-color: green !important;
-}
 </style>

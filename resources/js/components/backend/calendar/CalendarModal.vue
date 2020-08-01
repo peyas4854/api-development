@@ -2,7 +2,7 @@
   <div class>
     <div class="modal-header">
       <h4 class="modal-title" v-if="id">Edit Product {{ id }}</h4>
-      <h4 class="modal-title" v-else>Add Product</h4>
+      <h4 class="modal-title" v-else>Add Event</h4>
       <button type="button" class="close" data-dismiss="modal" @click.prevent>&times;</button>
     </div>
     <div class="modal-body">
@@ -11,41 +11,20 @@
       </div>
       <form v-else>
         <div class="row">
-          <div class="col-md-6 from_group col-sm-12">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" placeholder="Name" v-model="product.name" />
-            <p class="errors" v-if="errors.name">{{ errors.name[0] }}</p>
-          </div>
-          <div class="col-md-6 from_group col-sm-12">
-            <label for="price">Price</label>
-            <input type="number" class="form-control" placeholder="Price" v-model="product.price" />
-            <p class="errors" v-if="errors.price">{{ errors.price[0] }}</p>
-          </div>
           <div class="col-md-12 from_group col-sm-12">
-            <label for="description">Description</label>
-            <textarea
-              type="text"
-              class="form-control"
-              placeholder="Description"
-              v-model="product.detail"
-              rows="3"
-            />
-            <p class="errors" v-if="errors.detail">{{ errors.detail[0] }}</p>
+            <label for="name">Title</label>
+            <input type="text" class="form-control" placeholder="Name" v-model="event.title" />
+            <p class="errors" v-if="errors.title">{{ errors.title[0] }}</p>
           </div>
           <div class="col-md-6 from_group col-sm-12">
-            <label for="discount">Discount</label>
-            <input
-              type="number"
-              class="form-control"
-              placeholder="Discount"
-              v-model="product.discount"
-            />
-            <p class="errors" v-if="errors.discount">{{ errors.discount[0] }}</p>
+            <label for="name">Start date</label>
+            <input type="date" class="form-control" placeholder="Name" v-model="event.start_date" />
+            <p class="errors" v-if="errors.start_date">{{ errors.start_date[0] }}</p>
           </div>
           <div class="col-md-6 from_group col-sm-12">
-            <label for="stock">Stock</label>
-            <input type="number" class="form-control" placeholder="Price" v-model="product.stock" />
-            <p class="errors" v-if="errors.stock">{{ errors.stock[0] }}</p>
+            <label for="name">End date </label>
+            <input type="date" class="form-control" placeholder="Name" v-model="event.end_date" />
+            <p class="errors" v-if="errors.end_date">{{ errors.end_date[0] }}</p>
           </div>
         </div>
       </form>
@@ -56,18 +35,14 @@
     </div>
   </div>
 </template>
-
 <script>
 import commonMethods from "../../../helper/commonMethods";
 export default {
   extends: commonMethods,
-
   props: ["id", "modalID"],
   data() {
     return {
-      product: {
-        user_id: 1
-      },
+      event: {},
       errors: []
     };
   },
@@ -80,15 +55,20 @@ export default {
   methods: {
     save() {
       let instance = this;
-      instance.inputField = instance.product;
+      instance.inputField = {
+        title: this.event.title,
+        start_date: this.event.start_date,
+        end_date: this.event.end_date
+      };
       if (this.id) {
         instance.axoisUpdate(
           "http://127.0.0.1:8000/api/products/" + this.id,
           this.inputField
         );
       } else {
+console.log('event',instance.inputField);
         instance.postDataMethod(
-          "http://127.0.0.1:8000/api/products",
+          "event",
           this.inputField
         );
       }
@@ -107,9 +87,7 @@ export default {
       instance.axiosGet(
         route,
         function(response) {
-          //console.log("paici response ", response);
           instance.product = response.data.data;
-          // instance.message = response.data.message;
           instance.preLoader = false;
         },
         function(response) {
@@ -121,5 +99,4 @@ export default {
   }
 };
 </script>
-
 

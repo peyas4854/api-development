@@ -7,7 +7,6 @@ export default {
             preLoader: false,
             message: '',
             selectedItemId: '',
-
         }
     },
     methods: {
@@ -18,6 +17,7 @@ export default {
             axios.get(url)
                 .then(function (response) {
                     if (onSuccess) onSuccess(response);
+                    //set preloader globally 
                     this.setPreloader(false);
                     //this.toastonSuccess(response.data.message)
                 }.bind(this))
@@ -112,6 +112,7 @@ export default {
             });
         },
         addEdit(id) {
+            console.log('log');
             this.selectedItemId = id;
             this.isActive = true;
         },

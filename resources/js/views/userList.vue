@@ -26,7 +26,10 @@
     </div>
 
     <div class="main_wrapper_card_content">
-      <!-- <datatable :dataset="dataset" /> -->
+      <preloader v-if="preLoader == true" />
+     <div v-else >
+
+    
 
       <table class="table">
         <thead>
@@ -45,55 +48,56 @@
             <td>{{ user.email }}</td>
             <td>{{ user.userType }}</td>
             <td>
-              <button class="btn btn-dark">Edit</button>
+              <button class="btn btn-primary">Edit</button>
             </td>
           </tr>
         </tbody>
       </table>
+      <div class="row">
+        <div class="col-md-12">
+          <nav aria-label="Page">
+            <ul class="pagination justify-content-center">
+              <li
+                class="page-item"
+                @click="fetchPaginationUser(pagination.prev_page)"
+                v-bind:class="{disabled:!pagination.prev_page}"
+              >
+                <span class="page-link">Previous</span>
+              </li>
+              <li
+                class="page-item cursor-pointer"
+                v-for="(n,i) in pagination.last_page"
+                :key="i"
+                v-bind:class="{active:pagination.current_page == n}"
+              >
+                <a
+                  class="page-link "
+                  @click="fetchPaginationUser(pagination.path_page + n)"
+                >{{ n }}</a>
+              </li>
 
-      <!-- <div class="pagination">
-        <button
-          class="btn btn-dark mr-3"
-          @click="fetchPaginationUser(pagination.prev_page)"
-          :disabled="!pagination.prev_page"
-        >Prev</button>
-<ul class="list-group list-group-horizontal-sm">
-  <li class="list-group-item" v-for="(n,i) in 5" :key="i"><a href=""> {{ n }} </a></li> 
-</ul>
-       
-        <button
-          class="btn btn-primary ml-3"
-          @click="fetchPaginationUser(pagination.next_page)"
-          :disabled="!pagination.next_page"
-        >Next</button>
-         <span>{{ pagination.current_page}} of {{ pagination.last_page}}</span>
-      </div> -->
-<div class="row">
- 
-  <div class="col-md-12">
-    
-    <nav aria-label="Page">
-  <ul class="pagination justify-content-center">
-    <li class="page-item"  @click="fetchPaginationUser(pagination.prev_page)"  v-bind:class="{disabled:!pagination.prev_page}"> <span class="page-link" >Previous</span></li>
-    <li class="page-item" v-for="(n,i) in pagination.last_page" :key="i" v-bind:class:="{active:pagination.current_page == i+1}"><a class="page-link" href="#"  @click="fetchPaginationUser(pagination.path_page + n)">{{ n }}</a></li>
-   
-    <li class="page-item"  @click="fetchPaginationUser(pagination.next_page)"  v-bind:class="{disabled:!pagination.last_page}"><a class="page-link" href="#">Next</a></li>
-  </ul>
-</nav>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-12">
-    <nav aria-label="Page navigation example">
-  <ul class="pagination justify-content-center">
-    <li class="page-item">{{ pagination.current_page}} of {{ pagination.last_page}}</li>
-   
-  </ul>
-</nav>
-  </div>
-</div>
+              <li
+                class="page-item"
+                @click="fetchPaginationUser(pagination.next_page)"
+                v-bind:class="{disabled:!pagination.last_page}"
+              >
+                <a class="page-link" href="#">Next</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+              <li class="page-item">{{ pagination.current_page}} of {{ pagination.last_page}}</li>
+            </ul>
+          </nav>
+        </div>
+      </div>
 
-
+ </div>
     </div>
   </div>
 </template>
@@ -159,13 +163,12 @@ export default {
         last_page: data.last_page,
         next_page: data.next_page_url,
         prev_page: data.prev_page_url,
-        path_page: data.path+"?page=",
-       
+        path_page: data.path + "?page=",
       };
       this.pagination = pagination;
     },
     fetchPaginationUser(url) {
-      console.log('url',url)
+      console.log("url", url);
       this.url = url;
       this.getAllUser();
     },
@@ -174,7 +177,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.active{
+.active {
   background-color: blue;
 }
 </style>

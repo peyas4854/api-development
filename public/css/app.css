@@ -10941,7 +10941,6 @@ a.text-dark:focus {
   margin-bottom: 8px;
   text-align: center;
   transition: 0.3s;
-  background-color: red;
 }
 
 .sidebar_app .nav-item a {
@@ -10967,7 +10966,6 @@ a:hover {
 a {
   color: black !important;
   text-decoration: none !important;
-  background-color: transparent !important;
 }
 
 a:not([href]) {
@@ -11076,7 +11074,6 @@ label {
   font-family: Roboto;
   font-weight: 400;
   transition: 0.3s;
-  padding: 10px 35px;
 }
 
 .btn.app_primary_btn:hover {
