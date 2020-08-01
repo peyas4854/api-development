@@ -54,6 +54,7 @@ export default {
       calendarOptions: {
         plugins: [dayGridPlugin, timeGridPlugin, list, interactionPlugin],
         weekends: true,
+        showNonCurrentDates:false,
         initialView: "dayGridMonth",
         dateClick: this.handleDateClick,
         eventClick: this.eventClick,
@@ -121,4 +122,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
+
 </style>
