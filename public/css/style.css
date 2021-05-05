@@ -1,0 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap');
+
+body {
+    background-color: #ebeaf1;
+}
+
+p {
+    font-family: Montserrat;
+    color: #212529;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: roboto;
+    text-transform: capitalize;
+    color: #212529;
+
+}
+
+.errors {
+    color: red;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+
+.flex1 {
+    flex: 1;
+}
+
+.flex2 {
+    flex: 2;
+
+}

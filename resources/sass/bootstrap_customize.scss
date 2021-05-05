@@ -1,0 +1,81 @@
+a:hover {
+    color: black !important;
+    text-decoration: none !important;
+}
+
+a {
+    color: black !important;
+    text-decoration: none !important;
+    //background-color: transparent !important;
+}
+
+a:not([href]) {
+    color: inherit;
+    text-decoration: none;
+}
+
+.from_group {
+    margin-bottom: 1.5em;
+}
+
+label {
+    margin-bottom: 0.5rem;
+    font-size: 13px !important;
+    font-family: Montserrat !important;
+    color: #191717eb;
+    font-weight: 500;
+}
+
+::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #15141454 !important;
+    opacity: 1;
+    /* Firefox */
+}
+
+:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #15141454 !important;
+}
+
+::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: #15141454 !important;
+}
+
+.input::focus {
+    box-shadow: none !important;
+}
+
+.form-control:focus {
+    color: #495057 !important;
+    background-color: #fff !important;
+    border-color: #485056a3 !important;
+    /* outline: 0; */
+    box-shadow: none !important;
+}
+
+.list-group-item {
+    border: transparent !important;
+}
+
+.list-group-item:hover {
+    background-color: #081a6994;
+    color: white;
+    transition: 0.3s;
+    cursor: pointer;
+
+    a {
+        color: black;
+    }
+
+    a {
+        color: white !important;
+        background-color: transparent !important;
+        text-decoration: none;
+    }
+}
+
+.ative_btn {
+    border-left: 2.5px solid #081a6994 !important;
+}
