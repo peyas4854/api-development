@@ -188,7 +188,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.profile_image[data-v-2764ed30] {\n  width: 250px;\n  height: 250px;\n}\n.list-group-item[data-v-2764ed30] {\n  border: transparent !important;\n}\n.list-group-item[data-v-2764ed30]:hover {\n  background-color: #081a6994;\n  color: white;\n  transition: 0.3s;\n  cursor: pointer;\n}\n.ative_btn[data-v-2764ed30] {\n  border-left: 2.5px solid #081a6994 !important;\n}\n", ""]);
+exports.push([module.i, "\n.profile_image[data-v-2764ed30] {\r\n  width: 250px;\r\n  height: 250px;\n}\n.list-group-item[data-v-2764ed30] {\r\n  border: transparent !important;\n}\n.list-group-item[data-v-2764ed30]:hover {\r\n  background-color: #081a6994;\r\n  color: white;\r\n  transition: 0.3s;\r\n  cursor: pointer;\n}\n.ative_btn[data-v-2764ed30] {\r\n  border-left: 2.5px solid #081a6994 !important;\n}\r\n", ""]);
 
 // exports
 

@@ -7226,7 +7226,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.bg-light[data-v-64e79d5e] {\n  background-color: #06d0f1f2 !important;\n  position: fixed;\n  width: 100%;\n  border: 0px !important;\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\n  transition: 0.3s;\n  z-index: 9;\n}\n.bg-light[data-v-64e79d5e]:hover {\n  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);\n}\n.card-body[data-v-64e79d5e] {\n  border-bottom: 1px solid #d3d3daf3 !important;\n  display: flex;\n  padding: 0px 50px;\n  height: 70px;\n}\n.avatar[data-v-64e79d5e] {\n  vertical-align: middle;\n  width: 50px;\n  height: 50px;\n  border-radius: 50%;\n}\n.image[data-v-64e79d5e] {\n  position: relative;\n  left: 10em;\n}\n.slider_icon[data-v-64e79d5e] {\n  position: relative;\n  top: 24px;\n  right: 24px;\n  font-size: 22px !important;\n}\n.icon_top_bar[data-v-64e79d5e] {\n  font-size: 18px;\n  color: #ffffff;\n}\n.dropdown-menu.show[data-v-64e79d5e] {\n  display: block;\n  position: absolute !important;\n  left: -10px !important;\n  padding: 0px;\n}\n.ticker[data-v-64e79d5e] {\n  position: absolute;\n  right: 44px;\n  top: -8px;\n  width: 1.1em;\n  height: 1.1em;\n  border-radius: 0em 0em 0.5em 0em;\n  transform: rotate(225deg);\n  background: linear-gradient(-45deg, #ffffff 50%, transparent 50%);\n}\n.icon_number[data-v-64e79d5e] {\n  position: absolute;\n  top: 0px;\n  right: 4px;\n}\n.right_item[data-v-64e79d5e] {\n  float: right;\n}\n", ""]);
+exports.push([module.i, "\n.bg-light[data-v-64e79d5e] {\r\n  background-color: #06d0f1f2 !important;\r\n  position: fixed;\r\n  width: 100%;\r\n  border: 0px !important;\r\n  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);\r\n  transition: 0.3s;\r\n  z-index: 9;\n}\n.bg-light[data-v-64e79d5e]:hover {\r\n  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);\n}\n.card-body[data-v-64e79d5e] {\r\n  border-bottom: 1px solid #d3d3daf3 !important;\r\n  display: flex;\r\n  padding: 0px 50px;\r\n  height: 70px;\n}\n.avatar[data-v-64e79d5e] {\r\n  vertical-align: middle;\r\n  width: 50px;\r\n  height: 50px;\r\n  border-radius: 50%;\n}\n.image[data-v-64e79d5e] {\r\n  position: relative;\r\n  left: 10em;\n}\n.slider_icon[data-v-64e79d5e] {\r\n  position: relative;\r\n  top: 24px;\r\n  right: 24px;\r\n  font-size: 22px !important;\n}\n.icon_top_bar[data-v-64e79d5e] {\r\n  font-size: 18px;\r\n  color: #ffffff;\n}\n.dropdown-menu.show[data-v-64e79d5e] {\r\n  display: block;\r\n  position: absolute !important;\r\n  left: -10px !important;\r\n  padding: 0px;\n}\n.ticker[data-v-64e79d5e] {\r\n  position: absolute;\r\n  right: 44px;\r\n  top: -8px;\r\n  width: 1.1em;\r\n  height: 1.1em;\r\n  border-radius: 0em 0em 0.5em 0em;\r\n  transform: rotate(225deg);\r\n  background: linear-gradient(-45deg, #ffffff 50%, transparent 50%);\n}\n.icon_number[data-v-64e79d5e] {\r\n  position: absolute;\r\n  top: 0px;\r\n  right: 4px;\n}\n.right_item[data-v-64e79d5e] {\r\n  float: right;\n}\r\n", ""]);
 
 // exports
 
@@ -7283,7 +7283,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.navbar[data-v-a45d06a4] {\n  position: fixed !important;\n  top: 0px;\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n  justify-content: space-between;\n  padding: 0.5rem 1rem;\n  z-index: 999;\n  width: 100%;\n  box-shadow: 4px 5px 5px 6px #e6dbdb40;\n  margin-bottom: 12px !important;\n  /* padding-bottom: 16px; */\n  height: 6em !important;\n}\ninput.form-control.mr-sm-2[data-v-a45d06a4] {\n  width: 500px;\n  height: 50px;\n  background-color: #ffffff;\n}\n", ""]);
+exports.push([module.i, "\n.navbar[data-v-a45d06a4] {\r\n  position: fixed !important;\r\n  top: 0px;\r\n  display: flex;\r\n  flex-wrap: wrap;\r\n  align-items: center;\r\n  justify-content: space-between;\r\n  padding: 0.5rem 1rem;\r\n  z-index: 999;\r\n  width: 100%;\r\n  box-shadow: 4px 5px 5px 6px #e6dbdb40;\r\n  margin-bottom: 12px !important;\r\n  /* padding-bottom: 16px; */\r\n  height: 6em !important;\n}\ninput.form-control.mr-sm-2[data-v-a45d06a4] {\r\n  width: 500px;\r\n  height: 50px;\r\n  background-color: #ffffff;\n}\r\n", ""]);
 
 // exports
 
@@ -7302,7 +7302,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.content-body[data-v-411938dc] {\n  /* background-color: #ffffff40; */\n  padding-top: 10px !important;\n  margin-top: 100px;\n}\n", ""]);
+exports.push([module.i, "\n.content-body[data-v-411938dc] {\r\n  /* background-color: #ffffff40; */\r\n  padding-top: 10px !important;\r\n  margin-top: 100px;\n}\r\n", ""]);
 
 // exports
 

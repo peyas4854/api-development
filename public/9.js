@@ -209,7 +209,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.flex1[data-v-07a539b8] {\n  flex: 1;\n}\n.flex2[data-v-07a539b8] {\n  flex: 2;\n}\n.card-body.review-content[data-v-07a539b8] {\n  border-bottom: 1px solid black;\n}\n.rating_number[data-v-07a539b8] {\n  height: rem;\n  padding: 20px;\n  justify-content: center;\n  display: flex;\n  align-items: center;\n  font-size: 40px;\n  font-weight: 600;\n  font-family: Roboto;\n  color: #02000a;\n}\n.checked[data-v-07a539b8] {\n  color: orange;\n}\n", ""]);
+exports.push([module.i, "\n.flex1[data-v-07a539b8] {\r\n  flex: 1;\n}\n.flex2[data-v-07a539b8] {\r\n  flex: 2;\n}\n.card-body.review-content[data-v-07a539b8] {\r\n  border-bottom: 1px solid black;\n}\n.rating_number[data-v-07a539b8] {\r\n  height: rem;\r\n  padding: 20px;\r\n  justify-content: center;\r\n  display: flex;\r\n  align-items: center;\r\n  font-size: 40px;\r\n  font-weight: 600;\r\n  font-family: Roboto;\r\n  color: #02000a;\n}\n.checked[data-v-07a539b8] {\r\n  color: orange;\n}\r\n", ""]);
 
 // exports
 

@@ -1,5 +1,0 @@
-{
-    "key": "alt+shift+f",
-    "command": "phpformatter.fix",
-    "when": "editorFocus"
-}
